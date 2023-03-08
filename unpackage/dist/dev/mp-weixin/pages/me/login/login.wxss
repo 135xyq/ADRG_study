@@ -1,0 +1,39 @@
+#center.data-v-fc2c1bf6 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+#full.data-v-fc2c1bf6 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.login-contianer.data-v-fc2c1bf6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  top: 40%;
+}
+.login-contianer .login-avatar.data-v-fc2c1bf6 {
+  width: 250rpx;
+  height: 250rpx;
+  border-radius: 50%;
+}
+.login-contianer .login-button.data-v-fc2c1bf6 {
+  margin-top: 30rpx;
+  width: 400rpx;
+  font-size: 40rpx;
+  background-color: #00880E;
+  color: #FFF;
+  border-radius: 10px;
+}
+
