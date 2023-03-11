@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/me/login/login",
     "pages/index/index",
     "pages/class/class",
     "pages/problem/problem",
     "pages/message/message",
-    "pages/me/me"
+    "pages/me/me",
+    "pages/me/login/login"
   ],
   "subPackages": [],
   "window": {

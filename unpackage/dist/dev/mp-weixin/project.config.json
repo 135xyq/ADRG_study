@@ -8,7 +8,7 @@
         "urlCheck": false,
         "es6": false,
         "postcss": false,
-        "minified": false,
+        "minified": true,
         "newFeature": true,
         "bigPackageSizeSupport": true,
         "coverView": true,
@@ -35,7 +35,7 @@
         "useCompilerPlugins": false
     },
     "compileType": "miniprogram",
-    "libVersion": "2.27.2",
+    "libVersion": "",
     "appid": "wx656b4dde73487a50",
     "projectname": "ADRG_study",
     "condition": {},

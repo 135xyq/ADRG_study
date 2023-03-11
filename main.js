@@ -8,10 +8,18 @@ import Vue from 'vue'
 import uView from '@/uni_modules/uview-ui'
 Vue.use(uView)
 
+// 引入axios
+import request from 'utils/request.js'
+
+// 引入vuex
+import store from './store/index.js'
+
+
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
-    ...App
+    ...App,
+	store
 })
 app.$mount()
 // #endif
