@@ -21790,77 +21790,7 @@ module.exports = function isAxiosError(payload) {
 };
 
 /***/ }),
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */
-/*!********************************************!*\
-  !*** D:/毕设程序/ADRG_study/api/user/login.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.login = login;
-var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 158));
-/**
- * 微信登录
- * @param {Object} data 微信登录获取的临时登录凭证和用户信息
- */
-function login(data) {
-  return (0, _request.default)({
-    url: '/index/login',
-    method: 'post',
-    data: data
-  });
-}
-
-/***/ }),
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */
+/* 193 */
 /*!*****************************************!*\
   !*** D:/毕设程序/ADRG_study/store/index.js ***!
   \*****************************************/
@@ -21876,8 +21806,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 236));
-var _userInfo = _interopRequireDefault(__webpack_require__(/*! ./userInfo.js */ 239));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 194));
+var _userInfo = _interopRequireDefault(__webpack_require__(/*! ./userInfo.js */ 195));
 _vue.default.use(_vuex.default);
 var _default = new _vuex.default.Store({
   state: {},
@@ -21890,7 +21820,7 @@ var _default = new _vuex.default.Store({
 exports.default = _default;
 
 /***/ }),
-/* 236 */
+/* 194 */
 /*!**************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vuex3/dist/vuex.common.js ***!
   \**************************************************************************************/
@@ -23146,9 +23076,7 @@ module.exports = index_cjs;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 237 */,
-/* 238 */,
-/* 239 */
+/* 195 */
 /*!********************************************!*\
   !*** D:/毕设程序/ADRG_study/store/userInfo.js ***!
   \********************************************/
@@ -23182,6 +23110,73 @@ var _default = {
 };
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */
+/*!********************************************!*\
+  !*** D:/毕设程序/ADRG_study/api/user/login.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.login = login;
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 158));
+/**
+ * 微信登录
+ * @param {Object} data 微信登录获取的临时登录凭证和用户信息
+ */
+function login(data) {
+  return (0, _request.default)({
+    url: '/applet/login',
+    method: 'post',
+    data: data
+  });
+}
 
 /***/ })
 ]]);
