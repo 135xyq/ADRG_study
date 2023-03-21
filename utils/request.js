@@ -1,7 +1,7 @@
 import config from '@/common/config.js'
 import store from '@/store/index.js'
 
-const request = (url, data, method = 'POST', headers = "application/json;") => {
+const request = (url, data, method = 'POST',) => {
 	return new Promise((resolve, reject) => {
 		uni.showLoading({
 			title: '加载中',
@@ -12,9 +12,6 @@ const request = (url, data, method = 'POST', headers = "application/json;") => {
 			url: config.baseUrl+url,
 			method: method,
 			data: {...data,...store.getters.getReq},
-			header: {
-				'Content-Type': headers
-			},
 			success(res) {
 				if (res.data.code == 0) {
 					resolve(res.data)

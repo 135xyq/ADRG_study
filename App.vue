@@ -14,5 +14,9 @@
 
 <style lang="less">
 	/*每个页面公共css */
-	@import url("@/common/less/init.less");
+	@import url("@/common/style/init.less");
+</style>
+<style lang="scss">
+	// 映入uView样式
+	@import '@/uni_modules/uview-ui/theme.scss';
 </style>

@@ -19,7 +19,7 @@
 				</view>
 			</u-col>
 			<u-col span="8">
-				<view class="right-data">4234</view>
+				<view class="right-data"><u-count-down :time="30 * 60 * 60 * 1000" format="HH:mm:ss"></u-count-down></view>
 			</u-col>
 		</u-row>
 	</view>
@@ -43,20 +43,9 @@
 			 */
 			async getCategoryList() {
 				const res = await api.getCategoryList()
-				console.log(res);
 				this.listData = res.data.data
 				this.activeCategory = this.listData[0].id
-				console.log(this.activeCategory);
-				
-				// uni.request({
-				// 	url: "http://localhost:9000/applet/studycategory/list",
-				// 	success: (res) => {
-				// 		console.log(res);
-				// 		this.listData = res.data.data
-				// 		this.activeCategory = this.listData[0].id
-				// 		console.log(this.activeCategory);
-				// 	}
-				// })
+
 			},
 			/**
 			 * 切换分类
