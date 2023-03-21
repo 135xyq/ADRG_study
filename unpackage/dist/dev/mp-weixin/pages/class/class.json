@@ -1,4 +1,9 @@
 {
-  "navigationBarTitleText": "课程",
-  "usingComponents": {}
+  "navigationBarTitleText": "护理知识学习",
+  "usingComponents": {
+    "u-row": "/uni_modules/uview-ui/components/u-row/u-row",
+    "u-col": "/uni_modules/uview-ui/components/u-col/u-col",
+    "u-list": "/uni_modules/uview-ui/components/u-list/u-list",
+    "u-list-item": "/uni_modules/uview-ui/components/u-list-item/u-list-item"
+  }
 }

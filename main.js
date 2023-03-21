@@ -8,9 +8,6 @@ import Vue from 'vue'
 import uView from '@/uni_modules/uview-ui'
 Vue.use(uView)
 
-// 引入axios
-import request from 'utils/request.js'
-
 // 引入vuex
 import store from './store/index.js'
 

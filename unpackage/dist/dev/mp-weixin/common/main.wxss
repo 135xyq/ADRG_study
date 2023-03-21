@@ -1,3 +1,9 @@
+._ul,
+._li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
 #center {
   position: absolute;
   top: 50%;
