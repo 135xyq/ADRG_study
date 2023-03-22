@@ -27196,6 +27196,43 @@ var _default = {
 };
 exports.default = _default;
 
+/***/ }),
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */
+/*!*************************************************!*\
+  !*** D:/毕设程序/ADRG_study/api/article/article.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 168));
+// 文章相关的接口
+var _default = {
+  // 根据分类id获取文章列表
+  getList: function getList(data) {
+    return _request.default.post('/applet/article/list', data);
+  },
+  // 分页获取
+  getPage: function getPage(data) {
+    return _request.default.post('/applet/article/page', data);
+  }
+};
+exports.default = _default;
+
 /***/ })
 ]]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map
