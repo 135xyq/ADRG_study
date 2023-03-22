@@ -122,6 +122,7 @@
 
 			.list-item {
 				margin: 5px;
+				width: calc(100% - 10px);
 			}
 		}
 	}

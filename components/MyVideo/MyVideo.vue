@@ -4,7 +4,7 @@
 			<image mode="aspectFill" class="img" :src="videoData.thumbnail_url"></image>
 			<view class="bottom-info">
 				<view class="title">
-					<text>{{videoData.description}}</text>
+					<text>{{videoData.description ? videoData.description : '暂无视频介绍信息'}}</text>
 				</view>
 				<view class="info">
 					<view class="left">
@@ -44,6 +44,7 @@
 
 <style lang="scss" scoped>
 	.video-container {
+		width: 100%;
 		.img{
 			width: 100%;
 			height: 300rpx;
@@ -56,6 +57,7 @@
 				-webkit-line-clamp: 2; //行数
 				-webkit-box-orient: vertical;
 				color: $black;
+				height: 40px;
 			}
 
 			.info {

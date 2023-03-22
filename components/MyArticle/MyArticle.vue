@@ -3,7 +3,7 @@
 		<uni-card :title="articleData.title" spacing="5px" margin="2px" padding="0" :thumbnail="articleData.thumbnail_url">
 			<view class="bottom-info">
 				<view class="title">
-					<text>{{articleData.description}}</text>
+					<text>{{articleData.description ? articleData.description :'暂无文章的描述信息'}}</text>
 				</view>
 				<view class="info">
 					<view class="left">
@@ -43,6 +43,7 @@
 
 <style lang="scss" scoped>
 	.article-container {
+		width: 100%;
 		.img{
 			width: 100%;
 			height: 300rpx;
