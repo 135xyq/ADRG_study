@@ -1,7 +1,7 @@
 <template>
 	<view class="video-container">
 		<uni-card spacing="5px" margin="2px" padding="0">
-			<image class="img" :src="videoData.thumbnail_url"></image>
+			<image mode="aspectFill" class="img" :src="videoData.thumbnail_url"></image>
 			<view class="bottom-info">
 				<view class="title">
 					<text>{{videoData.description}}</text>
@@ -55,17 +55,19 @@
 				display: -webkit-box;
 				-webkit-line-clamp: 2; //行数
 				-webkit-box-orient: vertical;
+				color: $black;
 			}
 
 			.info {
-				display: flex;
-				justify-content: space-between;
+				// display: flex;
+				// justify-content: space-between;
 				.left{
 					font-size: 12px;
 					color: $gray;
 				}
 				.right{
 					display: flex;
+					justify-content: right;
 					.item{
 						font-size: 12px;
 						color: $gray;
