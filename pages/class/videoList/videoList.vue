@@ -11,7 +11,7 @@
 			<view class="list">
 				<u-grid :border="false" col="2">
 					<u-grid-item v-for="item in videoList" :key="item.id">
-						<view class="list-item">
+						<view class="list-item" @click="onHandleGoToVideoPlay(item.id)">
 							<MyVideo :videoData="item"></MyVideo>
 						</view>
 					</u-grid-item>
@@ -69,10 +69,11 @@
 		 * 页面到底底部事件
 		 */
 		async onReachBottom() {
+			// 没有数据了
 			if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
-				console.log('无所惧');
 				this.status = 'nomore'
 			} else {
+				// 每次请求下一页
 				this.pageInfo.page++;
 				await this.getVideoList()
 			}
@@ -88,6 +89,15 @@
 				});
 				this.pageInfo.total = res.data.total;
 				this.videoList = [...this.videoList, ...res.data.data];
+			},
+			/**
+			 * 跳转到视频详情页
+			 * @param {Object} id 视频id
+			 */
+			onHandleGoToVideoPlay(id) {
+				uni.navigateTo({
+					url:"/pages/class/videoplay/videoplay?id=" + id
+				})
 			}
 		}
 	}
