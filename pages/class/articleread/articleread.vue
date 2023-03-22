@@ -1,6 +1,6 @@
 <template>
 	<view>
-		video
+		articleread
 	</view>
 </template>
 
@@ -8,12 +8,13 @@
 	export default {
 		data() {
 			return {
-				categoryId: ''
+				id:'' ,// 文章id
 			};
 		},
 		onLoad(option) {
-			// 获取传递的分类id
-			this.categoryId = option.id;
+			// 获取文章id
+			this.id = option.id;
+			console.log('文章',this.id);
 		}
 	}
 </script>

@@ -17,7 +17,7 @@
 				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选视频" :isLink="true" value="更多"
 					@click="onHandleGoToMoreVideo" arrow-direction="right"></u-cell>
 				<view class="video-list-container" v-if="getVideoData.length > 0">
-					<view class="" v-for="item in getVideoData" :key="item.id">
+					<view class="" v-for="item in getVideoData" :key="item.id" @click="onHandleToVideoDetail(item.id)">
 						<MyVideo :videoData="item"></MyVideo>
 					</view>
 				</view>
@@ -28,7 +28,7 @@
 				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选文章" :isLink="true" value="更多" @click="onHandleGoToMoreArticle"
 					arrow-direction="right"></u-cell>
 				<view class="video-list-container" v-if="getArticleData.length > 0">
-					<view class="" v-for="item in getArticleData" :key="item.id">
+					<view class="" v-for="item in getArticleData" :key="item.id" @click="onHandleToArticleDetail(item.id)">
 						<MyArticle :articleData="item"></MyArticle>
 					</view>
 				</view>
@@ -97,7 +97,6 @@
 			 * 跳转到视频列表页
 			 */
 			onHandleGoToMoreVideo() {
-				console.log(2121);
 				// 携带数据为分类id
 				uni.navigateTo({
 					url: '/pages/class/videoList/videoList?id=' + this.activeCategory
@@ -110,7 +109,26 @@
 			onHandleGoToMoreArticle() {
 				// 携带数据为分类id
 				uni.navigateTo({
-					url: '/pages/class/videoList/articleList?id=' + this.activeCategory
+					url: '/pages/class/articleList/articleList?id=' + this.activeCategory
+				})
+			},
+			/**
+			 * 跳转到视频播放页
+			 */
+			onHandleToVideoDetail(id) {
+				// 携带数据为视频id
+				uni.navigateTo({
+					url: '/pages/class/videoplay/videoplay?id=' + id
+				})
+			},
+			/**
+			 * 跳转到文章阅读页
+			 * @param {Object} id
+			 */
+			onHandleToArticleDetail(id) {
+				// 携带数据为视频id
+				uni.navigateTo({
+					url: '/pages/class/articleread/articleread?id=' + id
 				})
 			}
 		}

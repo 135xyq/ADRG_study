@@ -62,6 +62,24 @@
             
         }
     
+        ,{
+            "path" : "pages/class/videoplay/videoplay",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "视频详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/class/articleread/articleread",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "文章详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

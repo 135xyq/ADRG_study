@@ -7,7 +7,9 @@
     "pages/me/me",
     "pages/me/login/login",
     "pages/class/videoList/videoList",
-    "pages/class/articleList/articleList"
+    "pages/class/articleList/articleList",
+    "pages/class/videoplay/videoplay",
+    "pages/class/articleread/articleread"
   ],
   "subPackages": [],
   "window": {
