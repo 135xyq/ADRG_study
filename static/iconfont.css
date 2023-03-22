@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3968993 */
+  src: url('/static/iconfont.ttf') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gengduo:before {
+  content: "\e620";
+}
+
+.icon-pinglun:before {
+  content: "\e63b";
+}
+
+.icon-eye:before {
+  content: "\e7ed";
+}
+
+.icon-dianzan:before {
+  content: "\e619";
+}
+
