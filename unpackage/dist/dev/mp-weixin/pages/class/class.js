@@ -112,6 +112,9 @@ try {
     MyVideo: function () {
       return __webpack_require__.e(/*! import() | components/MyVideo/MyVideo */ "components/MyVideo/MyVideo").then(__webpack_require__.bind(null, /*! @/components/MyVideo/MyVideo.vue */ 304))
     },
+    MyArticle: function () {
+      return __webpack_require__.e(/*! import() | components/MyArticle/MyArticle */ "components/MyArticle/MyArticle").then(__webpack_require__.bind(null, /*! @/components/MyArticle/MyArticle.vue */ 325))
+    },
   }
 } catch (e) {
   if (
@@ -204,6 +207,14 @@ var _category = _interopRequireDefault(__webpack_require__(/*! @/api/studySource
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -213,6 +224,7 @@ var _default = {
     };
   },
   computed: {
+    // 获取对应分类下的视频
     getVideoData: function getVideoData() {
       var _this = this;
       if (this.activeCategory !== '') {
@@ -222,17 +234,28 @@ var _default = {
         return video[0].video;
       }
       return [];
+    },
+    // 获取对应分类下的视频
+    getArticleData: function getArticleData() {
+      var _this2 = this;
+      if (this.activeCategory !== '') {
+        var article = this.listData.filter(function (item) {
+          return item.id === _this2.activeCategory;
+        });
+        return article[0].article;
+      }
+      return [];
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
     return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this2.getCategoryList();
+              return _this3.getCategoryList();
             case 2:
             case "end":
               return _context.stop();
@@ -246,7 +269,7 @@ var _default = {
      * 获取分类列表
      */
     getCategoryList: function getCategoryList() {
-      var _this3 = this;
+      var _this4 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
         var res;
         return _regenerator.default.wrap(function _callee2$(_context2) {
@@ -257,8 +280,8 @@ var _default = {
                 return _category.default.getCategoryList();
               case 2:
                 res = _context2.sent;
-                _this3.listData = res.data.data;
-                _this3.activeCategory = _this3.listData[0].id;
+                _this4.listData = res.data.data;
+                _this4.activeCategory = _this4.listData[0].id;
               case 5:
               case "end":
                 return _context2.stop();

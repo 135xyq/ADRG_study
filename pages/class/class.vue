@@ -1,25 +1,35 @@
 <template>
 	<view class="class-container">
-		<u-row>
-			<u-col span="4">
-				<view class="left-list">
-					<u-list>
-						<u-list-item v-for="(item, index) in listData" :key="item.id">
-							<view class="list-item" :class="{active:item.id === activeCategory}"
-								@click="onHandleChangeCategory(item.id)">
-								{{item.name}}
-							</view>
-							</u-cell> 
-						</u-list-item>
-					</u-list>
+		<view class="left-list">
+			<u-list>
+				<u-list-item v-for="(item, index) in listData" :key="item.id">
+					<view class="list-item" :class="{active:item.id === activeCategory}"
+						@click="onHandleChangeCategory(item.id)">
+						{{item.name}}
+					</view>
+					</u-cell>
+				</u-list-item>
+			</u-list>
+		</view>
+
+		<view class="right-list">
+			<scroll-view scroll-y="true" scroll-top="0">
+				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选视频" :isLink="true" value="更多"
+					arrow-direction="right"></u-cell>
+				<view class="video-list-container">
+					<view class="" v-for="item in getVideoData" :key="item.id">
+						<MyVideo :videoData="item"></MyVideo>
+					</view>
 				</view>
-			</u-col>
-			<u-col span="8">
-				<view class="test">
-					qwewqe
+				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选文章" :isLink="true" value="更多"
+					arrow-direction="right"></u-cell>
+				<view class="video-list-container">
+					<view class="" v-for="item in getArticleData" :key="item.id">
+						<MyArticle :articleData = "item"></MyArticle>
+					</view>
 				</view>
-			</u-col>
-		</u-row>
+			</scroll-view>
+		</view>
 	</view>
 </template>
 
@@ -32,6 +42,27 @@
 				activeCategory: '',
 				show: false
 			};
+		},
+		computed: {
+			// 获取对应分类下的视频
+			getVideoData() {
+				if (this.activeCategory !== '') {
+					const video = this.listData.filter(item => item.id === this.activeCategory);
+					return video[0].video;
+				}
+				return []
+
+			},
+
+			// 获取对应分类下的视频
+			getArticleData() {
+				if (this.activeCategory !== '') {
+					const article = this.listData.filter(item => item.id === this.activeCategory);
+					return article[0].article;
+				}
+				return []
+
+			}
 		},
 		async created() {
 			await this.getCategoryList()
@@ -59,8 +90,18 @@
 </script>
 
 <style lang="scss" scoped>
+	.class-container {
+		position: relative;
+		width: 100%;
+	}
+
 	.left-list {
+		position: fixed;
+		// top: 0;
+		width: 35%;
+		overflow: hidden;
 		background-color: $gray_background;
+
 		.list-item {
 			color: $black;
 			height: 100rpx;
@@ -76,5 +117,13 @@
 			}
 		}
 	}
-	
+
+	.right-list {
+		width: 65%;
+		// background-color: red;
+		color: $gray;
+		position: absolute;
+		left: 35%;
+		padding-bottom: 50px;
+	}
 </style>
