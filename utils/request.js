@@ -25,7 +25,13 @@ const request = (url, data, method = 'POST',) => {
                         uni.reLaunch({
                         	url:'/pages/login/login'
                         })
-                    }
+                    }else{
+						uni.showToast({
+							title: res.data.msg,
+							icon:'error',
+							duration: 2000
+						});
+					}
 					reject(res.data.msg);
 				}
 				uni.hideLoading(); //关闭loading
