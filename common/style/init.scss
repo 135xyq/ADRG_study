@@ -1,8 +1,8 @@
-@green: #00880E;
-@white: #FFF;
-@primary: #55AAFF;
-@gray_background: #F0F0F0;
-@black: #000;
+$green: #00880E;
+$white: #FFF;
+$primary: #55AAFF;
+$gray_background: #F0F0F0;
+$black: #000;
 
 ul,li{
 	margin: 0;
@@ -12,7 +12,7 @@ ul,li{
 
 
 // 水平居中
-#center{
+@mixin center{
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -20,7 +20,7 @@ ul,li{
 }
 
 // 占满整个屏幕
-#full{
+@mixin full{
 	position: absolute;
 	top: 0;
 	bottom: 0;

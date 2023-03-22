@@ -1,12 +1,15 @@
 {
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		
+
 		{
 			"path": "pages/class/class",
 			"style": {
 				"navigationBarTitleText": "护理知识学习"
 			}
-		},{
+		}, {
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页"
@@ -31,17 +34,16 @@
 			}
 		},
 		{
-		    "path" : "pages/me/login/login",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "登录",
-		        "enablePullDownRefresh": false
-		    }
-		    
+			"path": "pages/me/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    
-    
-    ],
+
+
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -60,22 +62,22 @@
 			"iconPath": "static/icon/index.png",
 			"selectedIconPath": "static/icon/index_active.png",
 			"text": "首页"
-		},{
+		}, {
 			"pagePath": "pages/class/class",
 			"iconPath": "static/icon/class.png",
 			"selectedIconPath": "static/icon/class_active.png",
 			"text": "课程"
-		},{
+		}, {
 			"pagePath": "pages/problem/problem",
 			"iconPath": "static/icon/problem.png",
 			"selectedIconPath": "static/icon/problem_active.png",
 			"text": "题库"
-		},{
+		}, {
 			"pagePath": "pages/message/message",
 			"iconPath": "static/icon/message.png",
 			"selectedIconPath": "static/icon/message_active.png",
 			"text": "消息"
-		},{
+		}, {
 			"pagePath": "pages/me/me",
 			"iconPath": "static/icon/me.png",
 			"selectedIconPath": "static/icon/me_active.png",

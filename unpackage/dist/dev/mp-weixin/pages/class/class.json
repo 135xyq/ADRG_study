@@ -4,7 +4,6 @@
     "u-row": "/uni_modules/uview-ui/components/u-row/u-row",
     "u-col": "/uni_modules/uview-ui/components/u-col/u-col",
     "u-list": "/uni_modules/uview-ui/components/u-list/u-list",
-    "u-list-item": "/uni_modules/uview-ui/components/u-list-item/u-list-item",
-    "u-count-down": "/uni_modules/uview-ui/components/u-count-down/u-count-down"
+    "u-list-item": "/uni_modules/uview-ui/components/u-list-item/u-list-item"
   }
 }

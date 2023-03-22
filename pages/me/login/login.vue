@@ -93,12 +93,12 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 	.login-contianer {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		#center;
+		@include center;
 		top: 40%;
 
 		.login-avatar {
@@ -111,8 +111,8 @@
 			margin-top: 30rpx;
 			width: 400rpx;
 			font-size: 40rpx;
-			background-color: @green;
-			color: @white;
+			background-color: $green;
+			color: $white;
 			border-radius: 10px;
 		}
 	}
