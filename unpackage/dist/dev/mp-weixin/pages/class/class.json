@@ -5,6 +5,7 @@
     "u-list-item": "/uni_modules/uview-ui/components/u-list-item/u-list-item",
     "u-cell": "/uni_modules/uview-ui/components/u-cell/u-cell",
     "my-video": "/components/MyVideo/MyVideo",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
     "my-article": "/components/MyArticle/MyArticle"
   }
 }

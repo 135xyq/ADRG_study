@@ -24398,6 +24398,140 @@ exports.default = _default;
 /* 254 */,
 /* 255 */
 /*!**************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-list/props.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 控制是否出现滚动条，仅nvue有效
+    showScrollbar: {
+      type: Boolean,
+      default: uni.$u.props.list.showScrollbar
+    },
+    // 距底部多少时触发scrolltolower事件
+    lowerThreshold: {
+      type: [String, Number],
+      default: uni.$u.props.list.lowerThreshold
+    },
+    // 距顶部多少时触发scrolltoupper事件，非nvue有效
+    upperThreshold: {
+      type: [String, Number],
+      default: uni.$u.props.list.upperThreshold
+    },
+    // 设置竖向滚动条位置
+    scrollTop: {
+      type: [String, Number],
+      default: uni.$u.props.list.scrollTop
+    },
+    // 控制 onscroll 事件触发的频率，仅nvue有效
+    offsetAccuracy: {
+      type: [String, Number],
+      default: uni.$u.props.list.offsetAccuracy
+    },
+    // 启用 flexbox 布局。开启后，当前节点声明了display: flex就会成为flex container，并作用于其孩子节点，仅微信小程序有效
+    enableFlex: {
+      type: Boolean,
+      default: uni.$u.props.list.enableFlex
+    },
+    // 是否按分页模式显示List，默认值false
+    pagingEnabled: {
+      type: Boolean,
+      default: uni.$u.props.list.pagingEnabled
+    },
+    // 是否允许List滚动
+    scrollable: {
+      type: Boolean,
+      default: uni.$u.props.list.scrollable
+    },
+    // 值应为某子元素id（id不能以数字开头）
+    scrollIntoView: {
+      type: String,
+      default: uni.$u.props.list.scrollIntoView
+    },
+    // 在设置滚动条位置时使用动画过渡
+    scrollWithAnimation: {
+      type: Boolean,
+      default: uni.$u.props.list.scrollWithAnimation
+    },
+    // iOS点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只对微信小程序有效
+    enableBackToTop: {
+      type: Boolean,
+      default: uni.$u.props.list.enableBackToTop
+    },
+    // 列表的高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.list.height
+    },
+    // 列表宽度
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.list.width
+    },
+    // 列表前后预渲染的屏数，1代表一个屏幕的高度，1.5代表1个半屏幕高度
+    preLoadScreen: {
+      type: [String, Number],
+      default: uni.$u.props.list.preLoadScreen
+    }
+    // vue下，是否开启虚拟列表
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */
+/*!*******************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-list-item/props.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 用于滚动到指定item
+    anchor: {
+      type: [String, Number],
+      default: uni.$u.props.listItem.anchor
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */
+/*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-cell/props.js ***!
   \**************************************************************************/
 /*! no static exports found */
@@ -24524,14 +24658,28 @@ exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-icon/icons.js ***!
   \**************************************************************************/
@@ -24762,7 +24910,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 264 */
+/* 294 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-icon/props.js ***!
   \**************************************************************************/
@@ -24869,154 +25017,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */
-/*!**************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-list/props.js ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {
-    // 控制是否出现滚动条，仅nvue有效
-    showScrollbar: {
-      type: Boolean,
-      default: uni.$u.props.list.showScrollbar
-    },
-    // 距底部多少时触发scrolltolower事件
-    lowerThreshold: {
-      type: [String, Number],
-      default: uni.$u.props.list.lowerThreshold
-    },
-    // 距顶部多少时触发scrolltoupper事件，非nvue有效
-    upperThreshold: {
-      type: [String, Number],
-      default: uni.$u.props.list.upperThreshold
-    },
-    // 设置竖向滚动条位置
-    scrollTop: {
-      type: [String, Number],
-      default: uni.$u.props.list.scrollTop
-    },
-    // 控制 onscroll 事件触发的频率，仅nvue有效
-    offsetAccuracy: {
-      type: [String, Number],
-      default: uni.$u.props.list.offsetAccuracy
-    },
-    // 启用 flexbox 布局。开启后，当前节点声明了display: flex就会成为flex container，并作用于其孩子节点，仅微信小程序有效
-    enableFlex: {
-      type: Boolean,
-      default: uni.$u.props.list.enableFlex
-    },
-    // 是否按分页模式显示List，默认值false
-    pagingEnabled: {
-      type: Boolean,
-      default: uni.$u.props.list.pagingEnabled
-    },
-    // 是否允许List滚动
-    scrollable: {
-      type: Boolean,
-      default: uni.$u.props.list.scrollable
-    },
-    // 值应为某子元素id（id不能以数字开头）
-    scrollIntoView: {
-      type: String,
-      default: uni.$u.props.list.scrollIntoView
-    },
-    // 在设置滚动条位置时使用动画过渡
-    scrollWithAnimation: {
-      type: Boolean,
-      default: uni.$u.props.list.scrollWithAnimation
-    },
-    // iOS点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只对微信小程序有效
-    enableBackToTop: {
-      type: Boolean,
-      default: uni.$u.props.list.enableBackToTop
-    },
-    // 列表的高度
-    height: {
-      type: [String, Number],
-      default: uni.$u.props.list.height
-    },
-    // 列表宽度
-    width: {
-      type: [String, Number],
-      default: uni.$u.props.list.width
-    },
-    // 列表前后预渲染的屏数，1代表一个屏幕的高度，1.5代表1个半屏幕高度
-    preLoadScreen: {
-      type: [String, Number],
-      default: uni.$u.props.list.preLoadScreen
-    }
-    // vue下，是否开启虚拟列表
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */
-/*!*******************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-list-item/props.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {
-    // 用于滚动到指定item
-    anchor: {
-      type: [String, Number],
-      default: uni.$u.props.listItem.anchor
-    }
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */,
-/* 294 */
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-line/props.js ***!
   \**************************************************************************/
@@ -25067,13 +25075,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 295 */,
-/* 296 */,
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \******************************************************************************/
@@ -26092,6 +26108,103 @@ var _default = {
   }]
 };
 exports.default = _default;
+
+/***/ }),
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */
+/*!***************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-empty/props.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 内置图标名称，或图片路径，建议绝对路径
+    icon: {
+      type: String,
+      default: uni.$u.props.empty.icon
+    },
+    // 提示文字
+    text: {
+      type: String,
+      default: uni.$u.props.empty.text
+    },
+    // 文字颜色
+    textColor: {
+      type: String,
+      default: uni.$u.props.empty.textColor
+    },
+    // 文字大小
+    textSize: {
+      type: [String, Number],
+      default: uni.$u.props.empty.textSize
+    },
+    // 图标的颜色
+    iconColor: {
+      type: String,
+      default: uni.$u.props.empty.iconColor
+    },
+    // 图标的大小
+    iconSize: {
+      type: [String, Number],
+      default: uni.$u.props.empty.iconSize
+    },
+    // 选择预置的图标类型
+    mode: {
+      type: String,
+      default: uni.$u.props.empty.mode
+    },
+    //  图标宽度，单位px
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.empty.width
+    },
+    // 图标高度，单位px
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.empty.height
+    },
+    // 是否显示组件
+    show: {
+      type: Boolean,
+      default: uni.$u.props.empty.show
+    },
+    // 组件距离上一个元素之间的距离，默认px单位
+    marginTop: {
+      type: [String, Number],
+      default: uni.$u.props.empty.marginTop
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ })
 ]]);

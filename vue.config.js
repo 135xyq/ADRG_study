@@ -1,4 +1,3 @@
-
 // let path = require('path');
 // let stylePath = path.resolve(__dirname, 'common/style/init.less') //less的路径
 // module.exports = {
@@ -15,6 +14,10 @@
 
 module.exports = {
 	devServer: {
-	    proxy: 'http://localhost:9000'
-	  }
+		proxy: {
+			'/storage':{
+				target: 'http://localhost:9000'
+			}
+		}
+	}
 }

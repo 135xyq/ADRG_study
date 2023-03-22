@@ -43,7 +43,26 @@
 		}
 
 
-	],
+	    ,{
+            "path" : "pages/class/videoList/videoList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "视频列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/class/articleList/articleList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "文章列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

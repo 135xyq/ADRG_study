@@ -101,19 +101,22 @@ var components
 try {
   components = {
     uList: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list/u-list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list/u-list")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list/u-list.vue */ 266))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list/u-list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list/u-list")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list/u-list.vue */ 250))
     },
     uListItem: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list-item/u-list-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list-item/u-list-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list-item/u-list-item.vue */ 274))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-list-item/u-list-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-list-item/u-list-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-list-item/u-list-item.vue */ 258))
     },
     uCell: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-cell/u-cell */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-cell/u-cell")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-cell/u-cell.vue */ 250))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-cell/u-cell */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-cell/u-cell")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-cell/u-cell.vue */ 266))
     },
     MyVideo: function () {
-      return __webpack_require__.e(/*! import() | components/MyVideo/MyVideo */ "components/MyVideo/MyVideo").then(__webpack_require__.bind(null, /*! @/components/MyVideo/MyVideo.vue */ 304))
+      return __webpack_require__.e(/*! import() | components/MyVideo/MyVideo */ "components/MyVideo/MyVideo").then(__webpack_require__.bind(null, /*! @/components/MyVideo/MyVideo.vue */ 274))
+    },
+    uEmpty: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-empty/u-empty.vue */ 333))
     },
     MyArticle: function () {
-      return __webpack_require__.e(/*! import() | components/MyArticle/MyArticle */ "components/MyArticle/MyArticle").then(__webpack_require__.bind(null, /*! @/components/MyArticle/MyArticle.vue */ 325))
+      return __webpack_require__.e(/*! import() | components/MyArticle/MyArticle */ "components/MyArticle/MyArticle").then(__webpack_require__.bind(null, /*! @/components/MyArticle/MyArticle.vue */ 281))
     },
   }
 } catch (e) {
@@ -137,6 +140,17 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.getVideoData.length
+  var g1 = _vm.getArticleData.length
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0,
+        g1: g1,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -170,7 +184,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
@@ -180,6 +194,14 @@ exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 55));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 57));
 var _category = _interopRequireDefault(__webpack_require__(/*! @/api/studySource/category.js */ 167));
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -296,11 +318,31 @@ var _default = {
      */
     onHandleChangeCategory: function onHandleChangeCategory(id) {
       this.activeCategory = id;
-      console.log(id);
+      // console.log(id);
+    },
+    /**
+     * 跳转到视频列表页
+     */
+    onHandleGoToMoreVideo: function onHandleGoToMoreVideo() {
+      console.log(2121);
+      // 携带数据为分类id
+      uni.navigateTo({
+        url: '/pages/class/videoList/videoList?id=' + this.activeCategory
+      });
+    },
+    /**
+     * 跳转到文章列表页
+     */
+    onHandleGoToMoreArticle: function onHandleGoToMoreArticle() {
+      // 携带数据为分类id
+      uni.navigateTo({
+        url: '/pages/class/videoList/articleList?id=' + this.activeCategory
+      });
     }
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

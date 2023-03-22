@@ -15,18 +15,26 @@
 		<view class="right-list">
 			<scroll-view scroll-y="true" scroll-top="0">
 				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选视频" :isLink="true" value="更多"
-					arrow-direction="right"></u-cell>
-				<view class="video-list-container">
+					@click="onHandleGoToMoreVideo" arrow-direction="right"></u-cell>
+				<view class="video-list-container" v-if="getVideoData.length > 0">
 					<view class="" v-for="item in getVideoData" :key="item.id">
 						<MyVideo :videoData="item"></MyVideo>
 					</view>
 				</view>
-				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选文章" :isLink="true" value="更多"
+				<view v-else>
+					<u-empty mode="list" >
+					</u-empty>
+				</view>
+				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选文章" :isLink="true" value="更多" @click="onHandleGoToMoreArticle"
 					arrow-direction="right"></u-cell>
-				<view class="video-list-container">
+				<view class="video-list-container" v-if="getArticleData.length > 0">
 					<view class="" v-for="item in getArticleData" :key="item.id">
-						<MyArticle :articleData = "item"></MyArticle>
+						<MyArticle :articleData="item"></MyArticle>
 					</view>
+				</view>
+				<view v-else>
+					<u-empty mode="list" >
+					</u-empty>
 				</view>
 			</scroll-view>
 		</view>
@@ -83,7 +91,27 @@
 			 */
 			onHandleChangeCategory(id) {
 				this.activeCategory = id
-				console.log(id);
+				// console.log(id);
+			},
+			/**
+			 * 跳转到视频列表页
+			 */
+			onHandleGoToMoreVideo() {
+				console.log(2121);
+				// 携带数据为分类id
+				uni.navigateTo({
+					url: '/pages/class/videoList/videoList?id=' + this.activeCategory
+				})
+				
+			},
+			/**
+			 * 跳转到文章列表页
+			 */
+			onHandleGoToMoreArticle() {
+				// 携带数据为分类id
+				uni.navigateTo({
+					url: '/pages/class/videoList/articleList?id=' + this.activeCategory
+				})
 			}
 		}
 	}

@@ -5,7 +5,9 @@
     "pages/problem/problem",
     "pages/message/message",
     "pages/me/me",
-    "pages/me/login/login"
+    "pages/me/login/login",
+    "pages/class/videoList/videoList",
+    "pages/class/articleList/articleList"
   ],
   "subPackages": [],
   "window": {
