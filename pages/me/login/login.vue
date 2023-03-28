@@ -8,9 +8,7 @@
 
 <script>
 	import axios from "axios"
-	import {
-		login
-	} from "@/api/user/login.js";
+	import loginApi from "@/api/user/login.js";
 	export default {
 		data() {
 			return {
@@ -46,18 +44,19 @@
 						const {
 							code
 						} = await this.getCode();
+						
 
 						// 登录
-						let result = await login({
+						let result = await loginApi.login({
 							code,
 							nickName: userInfo.nickName,
 							avatarUrl: userInfo.avatarUrl,
 							gender: userInfo.gender
 						})
 						//  登录成功,将数据存储到本地，跳转会原页面
-						if (result.data.code === 0) {
+						if (result.code === 0) {
 							// console.log(result.data);
-							this.$store.dispatch('userInfo/updateUserInfo', result.data.data);
+							this.$store.dispatch('userInfo/updateUserInfo', result.data);
 							uni.hideLoading(); // 关闭加载框
 							// 消息提示
 							uni.showToast({

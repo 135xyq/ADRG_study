@@ -145,7 +145,7 @@ exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 55));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 57));
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ 204));
-var _login = __webpack_require__(/*! @/api/user/login.js */ 247);
+var _login = _interopRequireDefault(__webpack_require__(/*! @/api/user/login.js */ 247));
 //
 //
 //
@@ -204,7 +204,7 @@ var _default = {
                               _yield$_this$getCode = _context.sent;
                               code = _yield$_this$getCode.code;
                               _context.next = 7;
-                              return (0, _login.login)({
+                              return _login.default.login({
                                 code: code,
                                 nickName: userInfo.nickName,
                                 avatarUrl: userInfo.avatarUrl,
@@ -213,9 +213,9 @@ var _default = {
                             case 7:
                               result = _context.sent;
                               //  登录成功,将数据存储到本地，跳转会原页面
-                              if (result.data.code === 0) {
+                              if (result.code === 0) {
                                 // console.log(result.data);
-                                _this.$store.dispatch('userInfo/updateUserInfo', result.data.data);
+                                _this.$store.dispatch('userInfo/updateUserInfo', result.data);
                                 uni.hideLoading(); // 关闭加载框
                                 // 消息提示
                                 uni.showToast({

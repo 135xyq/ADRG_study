@@ -1,12 +1,9 @@
-// import request from "@/utils/request.js";
-// /**
-//  * 微信登录
-//  * @param {Object} data 微信登录获取的临时登录凭证和用户信息
-//  */
-// export function login(data) {
-// 	return request({
-// 		url: '/applet/login',
-// 		method: 'post',
-// 		data,
-// 	})
-// }
+import request from "@/utils/request.js";
+
+// 用户登录
+export default {
+	//  获取分类
+	login(data){
+		return request.post('/applet/login/login',data);
+	}
+}

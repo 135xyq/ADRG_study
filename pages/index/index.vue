@@ -1,6 +1,8 @@
 <template>
 	<view class="content">
 		首页
+		<img src="http://localhost:9000/storage/admin/20230323/641c5de71d96b.jpg" alt="显示不了">
+		23
 	</view>
 </template>
 
