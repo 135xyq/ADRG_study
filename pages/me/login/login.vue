@@ -9,6 +9,8 @@
 <script>
 	import axios from "axios"
 	import loginApi from "@/api/user/login.js";
+	import userApi from "@/api/user/user.js";
+	
 	export default {
 		data() {
 			return {
@@ -56,7 +58,13 @@
 						//  登录成功,将数据存储到本地，跳转会原页面
 						if (result.code === 0) {
 							// console.log(result.data);
-							this.$store.dispatch('userInfo/updateUserInfo', result.data);
+							//  将token存储仓库中
+							this.$store.dispatch('updateToken', result.data.token);
+							
+							// 获取用户信息
+							await this.getUserInfo(); 
+							
+							
 							uni.hideLoading(); // 关闭加载框
 							// 消息提示
 							uni.showToast({
@@ -87,6 +95,14 @@
 					}
 				})
 
+			},
+			
+			async getUserInfo() {
+				const res = await userApi.getUserInfo()
+				
+				console.log(res);
+				
+				this.$store.dispatch('updateUserInfo',res.data)
 			}
 		}
 	}

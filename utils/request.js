@@ -1,6 +1,7 @@
 import config from '@/common/config.js'
 import store from '@/store/index.js'
 
+console.log(store);
 const request = (url, data, method = 'POST',) => {
 	return new Promise((resolve, reject) => {
 		uni.showLoading({
@@ -11,12 +12,12 @@ const request = (url, data, method = 'POST',) => {
 		uni.request({
 			url: config.baseUrl+url,
 			method: method,
-			data: {...data,...store.getters.getReq},
+			data: {...data,...store.getters.getToken},
 			success(res) {
 				if (res.data.code == 0) {
 					resolve(res.data)
 				} else {
-                    if(res.data.code == 1 && res.data.msg=='token不存在'){
+                    if(res.data.code == 403){
                         // 清空store
                         store.commit('clearStore');
                         // 清空本地存储的token

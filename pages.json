@@ -3,7 +3,12 @@
 		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
+		{
+			"path": "pages/me/me",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
 		{
 			"path": "pages/class/class",
 			"style": {
@@ -25,12 +30,6 @@
 			"path": "pages/message/message",
 			"style": {
 				"navigationBarTitleText": "消息"
-			}
-		},
-		{
-			"path": "pages/me/me",
-			"style": {
-				"navigationBarTitleText": "个人中心"
 			}
 		},
 		{

@@ -1,1 +1,1 @@
-<view><button data-event-opts="{{[['tap',[['onHandleLogin',['$event']]]]]}}" bindtap="__e">登录</button></view>
+<view class="me-container"><view class="top _div"><view class="set _div"><uni-icons vue-id="8e55f700-1" custom-prefix="iconfont" type="icon-shezhi" size="30" bind:__l="__l"></uni-icons></view></view><view class="user-info _div"><u-avatar vue-id="8e55f700-2" src="{{src}}" bind:__l="__l"></u-avatar></view><view class="bottom _div"><button data-event-opts="{{[['tap',[['onHandleLogin',['$event']]]]]}}" bindtap="__e">登录</button></view></view>

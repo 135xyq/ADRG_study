@@ -11,6 +11,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-shoucang:before {
+  content: "\e626";
+}
+
+.icon-yijianfankui:before {
+  content: "\e60f";
+}
+
+.icon-lishijilu:before {
+  content: "\e650";
+}
+
+.icon-cuotiben:before {
+  content: "\e60e";
+}
+
+.icon-shezhi:before {
+  content: "\e6cf";
+}
+
+.icon-a-bijibenbiji:before {
+  content: "\e6bf";
+}
+
 .icon-wenzhang-copy:before {
   content: "\e643";
 }

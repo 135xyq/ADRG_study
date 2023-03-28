@@ -146,6 +146,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 57));
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ 204));
 var _login = _interopRequireDefault(__webpack_require__(/*! @/api/user/login.js */ 247));
+var _user = _interopRequireDefault(__webpack_require__(/*! @/api/user/user.js */ 483));
 //
 //
 //
@@ -212,31 +213,40 @@ var _default = {
                               });
                             case 7:
                               result = _context.sent;
-                              //  登录成功,将数据存储到本地，跳转会原页面
-                              if (result.code === 0) {
-                                // console.log(result.data);
-                                _this.$store.dispatch('userInfo/updateUserInfo', result.data);
-                                uni.hideLoading(); // 关闭加载框
-                                // 消息提示
-                                uni.showToast({
-                                  title: '登录成功',
-                                  duration: 1000,
-                                  icon: 'success',
-                                  success: function success() {
-                                    // 跳转会原页面
-                                    setTimeout(function () {
-                                      uni.navigateBack();
-                                    }, 1000);
-                                  }
-                                });
-                              } else {
-                                uni.showToast({
-                                  title: '登录失败',
-                                  duration: 2000,
-                                  icon: 'error'
-                                });
+                              if (!(result.code === 0)) {
+                                _context.next = 16;
+                                break;
                               }
-                            case 9:
+                              // console.log(result.data);
+                              //  将token存储仓库中
+                              _this.$store.dispatch('updateToken', result.data.token);
+
+                              // 获取用户信息
+                              _context.next = 12;
+                              return _this.getUserInfo();
+                            case 12:
+                              uni.hideLoading(); // 关闭加载框
+                              // 消息提示
+                              uni.showToast({
+                                title: '登录成功',
+                                duration: 1000,
+                                icon: 'success',
+                                success: function success() {
+                                  // 跳转会原页面
+                                  setTimeout(function () {
+                                    uni.navigateBack();
+                                  }, 1000);
+                                }
+                              });
+                              _context.next = 17;
+                              break;
+                            case 16:
+                              uni.showToast({
+                                title: '登录失败',
+                                duration: 2000,
+                                icon: 'error'
+                              });
+                            case 17:
                             case "end":
                               return _context.stop();
                           }
@@ -262,6 +272,28 @@ var _default = {
             }
           }
         }, _callee2);
+      }))();
+    },
+    getUserInfo: function getUserInfo() {
+      var _this2 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        var res;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _user.default.getUserInfo();
+              case 2:
+                res = _context3.sent;
+                console.log(res);
+                _this2.$store.dispatch('updateUserInfo', res.data);
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   }
