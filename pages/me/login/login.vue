@@ -71,17 +71,14 @@
 								title: '登录成功',
 								duration: 1000,
 								icon: 'success',
-								success: async () => {
-									// 获取用户信息
-
-									// 跳转会原页面
-									setTimeout(() => {
-										uni.navigateTo({
-											url:'/pages/me/me'
-										})
-									}, 1000)
-								}
 							})
+							
+							setTimeout(()=>{
+								// 跳转回首页
+								uni.reLaunch({
+									url: '/pages/index/index'
+								})
+							},1500)
 						} else {
 							uni.showToast({
 								title: '登录失败',

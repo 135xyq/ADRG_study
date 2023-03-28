@@ -35,7 +35,7 @@ export default new Vuex.Store({
 		clearStore(state) {
 			state.token = '';
 			state.userInfo = {}
-		}
+		},
 	},
 	actions: {
 		updateUserInfo({
@@ -49,6 +49,12 @@ export default new Vuex.Store({
 		}, token) {
 			uni.setStorageSync('token', token);
 			commit("updateToken", token);
+		},
+		// 退出登录
+		logout({commit}) {
+			uni.removeStorageSync('token');
+			uni.removeStorageSync('userInfo');
+			commit("clearStore");
 		}
 	}
 })

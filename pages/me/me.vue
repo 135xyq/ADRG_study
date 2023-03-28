@@ -2,7 +2,8 @@
 	<view class="me-container">
 		<div class="top">
 			<div class="set">
-				<uni-icons custom-prefix="iconfont" type="icon-shezhi" size="35" @click="onHandleGoPageUserSet"></uni-icons>
+				<uni-icons custom-prefix="iconfont" type="icon-shezhi" size="35" @click="onHandleGoPageUserSet">
+				</uni-icons>
 			</div>
 			<div class="user-info">
 				<u-row>
@@ -60,7 +61,7 @@
 						<view class="select-item">意见反馈</view>
 					</view>
 				</u-cell>
-				<u-cell size="large" isLink>
+				<u-cell size="large" isLink @click="onHandleLogout">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-tuichudenglu" size="25"></uni-icons>
 					</view>
@@ -74,20 +75,22 @@
 </template>
 
 <script>
-	import userApi from "@/api/user/user.js"
+	import loginApi from "@/api/user/login.js"
 
 	export default {
 		data() {
-			return {
-				userInfo: {}
-			}
-		},
-		async created() {
-			await userApi.getUserInfo()
+			return {}
 		},
 		computed: {
 			getUser() {
 				return this.$store.getters.getUser;
+			}
+		},
+		onLoad() {
+			if(this.$store.state.token === ''){
+				uni.navigateTo({
+					url:'/pages/me/login/login'
+				})
 			}
 		},
 		methods: {
@@ -96,7 +99,7 @@
 			 */
 			onHandleGoPageUserSet() {
 				uni.navigateTo({
-					url:'/pages/set/set'
+					url: '/pages/set/set'
 				})
 			},
 			/**
@@ -104,7 +107,7 @@
 			 */
 			onHandleGoPageStudyHistory() {
 				uni.navigateTo({
-					url:'/pages/studyHistory/studyHistory'
+					url: '/pages/studyHistory/studyHistory'
 				})
 			},
 			/**
@@ -112,7 +115,7 @@
 			 */
 			onHandleGoPageStar() {
 				uni.navigateTo({
-					url:'/pages/star/star'
+					url: '/pages/star/star'
 				})
 			},
 			/**
@@ -120,7 +123,7 @@
 			 */
 			onHandleGoPageNote() {
 				uni.navigateTo({
-					url:'/pages/note/note'
+					url: '/pages/note/note'
 				})
 			},
 			/**
@@ -128,7 +131,7 @@
 			 */
 			onHandleGoPageErroQuestion() {
 				uni.navigateTo({
-					url:'/pages/errorQuestion/errorQuestion'
+					url: '/pages/errorQuestion/errorQuestion'
 				})
 			},
 			/**
@@ -136,42 +139,62 @@
 			 */
 			onHandleGoPageFeedBack() {
 				uni.navigateTo({
-					url:'/pages/feedback/feedback'
+					url: '/pages/feedback/feedback'
 				})
 			},
+			/**
+			 * 退出登录
+			 */
+			async onHandleLogout() {
+				const res = await loginApi.logout();
+
+				if (res.code === 0) {
+					this.$store.dispatch('logout');
+					uni.navigateTo({
+						url: '/pages/me/login/login'
+					})
+					uni.showToast({
+						title: res.msg,
+						icon: "success",
+						duration: 2000
+					})
+				}
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.top{
+	.top {
 		margin-bottom: 40px;
-		.set{
+
+		.set {
 			height: 50px;
 			text-align: right;
 			padding: 10px;
 		}
-		
-		.user-info{
-			.avatar{
+
+		.user-info {
+			.avatar {
 				margin-left: 30px;
 				vertical-align: top;
 			}
-			.name{
+
+			.name {
 				overflow: hidden;
 			}
 		}
 	}
-	
-	.content{
-		.u-slot-icon{
+
+	.content {
+		.u-slot-icon {
 			margin-right: 20rpx;
 			font-weight: 600;
 		}
-		.u-slot-title{
+
+		.u-slot-title {
 			font-size: 16px;
 			font-weight: 600;
 		}
 	}
-
 </style>

@@ -9,7 +9,13 @@
     "pages/class/videoList/videoList",
     "pages/class/articleList/articleList",
     "pages/class/videoplay/videoplay",
-    "pages/class/articleread/articleread"
+    "pages/class/articleread/articleread",
+    "pages/set/set",
+    "pages/studyHistory/studyHistory",
+    "pages/star/star",
+    "pages/note/note",
+    "pages/errorQuestion/errorQuestion",
+    "pages/feedback/feedback"
   ],
   "subPackages": [],
   "window": {
