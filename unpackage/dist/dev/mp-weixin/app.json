@@ -15,7 +15,8 @@
     "pages/star/star",
     "pages/note/note",
     "pages/errorQuestion/errorQuestion",
-    "pages/feedback/feedback"
+    "pages/feedback/feedback",
+    "pages/set/userNameSet/userNameSet"
   ],
   "subPackages": [],
   "window": {

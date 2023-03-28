@@ -9,7 +9,7 @@
 					<u-avatar :src="userInfo.avatar" size="80"></u-avatar>
 				</view>
 			</u-cell>
-			<u-cell isLink center class="item">
+			<u-cell isLink center class="item" @click="onHandleSetName">
 				<view slot="title" class="u-slot-title">
 					<text class="u-cell-text">昵称</text>
 				</view>
@@ -61,6 +61,19 @@
 				}
 			}
 		},
+		methods:{
+			/**
+			 * 修改昵称
+			 */
+			onHandleSetName() {
+				//  参数
+				const query = `?name=${this.userInfo.nickName}`
+				
+				uni.navigateTo({
+					url:'/pages/set/userNameSet/userNameSet' + query
+				})
+			}
+		}
 	}
 </script>
 
