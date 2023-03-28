@@ -18,9 +18,9 @@
 				</u-row>
 			</div>
 		</div>
-
 		<div class="bottom">
 			<view class="content">
+				<u-line></u-line>
 				<u-cell size="large" isLink @click="onHandleGoPageStudyHistory">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-lishijilu" size="25"></uni-icons>
