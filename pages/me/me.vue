@@ -2,7 +2,7 @@
 	<view class="me-container">
 		<div class="top">
 			<div class="set">
-				<uni-icons custom-prefix="iconfont" type="icon-shezhi" size="35"></uni-icons>
+				<uni-icons custom-prefix="iconfont" type="icon-shezhi" size="35" @click="onHandleGoPageUserSet"></uni-icons>
 			</div>
 			<div class="user-info">
 				<u-row>
@@ -20,7 +20,7 @@
 
 		<div class="bottom">
 			<view class="content">
-				<u-cell size="large" isLink>
+				<u-cell size="large" isLink @click="onHandleGoPageStudyHistory">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-lishijilu" size="25"></uni-icons>
 					</view>
@@ -28,7 +28,7 @@
 						<view class="select-item">学习记录</view>
 					</view>
 				</u-cell>
-				<u-cell size="large" isLink>
+				<u-cell size="large" isLink @click="onHandleGoPageStar">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-shoucang" size="25"></uni-icons>
 					</view>
@@ -36,7 +36,7 @@
 						<view class="select-item">收藏</view>
 					</view>
 				</u-cell>
-				<u-cell size="large" isLink>
+				<u-cell size="large" isLink @click="onHandleGoPageErroQuestion">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-cuotiben" size="25"></uni-icons>
 					</view>
@@ -44,7 +44,7 @@
 						<view class="select-item">错题本</view>
 					</view>
 				</u-cell>
-				<u-cell size="large" isLink>
+				<u-cell size="large" isLink @click="onHandleGoPageNote">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-a-bijibenbiji" size="25"></uni-icons>
 					</view>
@@ -52,7 +52,7 @@
 						<view class="select-item">笔记</view>
 					</view>
 				</u-cell>
-				<u-cell size="large" isLink>
+				<u-cell size="large" isLink @click="onHandleGoPageFeedBack">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-yijianfankui" size="25"></uni-icons>
 					</view>
@@ -90,7 +90,56 @@
 				return this.$store.getters.getUser;
 			}
 		},
-		methods: {}
+		methods: {
+			/**
+			 * 前往用户设置界面
+			 */
+			onHandleGoPageUserSet() {
+				uni.navigateTo({
+					url:'/pages/set/set'
+				})
+			},
+			/**
+			 * 前往学习记录页
+			 */
+			onHandleGoPageStudyHistory() {
+				uni.navigateTo({
+					url:'/pages/studyHistory/studyHistory'
+				})
+			},
+			/**
+			 * 前往收藏页
+			 */
+			onHandleGoPageStar() {
+				uni.navigateTo({
+					url:'/pages/star/star'
+				})
+			},
+			/**
+			 * 前往笔记
+			 */
+			onHandleGoPageNote() {
+				uni.navigateTo({
+					url:'/pages/note/note'
+				})
+			},
+			/**
+			 * 前往错题记录页
+			 */
+			onHandleGoPageErroQuestion() {
+				uni.navigateTo({
+					url:'/pages/errorQuestion/errorQuestion'
+				})
+			},
+			/**
+			 * 前往意见反馈
+			 */
+			onHandleGoPageFeedBack() {
+				uni.navigateTo({
+					url:'/pages/feedback/feedback'
+				})
+			},
+		}
 	}
 </script>
 
