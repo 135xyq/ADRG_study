@@ -1,7 +1,6 @@
 import config from '@/common/config.js'
 import store from '@/store/index.js'
 
-console.log(store);
 const request = (url, data, method = 'POST',) => {
 	return new Promise((resolve, reject) => {
 		uni.showLoading({
@@ -12,7 +11,7 @@ const request = (url, data, method = 'POST',) => {
 		uni.request({
 			url: config.baseUrl+url,
 			method: method,
-			data: {...data,...store.getters.getToken},
+			data: {...store.getters.getToken,...data},
 			success(res) {
 				if (res.data.code == 0) {
 					resolve(res.data)
@@ -24,7 +23,7 @@ const request = (url, data, method = 'POST',) => {
                         uni.clearStorageSync('token');
                         // 重定向到登录页
                         uni.reLaunch({
-                        	url:'/pages/login/login'
+                        	url:'/pages/me/login/login'
                         })
                     }else{
 						uni.showToast({

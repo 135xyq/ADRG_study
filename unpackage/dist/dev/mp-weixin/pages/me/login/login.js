@@ -179,10 +179,10 @@ var _default = {
     // 获取code后登录
     onHandleLogin: function onHandleLogin() {
       var _this = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        return _regenerator.default.wrap(function _callee2$(_context2) {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        return _regenerator.default.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 uni.showLoading({
                   title: '登录中',
@@ -192,19 +192,19 @@ var _default = {
                 uni.getUserProfile({
                   desc: '获取头像和昵称',
                   success: function () {
-                    var _success = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {
+                    var _success = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(res) {
                       var userInfo, _yield$_this$getCode, code, result;
-                      return _regenerator.default.wrap(function _callee$(_context) {
+                      return _regenerator.default.wrap(function _callee2$(_context2) {
                         while (1) {
-                          switch (_context.prev = _context.next) {
+                          switch (_context2.prev = _context2.next) {
                             case 0:
                               userInfo = res.userInfo;
-                              _context.next = 3;
+                              _context2.next = 3;
                               return _this.getCode();
                             case 3:
-                              _yield$_this$getCode = _context.sent;
+                              _yield$_this$getCode = _context2.sent;
                               code = _yield$_this$getCode.code;
-                              _context.next = 7;
+                              _context2.next = 7;
                               return _login.default.login({
                                 code: code,
                                 nickName: userInfo.nickName,
@@ -212,18 +212,18 @@ var _default = {
                                 gender: userInfo.gender
                               });
                             case 7:
-                              result = _context.sent;
+                              result = _context2.sent;
                               if (!(result.code === 0)) {
-                                _context.next = 16;
+                                _context2.next = 16;
                                 break;
                               }
                               // console.log(result.data);
                               //  将token存储仓库中
                               _this.$store.dispatch('updateToken', result.data.token);
-
-                              // 获取用户信息
-                              _context.next = 12;
-                              return _this.getUserInfo();
+                              _context2.next = 12;
+                              return _this.getUserInfo({
+                                token: result.data.token
+                              });
                             case 12:
                               uni.hideLoading(); // 关闭加载框
                               // 消息提示
@@ -231,14 +231,34 @@ var _default = {
                                 title: '登录成功',
                                 duration: 1000,
                                 icon: 'success',
-                                success: function success() {
-                                  // 跳转会原页面
-                                  setTimeout(function () {
-                                    uni.navigateBack();
-                                  }, 1000);
-                                }
+                                success: function () {
+                                  var _success2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+                                    return _regenerator.default.wrap(function _callee$(_context) {
+                                      while (1) {
+                                        switch (_context.prev = _context.next) {
+                                          case 0:
+                                            // 获取用户信息
+
+                                            // 跳转会原页面
+                                            setTimeout(function () {
+                                              uni.navigateTo({
+                                                url: '/pages/me/me'
+                                              });
+                                            }, 1000);
+                                          case 1:
+                                          case "end":
+                                            return _context.stop();
+                                        }
+                                      }
+                                    }, _callee);
+                                  }));
+                                  function success() {
+                                    return _success2.apply(this, arguments);
+                                  }
+                                  return success;
+                                }()
                               });
-                              _context.next = 17;
+                              _context2.next = 17;
                               break;
                             case 16:
                               uni.showToast({
@@ -248,10 +268,10 @@ var _default = {
                               });
                             case 17:
                             case "end":
-                              return _context.stop();
+                              return _context2.stop();
                           }
                         }
-                      }, _callee);
+                      }, _callee2);
                     }));
                     function success(_x) {
                       return _success.apply(this, arguments);
@@ -268,32 +288,31 @@ var _default = {
                 });
               case 2:
               case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    getUserInfo: function getUserInfo() {
-      var _this2 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
-        var res;
-        return _regenerator.default.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return _user.default.getUserInfo();
-              case 2:
-                res = _context3.sent;
-                console.log(res);
-                _this2.$store.dispatch('updateUserInfo', res.data);
-              case 5:
-              case "end":
                 return _context3.stop();
             }
           }
         }, _callee3);
+      }))();
+    },
+    getUserInfo: function getUserInfo(data) {
+      var _this2 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4() {
+        var res;
+        return _regenerator.default.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return _user.default.getUserInfo(data);
+              case 2:
+                res = _context4.sent;
+                _this2.$store.dispatch('updateUserInfo', JSON.stringify(res.data));
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }

@@ -10,7 +10,7 @@
 	import axios from "axios"
 	import loginApi from "@/api/user/login.js";
 	import userApi from "@/api/user/user.js";
-	
+
 	export default {
 		data() {
 			return {
@@ -46,7 +46,7 @@
 						const {
 							code
 						} = await this.getCode();
-						
+
 
 						// 登录
 						let result = await loginApi.login({
@@ -60,22 +60,26 @@
 							// console.log(result.data);
 							//  将token存储仓库中
 							this.$store.dispatch('updateToken', result.data.token);
-							
-							// 获取用户信息
-							await this.getUserInfo(); 
-							
-							
+
+							await this.getUserInfo({
+								token: result.data.token
+							});
+
 							uni.hideLoading(); // 关闭加载框
 							// 消息提示
 							uni.showToast({
 								title: '登录成功',
 								duration: 1000,
 								icon: 'success',
-								success: () => {
+								success: async () => {
+									// 获取用户信息
+
 									// 跳转会原页面
-									setTimeout(()=>{
-										uni.navigateBack();
-									},1000)
+									setTimeout(() => {
+										uni.navigateTo({
+											url:'/pages/me/me'
+										})
+									}, 1000)
 								}
 							})
 						} else {
@@ -96,13 +100,12 @@
 				})
 
 			},
-			
-			async getUserInfo() {
-				const res = await userApi.getUserInfo()
-				
-				console.log(res);
-				
-				this.$store.dispatch('updateUserInfo',res.data)
+
+			async getUserInfo(data) {
+				const res = await userApi.getUserInfo(data)
+
+
+				this.$store.dispatch('updateUserInfo', JSON.stringify(res.data))
 			}
 		}
 	}

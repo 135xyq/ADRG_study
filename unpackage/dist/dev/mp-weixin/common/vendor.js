@@ -19164,6 +19164,14 @@ var _default = new _vuex.default.Store({
       return {
         token: state.token
       };
+    },
+    // 获取用户信息
+    getUser: function getUser(state) {
+      var Storage = uni.getStorageSync('userInfo');
+      if (JSON.stringify(state.userInfo) == '{}' && Storage) {
+        store.commit('updateUserInfo', Storage);
+      }
+      return JSON.parse(state.userInfo);
     }
   },
   mutations: {
@@ -19172,6 +19180,11 @@ var _default = new _vuex.default.Store({
     },
     updateToken: function updateToken(state, token) {
       state.token = token;
+    },
+    // 清空store
+    clearStore: function clearStore(state) {
+      state.token = '';
+      state.userInfo = {};
     }
   },
   actions: {
@@ -19183,7 +19196,7 @@ var _default = new _vuex.default.Store({
     updateToken: function updateToken(_ref2, token) {
       var commit = _ref2.commit;
       uni.setStorageSync('token', token);
-      commit("token", token);
+      commit("updateToken", token);
     }
   }
 });
@@ -20509,7 +20522,6 @@ var _config = _interopRequireDefault(__webpack_require__(/*! @/common/config.js 
 var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 158));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-console.log(_index.default);
 var request = function request(url, data) {
   var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'POST';
   return new Promise(function (resolve, reject) {
@@ -20521,7 +20533,7 @@ var request = function request(url, data) {
     uni.request({
       url: _config.default.baseUrl + url,
       method: method,
-      data: _objectSpread(_objectSpread({}, data), _index.default.getters.getToken),
+      data: _objectSpread(_objectSpread({}, _index.default.getters.getToken), data),
       success: function success(res) {
         if (res.data.code == 0) {
           resolve(res.data);
@@ -20533,7 +20545,7 @@ var request = function request(url, data) {
             uni.clearStorageSync('token');
             // 重定向到登录页
             uni.reLaunch({
-              url: '/pages/login/login'
+              url: '/pages/me/login/login'
             });
           } else {
             uni.showToast({
@@ -27749,6 +27761,101 @@ var _default = {
   }
 };
 exports.default = _default;
+
+/***/ }),
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */
+/*!*************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-row/props.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 给col添加间距，左右边距各占一半
+    gutter: {
+      type: [String, Number],
+      default: uni.$u.props.row.gutter
+    },
+    // 水平排列方式，可选值为`start`(或`flex-start`)、`end`(或`flex-end`)、`center`、`around`(或`space-around`)、`between`(或`space-between`)
+    justify: {
+      type: String,
+      default: uni.$u.props.row.justify
+    },
+    // 垂直对齐方式，可选值为top、center、bottom
+    align: {
+      type: String,
+      default: uni.$u.props.row.align
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */
+/*!*************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-col/props.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 占父容器宽度的多少等分，总分为12份
+    span: {
+      type: [String, Number],
+      default: uni.$u.props.col.span
+    },
+    // 指定栅格左侧的间隔数(总12栏)
+    offset: {
+      type: [String, Number],
+      default: uni.$u.props.col.offset
+    },
+    // 水平排列方式，可选值为`start`(或`flex-start`)、`end`(或`flex-end`)、`center`、`around`(或`space-around`)、`between`(或`space-between`)
+    justify: {
+      type: String,
+      default: uni.$u.props.col.justify
+    },
+    // 垂直对齐方式，可选值为top、center、bottom、stretch
+    align: {
+      type: String,
+      default: uni.$u.props.col.align
+    },
+    // 文字对齐方式
+    textAlign: {
+      type: String,
+      default: uni.$u.props.col.textAlign
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ })
 ]]);
