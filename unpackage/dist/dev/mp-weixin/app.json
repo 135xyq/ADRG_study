@@ -16,7 +16,8 @@
     "pages/note/note",
     "pages/errorQuestion/errorQuestion",
     "pages/feedback/feedback",
-    "pages/set/userNameSet/userNameSet"
+    "pages/set/userNameSet/userNameSet",
+    "pages/set/userGenderSet/userGenderSet"
   ],
   "subPackages": [],
   "window": {

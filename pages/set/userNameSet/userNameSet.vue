@@ -34,7 +34,7 @@
 .button-container{
 	position: relative;
 	.button{
-		width: 140rpx;
+		width: 180rpx;
 		position: absolute;
 		right: 10px;
 		top: 10px;

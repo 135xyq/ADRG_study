@@ -17,7 +17,7 @@
 					{{userInfo.nickName}}
 				</view>
 			</u-cell>
-			<u-cell isLink center class="item">
+			<u-cell isLink center class="item" @click="onHandleSetGender">
 				<view slot="title" class="u-slot-title">
 					<text class="u-cell-text">性别</text>
 				</view>
@@ -71,6 +71,17 @@
 				
 				uni.navigateTo({
 					url:'/pages/set/userNameSet/userNameSet' + query
+				})
+			},
+			/**
+			 * 修改性别
+			 */
+			onHandleSetGender() {
+				//  参数
+				const query = `?gender=${this.userInfo.gender}`
+				
+				uni.navigateTo({
+					url:'/pages/set/userGenderSet/userGenderSet' + query
 				})
 			}
 		}
