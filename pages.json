@@ -160,6 +160,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/feedback/feedbackHistory/feedbackHistory",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "反馈历史记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
