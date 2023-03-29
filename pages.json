@@ -151,6 +151,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/set/userQuestionSet/userQuestionSet",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "组卷题数",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

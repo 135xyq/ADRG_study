@@ -25,7 +25,7 @@
 					<text>{{getGender(userInfo.gender)}}</text>
 				</view>
 			</u-cell>
-			<u-cell isLink center class="item">
+			<u-cell isLink center class="item" @click="onHandleSetQuestion">
 				<view slot="title" class="u-slot-title">
 					<text class="u-cell-text">一次出题数量</text>
 				</view>
@@ -82,6 +82,17 @@
 				
 				uni.navigateTo({
 					url:'/pages/set/userGenderSet/userGenderSet' + query
+				})
+			},
+			/**
+			 * 出题个数设置
+			 */
+			onHandleSetQuestion() {
+				//  参数
+				const query = `?count=${this.userInfo.questionCount}`
+				
+				uni.navigateTo({
+					url:'/pages/set/userQuestionSet/userQuestionSet' + query
 				})
 			}
 		}
