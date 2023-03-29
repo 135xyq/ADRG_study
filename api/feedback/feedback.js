@@ -3,7 +3,7 @@ import request from "@/utils/request.js";
 // 问题反馈等信息
 export default {
 	//  列表
-	feedbackList(data){
+	getFeedbackList(data){
 		return request.post('/applet/feedback/list',data);
 	},
 	//  提交一个反馈
