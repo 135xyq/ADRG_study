@@ -89,6 +89,11 @@
 				});
 				this.pageInfo.total = res.data.total;
 				this.videoList = [...this.videoList, ...res.data.data];
+				
+				// 没有数据了
+				if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
+					this.status = 'nomore'
+				}
 			},
 			/**
 			 * 跳转到视频详情页

@@ -66,7 +66,7 @@
 			this.scrollTop = e.scrollTop;
 		},
 		/**
-		 * 页面到底底部事件
+		 * 页面到底部事件
 		 */
 		async onReachBottom() {
 			// 没有数据了
@@ -89,6 +89,7 @@
 				});
 				this.pageInfo.total = res.data.total;
 				this.articleList = [...this.articleList, ...res.data.data];
+				
 				// 没有数据了
 				if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
 					this.status = 'nomore'
