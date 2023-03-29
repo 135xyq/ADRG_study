@@ -28,6 +28,9 @@
 				</view>
 			</view>
 		</view>
+		<view class="bottom-container">
+			<u-loadmore :status="loadStatus" height="50" :line="true" nomoreText="已经到底了" />
+		</view>
 	</view>
 </template>
 
@@ -40,17 +43,43 @@
 				list: ['未回复', '已回复'],
 				current: 0,
 				feedbacList:[],
-				status: 0
+				status: 0,
+				loadStatus: 'loading', // 加载更多的状态
+				pageInfo: {
+					page: 1,
+					limit: 20,
+					total:0
+				}
 			};
 		},
 		async onLoad() {
 			await this.getFeedbackData();
 		},
+		/**
+		 * 页面到底底部事件
+		 */
+		async onReachBottom() {
+			// 没有数据了
+			if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
+				this.loadStatus = 'nomore'
+			} else {
+				// 每次请求下一页
+				this.pageInfo.page++;
+				await this.getFeedbackData()
+			}
+		},
 		methods: {
 			async getFeedbackData() {
-				const res = await feedbackApi.getFeedbackList({status:this.status});
+				const res = await feedbackApi.getFeedbackList({status:this.status,...this.pageInfo});
 				
-				this.feedbacList = res.data.data
+				this.feedbacList = [...this.feedbacList,...res.data.data]
+				this.pageInfo.total = res.data.total
+				
+				// 没有数据了
+				if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
+					this.loadStatus = 'nomore'
+				}
+				
 			},
 			/**
 			 * 更改选择
@@ -60,6 +89,14 @@
 				
 				this.current = index
 				this.status = index
+				
+				//  数据重置
+				this.pageInfo = {
+					page:1,
+					limit: 20,
+					total:0
+				}
+				this.feedbacList = []
 				
 				await this.getFeedbackData()
 			}
