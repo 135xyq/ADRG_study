@@ -1,13 +1,12 @@
 <template>
 	<view class="user-question-set">
 		<u-picker :show="true" :defaultIndex="defaultIndex" :columns="columns" @confirm="onHandleConfirm" @cancel="onHandleCancel"></u-picker>
-<!-- 		<view class="button-container">
-			<u-button :disabled="oldCount === newCount" :loading="loading" class="button" type="success" text="确定" @click="onHandleSet"></u-button>
-		</view> -->
 	</view>
 </template>
 
 <script>
+	import userApi from "@/api/user/user.js"
+	
 	export default {
 		data() {
 			return {
@@ -25,8 +24,27 @@
 		},
 		methods: {
 			//  确认修改
-			onHandleConfirm(data) {
-				console.log(data.value[0]);
+			async onHandleConfirm(data) {
+				const res = await userApi.updateUserInfo({
+					question_count: data.value[0]
+				})
+				if (res.code === 0) {
+					uni.showToast({
+						title: res.msg,
+						duration: 1000,
+						icon: "success",
+						success: async()=>{
+							// 成功后清空存储的用户信息
+							this.$store.dispatch('clearUserInfo');
+							
+							//  重新获取数据
+							const res = await userApi.getUserInfo()
+							this.$store.dispatch('updateUserInfo', JSON.stringify(res.data))
+							
+							uni.navigateBack();
+						}
+					});
+				}
 			},
 			// 取消修改
 			onHandleCancel() {

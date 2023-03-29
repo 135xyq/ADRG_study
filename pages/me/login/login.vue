@@ -74,13 +74,13 @@
 								duration: 1000,
 								icon: 'success',
 							})
-							
-							setTimeout(()=>{
+
+							setTimeout(() => {
 								// 跳转回首页
 								uni.reLaunch({
 									url: '/pages/index/index'
 								})
-							},1500)
+							}, 1500)
 						} else {
 							uni.showToast({
 								title: '登录失败',
@@ -102,7 +102,7 @@
 
 			async getUserInfo(data) {
 				const res = await userApi.getUserInfo(data)
-				
+
 				this.$store.dispatch('updateUserInfo', JSON.stringify(res.data))
 			}
 		}

@@ -30,7 +30,7 @@
 					<text class="u-cell-text">一次出题数量</text>
 				</view>
 				<view slot="value" class="u-slot-title">
-					<text>{{10}}</text>
+					<text>{{userInfo.question_count}}</text>
 				</view>
 			</u-cell>
 		</u-cell-group>
@@ -49,12 +49,12 @@
 		},
 		computed: {
 			userInfo() {
-				if(this.$store.getters.getUser){
+				if (this.$store.getters.getUser) {
 					return this.$store.getters.getUser;
-				}else{
+				} else {
 					return {}
 				}
-				
+
 			},
 			getGender(gender) {
 				return gender => {
@@ -97,7 +97,7 @@
 			 */
 			onHandleSetQuestion() {
 				//  参数
-				const query = `?count=${this.userInfo.questionCount}`
+				const query = `?count=${this.userInfo.question_count}`
 
 				uni.navigateTo({
 					url: '/pages/set/userQuestionSet/userQuestionSet' + query
@@ -108,32 +108,34 @@
 			 */
 			async onHandleSetAvatar() {
 				const res = await upload();
-				if(res.code === 0) {
-					
+				if (res.code === 0) {
+
 					// 文件上传成功
-					const userUpdateInfo = await userApi.updateUserInfo({avatar:res.data.url})
-					
-					if(userUpdateInfo.code === 0) {
+					const userUpdateInfo = await userApi.updateUserInfo({
+						avatar: res.data.url
+					})
+
+					if (userUpdateInfo.code === 0) {
 						// 成功后清空存储的用户信息
 						this.$store.dispatch('clearUserInfo');
-						
+
 						//  重新获取数据
 						const res = await userApi.getUserInfo()
 						this.$store.dispatch('updateUserInfo', JSON.stringify(res.data))
-					}else {
+					} else {
 						uni.showToast({
 							title: res.msg,
 							duration: 1000,
-							icon:"error"
+							icon: "error"
 						});
 					}
-					
-					
-				}else{
+
+
+				} else {
 					uni.showToast({
 						title: res.msg,
 						duration: 1000,
-						icon:"error"
+						icon: "error"
 					});
 				}
 			}

@@ -11,6 +11,8 @@
 </template>
 
 <script>
+	import userApi from "@/api/user/user.js"
+	
 	export default {
 		data() {
 			return {
@@ -20,14 +22,36 @@
 			}
 		},
 		onLoad(options) {
-			this.oldGender = options.gender;
-			this.newGender = options.gender;
+			this.oldGender = Number(options.gender);
+			this.newGender = Number(options.gender);
 		},
 		methods: {
 			//  设置性别
-			onHandleSet() {
-				this.loading = true
-				console.log(this.newGender);
+			async onHandleSet() {
+				this.loading  =  true;
+				
+				const res = await userApi.updateUserInfo({
+					gender: this.newGender
+				})
+				if (res.code === 0) {
+					uni.showToast({
+						title: res.msg,
+						duration: 1000,
+						icon: "success",
+						success: async()=>{
+							// 成功后清空存储的用户信息
+							this.$store.dispatch('clearUserInfo');
+							
+							//  重新获取数据
+							const res = await userApi.getUserInfo()
+							this.$store.dispatch('updateUserInfo', JSON.stringify(res.data))
+							
+							uni.navigateBack();
+						}
+					});
+				}
+				
+				this.loading = false;
 			}
 		}
 	}
@@ -35,6 +59,7 @@
 
 <style lang="scss" scoped>
 .button-container{
+	margin-top: 10px;
 	position: relative;
 	.button{
 		width: 180rpx;

@@ -220,6 +220,8 @@ var _default = {
                               // console.log(result.data);
                               //  将token存储仓库中
                               _this.$store.dispatch('updateToken', result.data.token);
+
+                              // 将用户信息存储到仓库
                               _context.next = 12;
                               return _this.getUserInfo({
                                 token: result.data.token
