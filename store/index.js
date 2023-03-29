@@ -50,6 +50,10 @@ export default new Vuex.Store({
 			uni.setStorageSync('token', token);
 			commit("updateToken", token);
 		},
+		clearUserInfo({commit}){
+			uni.removeStorageSync('userInfo');
+			commit('updateUserInfo',null);
+		},
 		// 退出登录
 		logout({commit}) {
 			uni.removeStorageSync('token');

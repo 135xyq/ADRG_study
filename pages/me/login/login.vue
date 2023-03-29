@@ -61,6 +61,8 @@
 							//  将token存储仓库中
 							this.$store.dispatch('updateToken', result.data.token);
 
+
+							// 将用户信息存储到仓库
 							await this.getUserInfo({
 								token: result.data.token
 							});
@@ -100,8 +102,7 @@
 
 			async getUserInfo(data) {
 				const res = await userApi.getUserInfo(data)
-
-
+				
 				this.$store.dispatch('updateUserInfo', JSON.stringify(res.data))
 			}
 		}

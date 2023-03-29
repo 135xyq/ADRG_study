@@ -13,7 +13,7 @@
 						</view>
 					</u-col>
 					<u-col span="6">
-						<view>{{getUser.nickName}}</view>
+						<view>{{getUser.nick_name}}</view>
 					</u-col>
 				</u-row>
 			</div>
