@@ -6,7 +6,7 @@
 					<text class="u-cell-text">头像</text>
 				</view>
 				<view slot="value" class="u-slot-title">
-					<u-avatar :src="userInfo.avatar" size="80"></u-avatar>
+					<u-avatar :src="config.baseUrl+userInfo.avatar" size="80"></u-avatar>
 				</view>
 			</u-cell>
 			<u-cell isLink center class="item" @click="onHandleSetName">
@@ -40,11 +40,12 @@
 <script>
 	import upload from "@/api/upload.js"
 	import userApi from "@/api/user/user.js"
+	import config from "@/common/config.js"
 
 	export default {
 		data() {
 			return {
-
+				config
 			};
 		},
 		computed: {

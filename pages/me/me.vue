@@ -9,7 +9,7 @@
 				<u-row>
 					<u-col span="4">
 						<view class="avatar">
-							<u-avatar :src="getUser.avatar" size="80"></u-avatar>
+							<u-avatar :src="config.baseUrl+getUser.avatar" size="80"></u-avatar>
 						</view>
 					</u-col>
 					<u-col span="6">
@@ -76,10 +76,13 @@
 
 <script>
 	import loginApi from "@/api/user/login.js"
+	import config from "@/common/config.js"
 
 	export default {
 		data() {
-			return {}
+			return {
+				config
+			}
 		},
 		computed: {
 			getUser() {

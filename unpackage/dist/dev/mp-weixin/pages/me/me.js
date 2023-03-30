@@ -183,6 +183,7 @@ exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 55));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 57));
 var _login = _interopRequireDefault(__webpack_require__(/*! @/api/user/login.js */ 166));
+var _config = _interopRequireDefault(__webpack_require__(/*! @/common/config.js */ 168));
 //
 //
 //
@@ -261,7 +262,9 @@ var _login = _interopRequireDefault(__webpack_require__(/*! @/api/user/login.js 
 //
 var _default = {
   data: function data() {
-    return {};
+    return {
+      config: _config.default
+    };
   },
   computed: {
     getUser: function getUser() {

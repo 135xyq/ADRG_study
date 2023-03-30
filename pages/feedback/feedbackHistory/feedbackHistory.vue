@@ -6,7 +6,7 @@
 		<view class="">
 			<view v-for="item in feedbacList" :key="item.id">
 				<view class="not-response" v-if="current == 0">
-					<uni-card :extra="item.create_time" :cover="item.image">
+					<uni-card :extra="item.create_time" :cover="config.baseUrl+item.image">
 						<text class="uni-body">{{item.content}}</text>
 					</uni-card>
 				</view>
@@ -36,10 +36,12 @@
 
 <script>
 	import feedbackApi from "@/api/feedback/feedback.js"
+	import config from "@/common/config.js"
 	
 	export default {
 		data() {
 			return {
+				config,
 				list: ['未回复', '已回复'],
 				current: 0,
 				feedbacList:[],

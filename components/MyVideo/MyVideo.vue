@@ -1,7 +1,7 @@
 <template>
 	<view class="video-container">
 		<uni-card spacing="5px" margin="2px" padding="0">
-			<image mode="aspectFill" class="img" :src="videoData.thumbnail_url"></image>
+			<image mode="aspectFill" class="img" :src="config.baseUrl+videoData.thumbnail_url"></image>
 			<view class="bottom-info">
 				<view class="title">
 					<text>{{videoData.description ? videoData.description : '暂无视频介绍信息'}}</text>
@@ -31,12 +31,14 @@
 </template>
 
 <script>
+	import config from "@/common/config.js"
+	
 	export default {
 		name: "MyVideo",
 		props: ['videoData'],
 		data() {
 			return {
-
+				config
 			};
 		}
 	}

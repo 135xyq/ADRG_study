@@ -1,6 +1,6 @@
 <template>
 	<view class="article-container">
-		<uni-card :title="articleData.title" spacing="5px" margin="2px" padding="0" :thumbnail="articleData.thumbnail_url">
+		<uni-card :title="articleData.title" spacing="5px" margin="2px" padding="0" :thumbnail="config.baseUrl+articleData.thumbnail_url">
 			<view class="bottom-info">
 				<view class="title">
 					<text>{{articleData.description ? articleData.description :'暂无文章的描述信息'}}</text>
@@ -30,12 +30,14 @@
 </template>
 
 <script>
+	import config from "@/common/config.js"
+	
 	export default {
 		name: "MyArticle",
 		props: ['articleData'],
 		data() {
 			return {
-
+				config
 			};
 		}
 	}
