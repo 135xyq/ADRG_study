@@ -10,5 +10,9 @@ export default {
 	// 分页获取
 	getPage(data){
 		return request.post('/applet/video/page',data);
+	},
+	// 获取视频详情
+	getVideoDetail(data) {
+		return request.post('/applet/video/detail',data);
 	}
 }
