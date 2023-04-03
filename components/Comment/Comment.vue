@@ -1,20 +1,21 @@
 <template>
 	<view class="comment-container">
 		<view class="user-info">
-			<u-avatar class="avatar" size="35" :src="commentData.avatar"></u-avatar>
+			<u-avatar class="avatar" size="35" :src="config.baseUrl + commentData.user.avatar"></u-avatar>
 			<view class="user">
 				<view class="name">
-					{{commentData.nick_name}}
+					{{commentData.user.nick_name}}
 				</view>
 				<view class="date">
-					{commentData.create_time}
+					{{commentData.create_time}}
 				</view>
 			</view>
 		</view>
 		<view class="content">
 			{{commentData.content}}
 		</view>
-		<view class="response-button" @click="onHandleResponseComment">
+		
+		<!-- <view class="response-button" @click="onHandleResponseComment">
 			回复
 		</view>
 		<view class="response">
@@ -22,17 +23,19 @@
 				<text class="name">{{item.nick_name}}</text>
 				<text>{{item.content}}</text>
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
 <script>
+	import config from "@/common/config.js"
+	
 	export default {
 		name: "Comment",
 		props: ['commentData'],
 		data() {
 			return {
-
+				config
 			};
 		},
 		methods: {
@@ -48,6 +51,8 @@
 
 <style lang="scss" scoped>
 	.comment-container {
+		margin-top: 10px;
+		margin-left: 10px;
 		.user-info {
 			display: flex;
 
@@ -66,6 +71,7 @@
 			margin-top: 20rpx;
 			margin-left: 45px;
 			font-size: 14px;
+			padding-right: 5px;
 		}
 		
 		.response-button{
