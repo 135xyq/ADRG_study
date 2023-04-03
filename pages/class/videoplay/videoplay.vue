@@ -76,6 +76,15 @@
 		onReady: function(res) {
 			this.videoContext = uni.createVideoContext('myVideo')
 		},
+		/**
+		 * 下拉刷新
+		 */
+		async onPullDownRefresh() {
+			this.initCommentData();
+			await this.getCommentList()
+			
+			uni.stopPullDownRefresh()
+		},
 		async onLoad(option) {
 			// 获取视频id
 			this.id = option.id
