@@ -36,11 +36,11 @@
 				{{pageInfo.total}}个评论
 			</view>
 			<view class="comment-list-container">
-<!-- 				<view class="" v-if="commentList.length === 0">
+				<!-- 				<view class="" v-if="commentList.length === 0">
 					<u-empty text="暂无评论" icon=""></u-empty>
 				</view> -->
 				<view class="comment-item" v-for="item in commentList" :key="item.id">
-					<Comment :commentData="item"></Comment>
+					<Comment :commentData="item" @deleteComment="onHandleDeleteComment"></Comment>
 				</view>
 				<view class="bottom-container">
 					<u-loadmore :status="loadStatus" height="50" :line="true" nomoreText="已经到底了" />
@@ -110,6 +110,20 @@
 		},
 		methods: {
 			/**
+			 * 初始化评论的数据
+			 */
+			initCommentData(){
+				this.pageInfo = {
+					page:1,
+					limit:10,
+					total:0
+				}
+				
+				this.commentList = []
+				this.scrollTop = 0
+				this.loadStatus =  'loading' // 加载更多的状态
+			},
+			/**
 			 * 获取视频详情
 			 */
 			async getVideoDetail() {
@@ -150,8 +164,29 @@
 			 */
 			onHandlePublishComment() {
 				uni.navigateTo({
-					url:'/pages/commentPublish/commentPublish?videoId=' + this.id
+					url: '/pages/commentPublish/commentPublish?videoId=' + this.id
 				})
+			},
+			/**
+			 * 删除评论
+			 * @param {Number} id 评论的id
+			 */
+			async onHandleDeleteComment(id) {
+				const res = await commentApi.deleteComment({id:id});
+				
+				console.log(res);
+				if(res.code === 0) {
+					uni.showToast({
+						title:res.msg,
+						icon:'success',
+						duration:1000
+					})
+					
+					setTimeout(async ()=>{
+						this.initCommentData(); // 重置数据
+						await this.getCommentList()
+					},1000)
+				}
 			}
 		}
 	}

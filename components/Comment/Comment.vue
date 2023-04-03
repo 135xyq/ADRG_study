@@ -1,14 +1,19 @@
 <template>
 	<view class="comment-container">
-		<view class="user-info">
-			<u-avatar class="avatar" size="35" :src="config.baseUrl + commentData.user.avatar"></u-avatar>
-			<view class="user">
-				<view class="name">
-					{{commentData.user.nick_name}}
+		<view class="top">
+			<view class="user-info">
+				<u-avatar class="avatar" size="35" :src="config.baseUrl + commentData.user.avatar"></u-avatar>
+				<view class="user">
+					<view class="name">
+						{{commentData.user.nick_name}}
+					</view>
+					<view class="date">
+						{{commentData.create_time}}
+					</view>
 				</view>
-				<view class="date">
-					{{commentData.create_time}}
-				</view>
+			</view>
+			<view v-if="userInfo.id === commentData.user.id"  class="delete" @click="onHandleDelete(commentData.id)">
+				删除
 			</view>
 		</view>
 		<view class="content">
@@ -35,15 +40,22 @@
 		props: ['commentData'],
 		data() {
 			return {
-				config
+				config,
+				userId:''
 			};
+		},
+		computed:{
+			userInfo(){
+				return  this.$store.getters.getUser;
+			}
 		},
 		methods: {
 			/**
-			 * 回复评论
+			 * 删除评论
+			 * @param {Object} id
 			 */
-			onHandleResponseComment() {
-				console.log('回复评论');
+			onHandleDelete(id){
+				this.$emit('deleteComment',id)
 			}
 		}
 	}
@@ -53,6 +65,10 @@
 	.comment-container {
 		margin-top: 10px;
 		margin-left: 10px;
+		.top{
+			display: flex;
+			justify-content: space-between;
+		}
 		.user-info {
 			display: flex;
 
@@ -66,6 +82,13 @@
 				}
 			}
 		}
+		
+		.delete{
+			padding-right: 20rpx;
+			font-size: 14px;
+			color: red;
+		}
+		
 
 		.content {
 			margin-top: 20rpx;
