@@ -14,7 +14,7 @@ export default {
 	 * @param {Object} data
 	 */
 	publishComment(data) {
-		return request.post('/applet/comment/publish',data);
+		return request.post('/applet/comment/publishcomment',data);
 	},
 	/**
 	 * 删除一个评论

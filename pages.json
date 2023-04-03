@@ -169,6 +169,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/commentPublish/commentPublish",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发表评论",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

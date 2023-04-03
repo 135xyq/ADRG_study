@@ -19,7 +19,8 @@
     "pages/set/userNameSet/userNameSet",
     "pages/set/userGenderSet/userGenderSet",
     "pages/set/userQuestionSet/userQuestionSet",
-    "pages/feedback/feedbackHistory/feedbackHistory"
+    "pages/feedback/feedbackHistory/feedbackHistory",
+    "pages/commentPublish/commentPublish"
   ],
   "subPackages": [],
   "window": {

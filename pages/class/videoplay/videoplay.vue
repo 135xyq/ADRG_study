@@ -149,7 +149,9 @@
 			 * 发布评论
 			 */
 			onHandlePublishComment() {
-				console.log('发布评论');
+				uni.navigateTo({
+					url:'/pages/commentPublish/commentPublish?videoId=' + this.id
+				})
 			}
 		}
 	}
