@@ -22,7 +22,8 @@
 					<text class="text">{{videoData.like_count}}</text>
 				</view>
 				<view class="shoucang item" @click="onHandleStar">
-					<uni-icons custom-prefix="iconfont" type="icon-shoucang1" :color="isStar?'#FED000':'gray'"></uni-icons>
+					<uni-icons custom-prefix="iconfont" type="icon-shoucang1"
+						:color="isStar?'#FED000':'gray'"></uni-icons>
 					<text class="text">{{videoData.star_count}}</text>
 				</view>
 			</view>
@@ -85,12 +86,15 @@
 		 */
 		async onPullDownRefresh() {
 			this.initCommentData();
+
+			// 获取视频详情和评论列表
 			await this.getCommentList()
-			
+			await this.getVideoDetail()
+
 			// 视频的收藏和点赞信息
 			await this.getVideoStarInfo()
 			await this.getVideoLikeInfo()
-			
+
 			uni.stopPullDownRefresh()
 		},
 		async onLoad(option) {
@@ -132,16 +136,16 @@
 			/**
 			 * 初始化评论的数据
 			 */
-			initCommentData(){
+			initCommentData() {
 				this.pageInfo = {
-					page:1,
-					limit:10,
-					total:0
+					page: 1,
+					limit: 10,
+					total: 0
 				}
-				
+
 				this.commentList = []
 				this.scrollTop = 0
-				this.loadStatus =  'loading' // 加载更多的状态
+				this.loadStatus = 'loading' // 加载更多的状态
 			},
 			/**
 			 * 获取视频详情
@@ -177,89 +181,115 @@
 			 * 判断视频是否已经收藏
 			 */
 			async getVideoStarInfo() {
-				const res = await starApi.isStar({videoId:this.id})
-				
-				if(res.code === 0) {
+				const res = await starApi.isStar({
+					videoId: this.id
+				})
+
+				if (res.code === 0) {
 					this.isStar = res.data.result;
 				}
-				
+
 			},
 			/**
 			 * 判断视频是否已经点赞
 			 */
 			async getVideoLikeInfo() {
-				const res = await likeApi.isLike({videoId:this.id})
-				
-				if(res.code === 0) {
+				const res = await likeApi.isLike({
+					videoId: this.id
+				})
+
+				if (res.code === 0) {
 					this.isLike = res.data.result;
 				}
-				
+
 			},
 			/**
 			 * 视频点赞
 			 */
 			async onHandleLike() {
 				// 已经点赞，再次点击取消点赞
-				if(this.isLike) {
+				if (this.isLike) {
 					const res = await likeApi.cancelLike({
 						videoId: this.id
 					})
-					
+
 					uni.showToast({
-						title:res.msg,
-						icon:'success',
-						duration:500
+						title: res.msg,
+						icon: 'success',
+						duration: 500
 					})
-					
+
 					this.isLike = false
-				}else{
+					this.videoData.like_count--;
+
+					// 重新获取，感觉没必要
+					// await this.getVideoLikeInfo()
+					// await this.getVideoDetail()
+				} else {
 					// 点赞
 					const res = await likeApi.newLike({
 						videoId: this.id
 					})
-					
+
 					uni.showToast({
-						title:res.msg,
-						icon:'success',
-						duration:1000
+						title: res.msg,
+						icon: 'success',
+						duration: 1000
 					})
-					
+
 					this.isLike = true
+					this.videoData.like_count++;
+
+					// 重新获取，感觉没必要
+					// await this.getVideoLikeInfo()
+					// await this.getVideoDetail()
 				}
-				
+
 			},
 			/**
 			 * 收藏和取消收藏
 			 */
 			async onHandleStar() {
 				// 已经收藏，再次点击取消收藏
-				if(this.isStar) {
+				if (this.isStar) {
 					const res = await starApi.cancelStar({
 						videoId: this.id
 					})
-					
+
 					uni.showToast({
-						title:res.msg,
-						icon:'success',
-						duration:1000
+						title: res.msg,
+						icon: 'success',
+						duration: 1000
 					})
-					
+
 					this.isStar = false
-				}else{
+					this.videoData.star_count--;
+
+
+					// 重新获取，感觉没必要
+					// await this.getVideoStarInfo()
+					// await this.getVideoDetail()
+				} else {
 					// 收藏
 					const res = await starApi.newStar({
 						videoId: this.id
 					})
-					
+
 					uni.showToast({
-						title:res.msg,
-						icon:'success',
-						duration:1000
+						title: res.msg,
+						icon: 'success',
+						duration: 1000
 					})
-					
-					this.isStar = true
+
+					// 不再进行网络请求，直接本地增加
+					this.isStar = true;
+					this.videoData.star_count++;
+
+					// 重新获取，感觉没必要
+					// await this.getVideoStarInfo()
+					// await this.getVideoDetail()
 				}
-				
+
 			},
 			/**
 			 * 发布评论
@@ -274,20 +304,22 @@
 			 * @param {Number} id 评论的id
 			 */
 			async onHandleDeleteComment(id) {
-				const res = await commentApi.deleteComment({id:id});
-				
+				const res = await commentApi.deleteComment({
+					id: id
+				});
+
 				// console.log(res);
-				if(res.code === 0) {
+				if (res.code === 0) {
 					uni.showToast({
-						title:res.msg,
-						icon:'success',
-						duration:1000
+						title: res.msg,
+						icon: 'success',
+						duration: 1000
 					})
-					
-					setTimeout(async ()=>{
+
+					setTimeout(async () => {
 						this.initCommentData(); // 重置数据
 						await this.getCommentList()
-					},1000)
+					}, 1000)
 				}
 			}
 		}
