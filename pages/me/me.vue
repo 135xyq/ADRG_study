@@ -37,6 +37,14 @@
 						<view class="select-item">收藏</view>
 					</view>
 				</u-cell>
+				<u-cell size="large" isLink @click="onHandleGoPageLike">
+					<view slot="icon" class="u-slot-icon">
+						<uni-icons custom-prefix="iconfont" type="icon-dianzan" size="25"></uni-icons>
+					</view>
+					<view slot="title" class="u-slot-title">
+						<view class="select-item">点赞</view>
+					</view>
+				</u-cell>
 				<u-cell size="large" isLink @click="onHandleGoPageErroQuestion">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-cuotiben" size="25"></uni-icons>
@@ -119,6 +127,14 @@
 			onHandleGoPageStar() {
 				uni.navigateTo({
 					url: '/pages/star/star'
+				})
+			},
+			/**
+			 * 前往点赞页
+			 */
+			onHandleGoPageLike() {
+				uni.navigateTo({
+					url: '/pages/like/like'
 				})
 			},
 			/**
