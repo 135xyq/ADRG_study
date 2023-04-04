@@ -21,8 +21,8 @@
 					<uni-icons custom-prefix="iconfont" type="icon-dianzan" color="gray"></uni-icons>
 					<text class="text">{{videoData.like_count}}</text>
 				</view>
-				<view class="shoucang item">
-					<uni-icons custom-prefix="iconfont" type="icon-shoucang" color="gray"></uni-icons>
+				<view class="shoucang item" @click="onHandleStar">
+					<uni-icons custom-prefix="iconfont" type="icon-shoucang1" :color="isStar?'#FED000':'gray'"></uni-icons>
 					<text class="text">{{videoData.star_count}}</text>
 				</view>
 			</view>
@@ -56,6 +56,7 @@
 	import videoApi from "@/api/video/video.js"
 	import config from "@/common/config.js"
 	import commentApi from "@/api/comment/comment.js"
+	import starApi from "@/api/star/star.js"
 
 	export default {
 		data() {
@@ -71,6 +72,7 @@
 				commentList: [],
 				scrollTop: 0,
 				loadStatus: 'loading', // 加载更多的状态
+				isStar: false, // 是否已经收藏
 			};
 		},
 		onReady: function(res) {
@@ -91,10 +93,12 @@
 
 			// 如果没有id则跳转回原页面
 			if (this.id) {
+				// 获取视频和评论列表
 				await this.getVideoDetail();
 				await this.getCommentList()
 
-
+				// 视频的收藏信息
+				await this.getVideoStarInfo()
 
 				// console.log(this.videoData);
 			} else {
@@ -163,10 +167,54 @@
 				}
 			},
 			/**
+			 * 判断视频是否已经收藏
+			 */
+			async getVideoStarInfo() {
+				const res = await starApi.isStar({videoId:this.id})
+				
+				if(res.code === 0) {
+					this.isStar = res.data.result;
+				}
+				
+			},
+			/**
 			 * 视频点赞
 			 */
 			onHandleLike() {
 				console.log('点赞');
+			},
+			/**
+			 * 收藏和取消收藏
+			 */
+			async onHandleStar() {
+				// 已经收藏，再次点击取消收藏
+				if(this.isStar) {
+					const res = await starApi.cancelStar({
+						videoId: this.id
+					})
+					
+					uni.showToast({
+						title:res.msg,
+						icon:'success',
+						duration:1000
+					})
+				}else{
+					// 收藏
+					const res = await starApi.newStar({
+						videoId: this.id
+					})
+					
+					uni.showToast({
+						title:res.msg,
+						icon:'success',
+						duration:1000
+					})
+				}
+				
+				// 在弹窗消失后重新获取收藏信息
+				setTimeout(async()=>{
+					await this.getVideoStarInfo()
+				},1000)
 			},
 			/**
 			 * 发布评论
@@ -183,7 +231,7 @@
 			async onHandleDeleteComment(id) {
 				const res = await commentApi.deleteComment({id:id});
 				
-				console.log(res);
+				// console.log(res);
 				if(res.code === 0) {
 					uni.showToast({
 						title:res.msg,
