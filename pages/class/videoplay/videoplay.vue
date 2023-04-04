@@ -18,7 +18,7 @@
 			</view>
 			<view class="right">
 				<view class="dianzan item" @click="onHandleLike">
-					<uni-icons custom-prefix="iconfont" type="icon-dianzan" color="gray"></uni-icons>
+					<uni-icons custom-prefix="iconfont" type="icon-dianzan" :color="isLike?'red':'gray'"></uni-icons>
 					<text class="text">{{videoData.like_count}}</text>
 				</view>
 				<view class="shoucang item" @click="onHandleStar">
@@ -57,6 +57,7 @@
 	import config from "@/common/config.js"
 	import commentApi from "@/api/comment/comment.js"
 	import starApi from "@/api/star/star.js"
+	import likeApi from "@/api/like/like.js"
 
 	export default {
 		data() {
@@ -73,6 +74,7 @@
 				scrollTop: 0,
 				loadStatus: 'loading', // 加载更多的状态
 				isStar: false, // 是否已经收藏
+				isLike: false, // 是否已经点赞
 			};
 		},
 		onReady: function(res) {
@@ -84,6 +86,10 @@
 		async onPullDownRefresh() {
 			this.initCommentData();
 			await this.getCommentList()
+			
+			// 视频的收藏和点赞信息
+			await this.getVideoStarInfo()
+			await this.getVideoLikeInfo()
 			
 			uni.stopPullDownRefresh()
 		},
@@ -97,8 +103,9 @@
 				await this.getVideoDetail();
 				await this.getCommentList()
 
-				// 视频的收藏信息
+				// 视频的收藏和点赞信息
 				await this.getVideoStarInfo()
+				await this.getVideoLikeInfo()
 
 				// console.log(this.videoData);
 			} else {
@@ -178,10 +185,48 @@
 				
 			},
 			/**
+			 * 判断视频是否已经点赞
+			 */
+			async getVideoLikeInfo() {
+				const res = await likeApi.isLike({videoId:this.id})
+				
+				if(res.code === 0) {
+					this.isLike = res.data.result;
+				}
+				
+			},
+			/**
 			 * 视频点赞
 			 */
-			onHandleLike() {
-				console.log('点赞');
+			async onHandleLike() {
+				// 已经点赞，再次点击取消点赞
+				if(this.isLike) {
+					const res = await likeApi.cancelLike({
+						videoId: this.id
+					})
+					
+					uni.showToast({
+						title:res.msg,
+						icon:'success',
+						duration:500
+					})
+					
+					this.isLike = false
+				}else{
+					// 点赞
+					const res = await likeApi.newLike({
+						videoId: this.id
+					})
+					
+					uni.showToast({
+						title:res.msg,
+						icon:'success',
+						duration:1000
+					})
+					
+					this.isLike = true
+				}
+				
 			},
 			/**
 			 * 收藏和取消收藏
@@ -198,6 +243,8 @@
 						icon:'success',
 						duration:1000
 					})
+					
+					this.isStar = false
 				}else{
 					// 收藏
 					const res = await starApi.newStar({
@@ -209,12 +256,10 @@
 						icon:'success',
 						duration:1000
 					})
+					
+					this.isStar = true
 				}
 				
-				// 在弹窗消失后重新获取收藏信息
-				setTimeout(async()=>{
-					await this.getVideoStarInfo()
-				},1000)
 			},
 			/**
 			 * 发布评论
