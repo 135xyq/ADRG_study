@@ -41,7 +41,7 @@
 		async onReachBottom() {
 			console.log(1);
 			// 没有数据了
-			if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
+			if (this.pageInfo.page * this.pageInfo.limit >= this.pageInfo.total) {
 				this.loadStatus = 'nomore'
 			} else {
 				// 每次请求下一页
@@ -69,7 +69,7 @@
 
 
 				// 没有数据了
-				if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
+				if (this.pageInfo.page * this.pageInfo.limit >= this.pageInfo.total) {
 					this.loadStatus = 'nomore'
 				}
 			}

@@ -70,7 +70,7 @@
 		 */
 		async onReachBottom() {
 			// 没有数据了
-			if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
+			if (this.pageInfo.page * this.pageInfo.limit >= this.pageInfo.total) {
 				this.status = 'nomore'
 			} else {
 				// 每次请求下一页
@@ -91,7 +91,7 @@
 				this.videoList = [...this.videoList, ...res.data.data];
 				
 				// 没有数据了
-				if (this.pageInfo.page * this.pageInfo.limit > this.pageInfo.total) {
+				if (this.pageInfo.page * this.pageInfo.limit >= this.pageInfo.total) {
 					this.status = 'nomore'
 				}
 			},
