@@ -69,6 +69,14 @@
 						<view class="select-item">意见反馈</view>
 					</view>
 				</u-cell>
+				<u-cell size="large" isLink @click="onHandleGoPageAppletAbout">
+					<view slot="icon" class="u-slot-icon">
+						<uni-icons type="info" size="25"></uni-icons>
+					</view>
+					<view slot="title" class="u-slot-title">
+						<view class="select-item">用户指南</view>
+					</view>
+				</u-cell>
 				<u-cell size="large" isLink @click="onHandleLogout">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-tuichudenglu" size="25"></uni-icons>
@@ -159,6 +167,14 @@
 			onHandleGoPageFeedBack() {
 				uni.navigateTo({
 					url: '/pages/feedback/feedback'
+				})
+			},
+			/**
+			 * 前往用户指南页
+			 */
+			onHandleGoPageAppletAbout() {
+				uni.navigateTo({
+					url: '/pages/AppletAbout/AppletAbout'
 				})
 			},
 			/**

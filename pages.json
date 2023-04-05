@@ -187,6 +187,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/AppletAbout/AppletAbout",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "用户指南",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
