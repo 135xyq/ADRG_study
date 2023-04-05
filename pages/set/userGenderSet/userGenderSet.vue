@@ -5,7 +5,7 @@
 			<u-radio activeColor="green" :customStyle="{padding: '20px'}" label="女" :name="2"></u-radio>
 		</u-radio-group>
 		<view class="button-container">
-			<u-button :disabled="newGender === oldGender" :loading="loading" class="button" type="success" text="确定" @click="onHandleSet"></u-button>
+			<u-button :customStyle="{width:'150px',}" :disabled="newGender === oldGender" :loading="loading"  type="success" text="确定" @click="onHandleSet"></u-button>
 		</view>
 	</view>
 </template>

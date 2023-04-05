@@ -2,7 +2,7 @@
 	<view class="username-set-container">
 		<u--input placeholder="请输入名字" maxlength="30" v-model="newName" border="bottom" clearable></u--input>
 		<view class="button-container">
-			<u-button :disabled="newName === oldName || newName.trim() === ''" :loading="loading" class="button"
+			<u-button :customStyle="{width:'150px',}" :disabled="newName === oldName || newName.trim() === ''" :loading="loading"
 				type="success" text="确定" @click="onHandleSet"></u-button>
 		</view>
 	</view>

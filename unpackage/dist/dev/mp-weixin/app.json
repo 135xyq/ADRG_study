@@ -20,7 +20,8 @@
     "pages/set/userGenderSet/userGenderSet",
     "pages/set/userQuestionSet/userQuestionSet",
     "pages/feedback/feedbackHistory/feedbackHistory",
-    "pages/commentPublish/commentPublish"
+    "pages/commentPublish/commentPublish",
+    "pages/like/like"
   ],
   "subPackages": [],
   "window": {

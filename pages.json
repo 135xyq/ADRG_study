@@ -93,7 +93,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "学习记录",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
             
         }
