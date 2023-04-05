@@ -59,6 +59,7 @@
 	import commentApi from "@/api/comment/comment.js"
 	import starApi from "@/api/star/star.js"
 	import likeApi from "@/api/like/like.js"
+	import historyApi from "@/api/studyHistory/studyHistory.js"
 
 	export default {
 		data() {
@@ -76,6 +77,7 @@
 				loadStatus: 'loading', // 加载更多的状态
 				isStar: false, // 是否已经收藏
 				isLike: false, // 是否已经点赞
+				startTime: 0 ,// 阅读开始时间
 			};
 		},
 		onReady: function(res) {
@@ -114,6 +116,25 @@
 				// console.log(this.videoData);
 			} else {
 				uni.navigateBack();
+			}
+			
+			// 开启计时
+			this.startTime = Date.now();
+		},
+		/**
+		 * 页面离开前统计阅读时长
+		 */
+		async onUnload(){
+			// 获取阅读时长，阅读时长过低不会记录
+			const endTime = Date.now()
+			const readTime = Math.floor((endTime - this.startTime) / 1000);
+			
+			if(readTime >= this.config.readTime) {
+				await historyApi.newStudyHistory({
+					type: 1,
+					id: this.id,
+					time: readTime
+				})
 			}
 		},
 		onPageScroll(e) {
