@@ -21,9 +21,9 @@
 			}
 		},
 		{
-			"path": "pages/problem/problem",
+			"path": "pages/question/question",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "题库"
 			}
 		},
 		{
@@ -221,7 +221,7 @@
 			"selectedIconPath": "static/icon/class_active.png",
 			"text": "课程"
 		}, {
-			"pagePath": "pages/problem/problem",
+			"pagePath": "pages/question/question",
 			"iconPath": "static/icon/problem.png",
 			"selectedIconPath": "static/icon/problem_active.png",
 			"text": "题库"
