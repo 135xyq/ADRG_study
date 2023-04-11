@@ -11,6 +11,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-biji:before {
+  content: "\e669";
+}
+
+.icon-zuotijilu:before {
+  content: "\e61a";
+}
+
 .icon-shoucang1:before {
   content: "\e8c6";
 }

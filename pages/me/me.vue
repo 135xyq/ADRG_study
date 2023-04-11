@@ -53,6 +53,14 @@
 						<view class="select-item">错题本</view>
 					</view>
 				</u-cell>
+				<u-cell size="large" isLink @click="onHandleGoPageQuestionRecordHistory">
+					<view slot="icon" class="u-slot-icon">
+						<uni-icons custom-prefix="iconfont" type="icon-zuotijilu" size="25"></uni-icons>
+					</view>
+					<view slot="title" class="u-slot-title">
+						<view class="select-item">做题记录</view>
+					</view>
+				</u-cell>
 				<u-cell size="large" isLink @click="onHandleGoPageNote">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-a-bijibenbiji" size="25"></uni-icons>
@@ -175,6 +183,14 @@
 			onHandleGoPageAppletAbout() {
 				uni.navigateTo({
 					url: '/pages/AppletAbout/AppletAbout'
+				})
+			},
+			/**
+			 * 前往做题历史记录
+			 */
+			onHandleGoPageQuestionRecordHistory() {
+				uni.navigateTo({
+					url:"/pages/QuestionRecordHistory/QuestionRecordHistory"
 				})
 			},
 			/**

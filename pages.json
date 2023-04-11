@@ -196,6 +196,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/QuestionRecordHistory/QuestionRecordHistory",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "刷题记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

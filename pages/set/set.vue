@@ -25,14 +25,14 @@
 					<text>{{getGender(userInfo.gender)}}</text>
 				</view>
 			</u-cell>
-			<u-cell isLink center class="item" @click="onHandleSetQuestion">
+<!-- 			<u-cell isLink center class="item" @click="onHandleSetQuestion">
 				<view slot="title" class="u-slot-title">
 					<text class="u-cell-text">一次出题数量</text>
 				</view>
 				<view slot="value" class="u-slot-title">
 					<text>{{userInfo.question_count}}</text>
 				</view>
-			</u-cell>
+			</u-cell> -->
 		</u-cell-group>
 	</view>
 </template>

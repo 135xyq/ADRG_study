@@ -3,7 +3,7 @@
     "pages/me/me",
     "pages/class/class",
     "pages/index/index",
-    "pages/problem/problem",
+    "pages/question/question",
     "pages/message/message",
     "pages/me/login/login",
     "pages/class/videoList/videoList",
@@ -21,7 +21,8 @@
     "pages/set/userQuestionSet/userQuestionSet",
     "pages/feedback/feedbackHistory/feedbackHistory",
     "pages/commentPublish/commentPublish",
-    "pages/like/like"
+    "pages/like/like",
+    "pages/AppletAbout/AppletAbout"
   ],
   "subPackages": [],
   "window": {
@@ -50,7 +51,7 @@
         "text": "课程"
       },
       {
-        "pagePath": "pages/problem/problem",
+        "pagePath": "pages/question/question",
         "iconPath": "static/icon/problem.png",
         "selectedIconPath": "static/icon/problem_active.png",
         "text": "题库"
