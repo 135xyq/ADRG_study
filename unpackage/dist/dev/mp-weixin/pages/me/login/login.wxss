@@ -49,7 +49,7 @@
   margin-top: 30rpx;
   width: 400rpx;
   font-size: 40rpx;
-  background-color: #00880E;
+  background-color: #27c036e6;
   color: #FFF;
   border-radius: 10px;
 }

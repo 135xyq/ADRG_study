@@ -42,170 +42,144 @@
 		}
 
 
-	    ,{
-            "path" : "pages/class/videoList/videoList",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "视频列表",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/class/articleList/articleList",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "文章列表",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    
-        ,{
-            "path" : "pages/class/videoplay/videoplay",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "视频详情",
-                "enablePullDownRefresh": true
-            }
-            
-        }
-        ,{
-            "path" : "pages/class/articleread/articleread",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "文章详情",
-                "enablePullDownRefresh": true
-            }
-            
-        }
-        ,{
-            "path" : "pages/set/set",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "用户设置",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/studyHistory/studyHistory",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "学习记录",
-                "enablePullDownRefresh": true
-            }
-            
-        }
-        ,{
-            "path" : "pages/star/star",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "收藏",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/note/note",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "笔记",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/errorQuestion/errorQuestion",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "错题本",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/feedback/feedback",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "意见反馈",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/set/userNameSet/userNameSet",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "更改名字",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/set/userGenderSet/userGenderSet",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "更改性别",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/set/userQuestionSet/userQuestionSet",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "组卷题数",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/feedback/feedbackHistory/feedbackHistory",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "反馈历史记录",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/commentPublish/commentPublish",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "发表评论",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/like/like",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "点赞",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/AppletAbout/AppletAbout",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "用户指南",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/QuestionRecordHistory/QuestionRecordHistory",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "刷题记录",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+		, {
+			"path": "pages/class/videoList/videoList",
+			"style": {
+				"navigationBarTitleText": "视频列表",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/class/articleList/articleList",
+			"style": {
+				"navigationBarTitleText": "文章列表",
+				"enablePullDownRefresh": false
+			}
+
+		}
+
+		, {
+			"path": "pages/class/videoplay/videoplay",
+			"style": {
+				"navigationBarTitleText": "视频详情",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/class/articleread/articleread",
+			"style": {
+				"navigationBarTitleText": "文章详情",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/set/set",
+			"style": {
+				"navigationBarTitleText": "用户设置",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/studyHistory/studyHistory",
+			"style": {
+				"navigationBarTitleText": "学习记录",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/star/star",
+			"style": {
+				"navigationBarTitleText": "收藏",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/note/note",
+			"style": {
+				"navigationBarTitleText": "笔记",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/errorQuestion/errorQuestion",
+			"style": {
+				"navigationBarTitleText": "错题本",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/set/userNameSet/userNameSet",
+			"style": {
+				"navigationBarTitleText": "更改名字",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/set/userGenderSet/userGenderSet",
+			"style": {
+				"navigationBarTitleText": "更改性别",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/set/userQuestionSet/userQuestionSet",
+			"style": {
+				"navigationBarTitleText": "组卷题数",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/feedback/feedbackHistory/feedbackHistory",
+			"style": {
+				"navigationBarTitleText": "反馈历史记录",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/commentPublish/commentPublish",
+			"style": {
+				"navigationBarTitleText": "发表评论",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/like/like",
+			"style": {
+				"navigationBarTitleText": "点赞",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/AppletAbout/AppletAbout",
+			"style": {
+				"navigationBarTitleText": "用户指南",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/QuestionRecordHistory/QuestionRecordHistory",
+			"style": {
+				"navigationBarTitleText": "刷题记录",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/question/questionAnswer/questionAnswer",
+			"style": {
+				"navigationBarTitleText": "答题",
+				"enablePullDownRefresh": false
+			}
+
+
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

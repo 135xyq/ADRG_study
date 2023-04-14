@@ -4,5 +4,9 @@ export default{
 	// 获取分类列表和每个分类用户的刷题数据
 	getQuestionCategoryList(data) {
 		return request.post('/applet/questioncategory/getquestioncategorylist',data);
+	},
+	// 随机组卷
+	getRandomQuestions(data) {
+		return request.post('/applet/question/getRandomQuestions',data);
 	}
 }

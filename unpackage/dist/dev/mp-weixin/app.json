@@ -22,7 +22,9 @@
     "pages/feedback/feedbackHistory/feedbackHistory",
     "pages/commentPublish/commentPublish",
     "pages/like/like",
-    "pages/AppletAbout/AppletAbout"
+    "pages/AppletAbout/AppletAbout",
+    "pages/QuestionRecordHistory/QuestionRecordHistory",
+    "pages/question/questionAnswer/questionAnswer"
   ],
   "subPackages": [],
   "window": {

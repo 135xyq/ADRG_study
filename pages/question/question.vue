@@ -135,7 +135,9 @@
 			 * @param {Object} category
 			 */
 			onHandleGoToQuestionList(category) {
-				console.log(category);
+				uni.navigateTo({
+					url:'/pages/question/questionAnswer/questionAnswer?category=' + category
+				})
 			},
 			/**
 			 * 弹出设置框
@@ -187,6 +189,9 @@
 				await this.onHandleClosePopup();
 				
 			},
+			/**
+			 * 前往历史记录页
+			 */
 			onHandleGoToQuestionHistory() {
 				uni.navigateTo({
 					url:'/pages/QuestionRecordHistory/QuestionRecordHistory'

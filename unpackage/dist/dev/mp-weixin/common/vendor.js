@@ -20701,12 +20701,53 @@ var _default = {
   // 获取分类列表和每个分类用户的刷题数据
   getQuestionCategoryList: function getQuestionCategoryList(data) {
     return _request.default.post('/applet/questioncategory/getquestioncategorylist', data);
+  },
+  // 随机组卷
+  getRandomQuestions: function getRandomQuestions(data) {
+    return _request.default.post('/applet/question/getRandomQuestions', data);
   }
 };
 exports.default = _default;
 
 /***/ }),
-/* 195 */,
+/* 195 */
+/*!*******************************************!*\
+  !*** D:/毕设程序/ADRG_study/api/user/user.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 167));
+// 用户操作Api
+var _default = {
+  //  获取用户详情
+  getUserInfo: function getUserInfo(data) {
+    return _request.default.post('/applet/appletuser/getuserinfo', data);
+  },
+  // 修改用户信息
+  updateUserInfo: function updateUserInfo(data) {
+    return _request.default.post('/applet/appletuser/edit', data);
+  },
+  // 获取用户设置信息
+  getUserSetInfo: function getUserSetInfo() {
+    return _request.default.post('/applet/appletuserset/getusersetinfo');
+  },
+  // 修改用户的设置信息
+  updateUserSetInfo: function updateUserSetInfo(data) {
+    return _request.default.post('/applet/appletuserset/edituserset', data);
+  }
+};
+exports.default = _default;
+
+/***/ }),
 /* 196 */,
 /* 197 */,
 /* 198 */,
@@ -20720,7 +20761,8 @@ exports.default = _default;
 /* 206 */,
 /* 207 */,
 /* 208 */,
-/* 209 */
+/* 209 */,
+/* 210 */
 /*!******************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/index.js ***!
   \******************************************************/
@@ -20742,7 +20784,7 @@ Object.defineProperty(exports, "default", {
   }
 });
 exports.toFormData = exports.spread = exports.mergeConfig = exports.isCancel = exports.isAxiosError = exports.formToJSON = void 0;
-var _axios = _interopRequireDefault(__webpack_require__(/*! ./lib/axios.js */ 210));
+var _axios = _interopRequireDefault(__webpack_require__(/*! ./lib/axios.js */ 211));
 // This module is intended to unwrap Axios default export as named.
 // Keep top-level export same with static properties
 // so that it can keep same with es module or cjs
@@ -20778,7 +20820,7 @@ exports.AxiosError = AxiosError;
 exports.Axios = Axios;
 
 /***/ }),
-/* 210 */
+/* 211 */
 /*!**********************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/axios.js ***!
   \**********************************************************/
@@ -20793,22 +20835,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./utils.js */ 211));
-var _bind = _interopRequireDefault(__webpack_require__(/*! ./helpers/bind.js */ 212));
-var _Axios = _interopRequireDefault(__webpack_require__(/*! ./core/Axios.js */ 213));
-var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./core/mergeConfig.js */ 245));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./defaults/index.js */ 222));
-var _formDataToJSON = _interopRequireDefault(__webpack_require__(/*! ./helpers/formDataToJSON.js */ 230));
-var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ./cancel/CanceledError.js */ 234));
-var _CancelToken = _interopRequireDefault(__webpack_require__(/*! ./cancel/CancelToken.js */ 248));
-var _isCancel = _interopRequireDefault(__webpack_require__(/*! ./cancel/isCancel.js */ 233));
-var _data = __webpack_require__(/*! ./env/data.js */ 247);
-var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./helpers/toFormData.js */ 216));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ./core/AxiosError.js */ 217));
-var _spread = _interopRequireDefault(__webpack_require__(/*! ./helpers/spread.js */ 249));
-var _isAxiosError = _interopRequireDefault(__webpack_require__(/*! ./helpers/isAxiosError.js */ 250));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./core/AxiosHeaders.js */ 231));
-var _HttpStatusCode = _interopRequireDefault(__webpack_require__(/*! ./helpers/HttpStatusCode.js */ 251));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./utils.js */ 212));
+var _bind = _interopRequireDefault(__webpack_require__(/*! ./helpers/bind.js */ 213));
+var _Axios = _interopRequireDefault(__webpack_require__(/*! ./core/Axios.js */ 214));
+var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./core/mergeConfig.js */ 246));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./defaults/index.js */ 223));
+var _formDataToJSON = _interopRequireDefault(__webpack_require__(/*! ./helpers/formDataToJSON.js */ 231));
+var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ./cancel/CanceledError.js */ 235));
+var _CancelToken = _interopRequireDefault(__webpack_require__(/*! ./cancel/CancelToken.js */ 249));
+var _isCancel = _interopRequireDefault(__webpack_require__(/*! ./cancel/isCancel.js */ 234));
+var _data = __webpack_require__(/*! ./env/data.js */ 248);
+var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./helpers/toFormData.js */ 217));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ./core/AxiosError.js */ 218));
+var _spread = _interopRequireDefault(__webpack_require__(/*! ./helpers/spread.js */ 250));
+var _isAxiosError = _interopRequireDefault(__webpack_require__(/*! ./helpers/isAxiosError.js */ 251));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./core/AxiosHeaders.js */ 232));
+var _HttpStatusCode = _interopRequireDefault(__webpack_require__(/*! ./helpers/HttpStatusCode.js */ 252));
 /**
  * Create an instance of Axios
  *
@@ -20879,7 +20921,7 @@ var _default = axios;
 exports.default = _default;
 
 /***/ }),
-/* 211 */
+/* 212 */
 /*!**********************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/utils.js ***!
   \**********************************************************/
@@ -20895,7 +20937,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var _bind = _interopRequireDefault(__webpack_require__(/*! ./helpers/bind.js */ 212));
+var _bind = _interopRequireDefault(__webpack_require__(/*! ./helpers/bind.js */ 213));
 // utils is a library of generic helper functions non-specific to axios
 
 var toString = Object.prototype.toString;
@@ -21583,7 +21625,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../app/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 212 */
+/* 213 */
 /*!*****************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/bind.js ***!
   \*****************************************************************/
@@ -21604,7 +21646,7 @@ function bind(fn, thisArg) {
 }
 
 /***/ }),
-/* 213 */
+/* 214 */
 /*!***************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/Axios.js ***!
   \***************************************************************/
@@ -21621,14 +21663,14 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 211));
-var _buildURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/buildURL.js */ 214));
-var _InterceptorManager = _interopRequireDefault(__webpack_require__(/*! ./InterceptorManager.js */ 219));
-var _dispatchRequest = _interopRequireDefault(__webpack_require__(/*! ./dispatchRequest.js */ 220));
-var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./mergeConfig.js */ 245));
-var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ./buildFullPath.js */ 239));
-var _validator = _interopRequireDefault(__webpack_require__(/*! ../helpers/validator.js */ 246));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./AxiosHeaders.js */ 231));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 212));
+var _buildURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/buildURL.js */ 215));
+var _InterceptorManager = _interopRequireDefault(__webpack_require__(/*! ./InterceptorManager.js */ 220));
+var _dispatchRequest = _interopRequireDefault(__webpack_require__(/*! ./dispatchRequest.js */ 221));
+var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./mergeConfig.js */ 246));
+var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ./buildFullPath.js */ 240));
+var _validator = _interopRequireDefault(__webpack_require__(/*! ../helpers/validator.js */ 247));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./AxiosHeaders.js */ 232));
 var validators = _validator.default.validators;
 
 /**
@@ -21792,7 +21834,7 @@ var _default = Axios;
 exports.default = _default;
 
 /***/ }),
-/* 214 */
+/* 215 */
 /*!*********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/buildURL.js ***!
   \*********************************************************************/
@@ -21807,8 +21849,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = buildURL;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
-var _AxiosURLSearchParams = _interopRequireDefault(__webpack_require__(/*! ../helpers/AxiosURLSearchParams.js */ 215));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
+var _AxiosURLSearchParams = _interopRequireDefault(__webpack_require__(/*! ../helpers/AxiosURLSearchParams.js */ 216));
 /**
  * It replaces all instances of the characters `:`, `$`, `,`, `+`, `[`, and `]` with their
  * URI encoded counterparts
@@ -21854,7 +21896,7 @@ function buildURL(url, params, options) {
 }
 
 /***/ }),
-/* 215 */
+/* 216 */
 /*!*********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/AxiosURLSearchParams.js ***!
   \*********************************************************************************/
@@ -21869,7 +21911,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./toFormData.js */ 216));
+var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./toFormData.js */ 217));
 /**
  * It encodes a string by replacing all characters that are not in the unreserved set with
  * their percent-encoded equivalents
@@ -21921,7 +21963,7 @@ var _default = AxiosURLSearchParams;
 exports.default = _default;
 
 /***/ }),
-/* 216 */
+/* 217 */
 /*!***********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/toFormData.js ***!
   \***********************************************************************/
@@ -21937,9 +21979,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 217));
-var _FormData = _interopRequireDefault(__webpack_require__(/*! ../platform/node/classes/FormData.js */ 218));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 218));
+var _FormData = _interopRequireDefault(__webpack_require__(/*! ../platform/node/classes/FormData.js */ 219));
 // temporary hotfix to avoid circular references until AxiosURLSearchParams is refactored
 
 /**
@@ -22126,7 +22168,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../app/HBuilderX/plugins/uniapp-cli/node_modules/buffer/index.js */ 50).Buffer))
 
 /***/ }),
-/* 217 */
+/* 218 */
 /*!********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/AxiosError.js ***!
   \********************************************************************/
@@ -22141,7 +22183,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
 /**
  * Create an Error with the specified message, config, error code, request and response.
  *
@@ -22220,7 +22262,7 @@ var _default = AxiosError;
 exports.default = _default;
 
 /***/ }),
-/* 218 */
+/* 219 */
 /*!*****************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/null.js ***!
   \*****************************************************************/
@@ -22239,7 +22281,7 @@ var _default = null;
 exports.default = _default;
 
 /***/ }),
-/* 219 */
+/* 220 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/InterceptorManager.js ***!
   \****************************************************************************/
@@ -22256,7 +22298,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 211));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 212));
 var InterceptorManager = /*#__PURE__*/function () {
   function InterceptorManager() {
     (0, _classCallCheck2.default)(this, InterceptorManager);
@@ -22337,7 +22379,7 @@ var _default = InterceptorManager;
 exports.default = _default;
 
 /***/ }),
-/* 220 */
+/* 221 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/dispatchRequest.js ***!
   \*************************************************************************/
@@ -22352,12 +22394,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = dispatchRequest;
-var _transformData = _interopRequireDefault(__webpack_require__(/*! ./transformData.js */ 221));
-var _isCancel = _interopRequireDefault(__webpack_require__(/*! ../cancel/isCancel.js */ 233));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../defaults/index.js */ 222));
-var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ../cancel/CanceledError.js */ 234));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 231));
-var _adapters = _interopRequireDefault(__webpack_require__(/*! ../adapters/adapters.js */ 235));
+var _transformData = _interopRequireDefault(__webpack_require__(/*! ./transformData.js */ 222));
+var _isCancel = _interopRequireDefault(__webpack_require__(/*! ../cancel/isCancel.js */ 234));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../defaults/index.js */ 223));
+var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ../cancel/CanceledError.js */ 235));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 232));
+var _adapters = _interopRequireDefault(__webpack_require__(/*! ../adapters/adapters.js */ 236));
 /**
  * Throws a `CanceledError` if cancellation has been requested.
  *
@@ -22413,7 +22455,7 @@ function dispatchRequest(config) {
 }
 
 /***/ }),
-/* 221 */
+/* 222 */
 /*!***********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/transformData.js ***!
   \***********************************************************************/
@@ -22428,9 +22470,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = transformData;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 211));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../defaults/index.js */ 222));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 231));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 212));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../defaults/index.js */ 223));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 232));
 /**
  * Transform the data for a request or a response
  *
@@ -22452,7 +22494,7 @@ function transformData(fns, response) {
 }
 
 /***/ }),
-/* 222 */
+/* 223 */
 /*!*******************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/defaults/index.js ***!
   \*******************************************************************/
@@ -22467,13 +22509,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 217));
-var _transitional = _interopRequireDefault(__webpack_require__(/*! ./transitional.js */ 223));
-var _toFormData = _interopRequireDefault(__webpack_require__(/*! ../helpers/toFormData.js */ 216));
-var _toURLEncodedForm = _interopRequireDefault(__webpack_require__(/*! ../helpers/toURLEncodedForm.js */ 224));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 225));
-var _formDataToJSON = _interopRequireDefault(__webpack_require__(/*! ../helpers/formDataToJSON.js */ 230));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 218));
+var _transitional = _interopRequireDefault(__webpack_require__(/*! ./transitional.js */ 224));
+var _toFormData = _interopRequireDefault(__webpack_require__(/*! ../helpers/toFormData.js */ 217));
+var _toURLEncodedForm = _interopRequireDefault(__webpack_require__(/*! ../helpers/toURLEncodedForm.js */ 225));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 226));
+var _formDataToJSON = _interopRequireDefault(__webpack_require__(/*! ../helpers/formDataToJSON.js */ 231));
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': undefined
 };
@@ -22598,7 +22640,7 @@ var _default = defaults;
 exports.default = _default;
 
 /***/ }),
-/* 223 */
+/* 224 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/defaults/transitional.js ***!
   \**************************************************************************/
@@ -22620,7 +22662,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 224 */
+/* 225 */
 /*!*****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/toURLEncodedForm.js ***!
   \*****************************************************************************/
@@ -22635,9 +22677,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = toURLEncodedForm;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
-var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./toFormData.js */ 216));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 225));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
+var _toFormData = _interopRequireDefault(__webpack_require__(/*! ./toFormData.js */ 217));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 226));
 function toURLEncodedForm(data, options) {
   return (0, _toFormData.default)(data, new _index.default.classes.URLSearchParams(), Object.assign({
     visitor: function visitor(value, key, path, helpers) {
@@ -22651,7 +22693,7 @@ function toURLEncodedForm(data, options) {
 }
 
 /***/ }),
-/* 225 */
+/* 226 */
 /*!*******************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/platform/index.js ***!
   \*******************************************************************/
@@ -22671,10 +22713,10 @@ Object.defineProperty(exports, "default", {
     return _index.default;
   }
 });
-var _index = _interopRequireDefault(__webpack_require__(/*! ./node/index.js */ 226));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./node/index.js */ 227));
 
 /***/ }),
-/* 226 */
+/* 227 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/platform/browser/index.js ***!
   \***************************************************************************/
@@ -22689,9 +22731,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _URLSearchParams = _interopRequireDefault(__webpack_require__(/*! ./classes/URLSearchParams.js */ 227));
-var _FormData = _interopRequireDefault(__webpack_require__(/*! ./classes/FormData.js */ 228));
-var _Blob = _interopRequireDefault(__webpack_require__(/*! ./classes/Blob.js */ 229));
+var _URLSearchParams = _interopRequireDefault(__webpack_require__(/*! ./classes/URLSearchParams.js */ 228));
+var _FormData = _interopRequireDefault(__webpack_require__(/*! ./classes/FormData.js */ 229));
+var _Blob = _interopRequireDefault(__webpack_require__(/*! ./classes/Blob.js */ 230));
 /**
  * Determine if we're running in a standard browser environment
  *
@@ -22745,7 +22787,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 227 */
+/* 228 */
 /*!*********************************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/platform/browser/classes/URLSearchParams.js ***!
   \*********************************************************************************************/
@@ -22760,12 +22802,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _AxiosURLSearchParams = _interopRequireDefault(__webpack_require__(/*! ../../../helpers/AxiosURLSearchParams.js */ 215));
+var _AxiosURLSearchParams = _interopRequireDefault(__webpack_require__(/*! ../../../helpers/AxiosURLSearchParams.js */ 216));
 var _default = typeof URLSearchParams !== 'undefined' ? URLSearchParams : _AxiosURLSearchParams.default;
 exports.default = _default;
 
 /***/ }),
-/* 228 */
+/* 229 */
 /*!**************************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/platform/browser/classes/FormData.js ***!
   \**************************************************************************************/
@@ -22783,7 +22825,7 @@ var _default = typeof FormData !== 'undefined' ? FormData : null;
 exports.default = _default;
 
 /***/ }),
-/* 229 */
+/* 230 */
 /*!**********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/platform/browser/classes/Blob.js ***!
   \**********************************************************************************/
@@ -22801,7 +22843,7 @@ var _default = typeof Blob !== 'undefined' ? Blob : null;
 exports.default = _default;
 
 /***/ }),
-/* 230 */
+/* 231 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/formDataToJSON.js ***!
   \***************************************************************************/
@@ -22816,7 +22858,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
 /**
  * It takes a string like `foo[x][y][z]` and returns an array like `['foo', 'x', 'y', 'z']
  *
@@ -22897,7 +22939,7 @@ var _default = formDataToJSON;
 exports.default = _default;
 
 /***/ }),
-/* 231 */
+/* 232 */
 /*!**********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/AxiosHeaders.js ***!
   \**********************************************************************/
@@ -22915,8 +22957,8 @@ exports.default = void 0;
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
-var _parseHeaders = _interopRequireDefault(__webpack_require__(/*! ../helpers/parseHeaders.js */ 232));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
+var _parseHeaders = _interopRequireDefault(__webpack_require__(/*! ../helpers/parseHeaders.js */ 233));
 var $internals = Symbol('internals');
 function normalizeHeader(header) {
   return header && String(header).trim().toLowerCase();
@@ -23178,7 +23220,7 @@ var _default = AxiosHeaders;
 exports.default = _default;
 
 /***/ }),
-/* 232 */
+/* 233 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/parseHeaders.js ***!
   \*************************************************************************/
@@ -23193,7 +23235,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 211));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 212));
 // RawAxiosHeaders whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
 var ignoreDuplicateOf = _utils.default.toObjectSet(['age', 'authorization', 'content-length', 'content-type', 'etag', 'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since', 'last-modified', 'location', 'max-forwards', 'proxy-authorization', 'referer', 'retry-after', 'user-agent']);
@@ -23239,7 +23281,7 @@ var _default = function _default(rawHeaders) {
 exports.default = _default;
 
 /***/ }),
-/* 233 */
+/* 234 */
 /*!********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/cancel/isCancel.js ***!
   \********************************************************************/
@@ -23258,7 +23300,7 @@ function isCancel(value) {
 }
 
 /***/ }),
-/* 234 */
+/* 235 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/cancel/CanceledError.js ***!
   \*************************************************************************/
@@ -23273,8 +23315,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 217));
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 218));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
 /**
  * A `CanceledError` is an object that is thrown when an operation is canceled.
  *
@@ -23296,7 +23338,7 @@ var _default = CanceledError;
 exports.default = _default;
 
 /***/ }),
-/* 235 */
+/* 236 */
 /*!**********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/adapters/adapters.js ***!
   \**********************************************************************/
@@ -23311,10 +23353,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
-var _http = _interopRequireDefault(__webpack_require__(/*! ./http.js */ 218));
-var _xhr = _interopRequireDefault(__webpack_require__(/*! ./xhr.js */ 236));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 217));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
+var _http = _interopRequireDefault(__webpack_require__(/*! ./http.js */ 219));
+var _xhr = _interopRequireDefault(__webpack_require__(/*! ./xhr.js */ 237));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 218));
 var knownAdapters = {
   http: _http.default,
   xhr: _xhr.default
@@ -23362,7 +23404,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 236 */
+/* 237 */
 /*!*****************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/adapters/xhr.js ***!
   \*****************************************************************/
@@ -23377,19 +23419,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 211));
-var _settle = _interopRequireDefault(__webpack_require__(/*! ./../core/settle.js */ 237));
-var _cookies = _interopRequireDefault(__webpack_require__(/*! ./../helpers/cookies.js */ 238));
-var _buildURL = _interopRequireDefault(__webpack_require__(/*! ./../helpers/buildURL.js */ 214));
-var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ../core/buildFullPath.js */ 239));
-var _isURLSameOrigin = _interopRequireDefault(__webpack_require__(/*! ./../helpers/isURLSameOrigin.js */ 242));
-var _transitional = _interopRequireDefault(__webpack_require__(/*! ../defaults/transitional.js */ 223));
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 217));
-var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ../cancel/CanceledError.js */ 234));
-var _parseProtocol = _interopRequireDefault(__webpack_require__(/*! ../helpers/parseProtocol.js */ 243));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 225));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 231));
-var _speedometer2 = _interopRequireDefault(__webpack_require__(/*! ../helpers/speedometer.js */ 244));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 212));
+var _settle = _interopRequireDefault(__webpack_require__(/*! ./../core/settle.js */ 238));
+var _cookies = _interopRequireDefault(__webpack_require__(/*! ./../helpers/cookies.js */ 239));
+var _buildURL = _interopRequireDefault(__webpack_require__(/*! ./../helpers/buildURL.js */ 215));
+var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ../core/buildFullPath.js */ 240));
+var _isURLSameOrigin = _interopRequireDefault(__webpack_require__(/*! ./../helpers/isURLSameOrigin.js */ 243));
+var _transitional = _interopRequireDefault(__webpack_require__(/*! ../defaults/transitional.js */ 224));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 218));
+var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ../cancel/CanceledError.js */ 235));
+var _parseProtocol = _interopRequireDefault(__webpack_require__(/*! ../helpers/parseProtocol.js */ 244));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 226));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosHeaders.js */ 232));
+var _speedometer2 = _interopRequireDefault(__webpack_require__(/*! ../helpers/speedometer.js */ 245));
 function progressEventReducer(listener, isDownloadStream) {
   var bytesNotified = 0;
   var _speedometer = (0, _speedometer2.default)(50, 250);
@@ -23597,7 +23639,7 @@ var _default = isXHRAdapterSupported && function (config) {
 exports.default = _default;
 
 /***/ }),
-/* 237 */
+/* 238 */
 /*!****************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/settle.js ***!
   \****************************************************************/
@@ -23612,7 +23654,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = settle;
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ./AxiosError.js */ 217));
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ./AxiosError.js */ 218));
 /**
  * Resolve or reject a Promise based on response status.
  *
@@ -23632,7 +23674,7 @@ function settle(resolve, reject, response) {
 }
 
 /***/ }),
-/* 238 */
+/* 239 */
 /*!********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/cookies.js ***!
   \********************************************************************/
@@ -23647,8 +23689,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 211));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 225));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 212));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 226));
 var _default = _index.default.isStandardBrowserEnv ?
 // Standard browser envs support document.cookie
 function standardBrowserEnv() {
@@ -23692,7 +23734,7 @@ function nonStandardBrowserEnv() {
 exports.default = _default;
 
 /***/ }),
-/* 239 */
+/* 240 */
 /*!***********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/buildFullPath.js ***!
   \***********************************************************************/
@@ -23707,8 +23749,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = buildFullPath;
-var _isAbsoluteURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/isAbsoluteURL.js */ 240));
-var _combineURLs = _interopRequireDefault(__webpack_require__(/*! ../helpers/combineURLs.js */ 241));
+var _isAbsoluteURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/isAbsoluteURL.js */ 241));
+var _combineURLs = _interopRequireDefault(__webpack_require__(/*! ../helpers/combineURLs.js */ 242));
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
  * only when the requestedURL is not already an absolute URL.
@@ -23727,7 +23769,7 @@ function buildFullPath(baseURL, requestedURL) {
 }
 
 /***/ }),
-/* 240 */
+/* 241 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
   \**************************************************************************/
@@ -23756,7 +23798,7 @@ function isAbsoluteURL(url) {
 }
 
 /***/ }),
-/* 241 */
+/* 242 */
 /*!************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/combineURLs.js ***!
   \************************************************************************/
@@ -23783,7 +23825,7 @@ function combineURLs(baseURL, relativeURL) {
 }
 
 /***/ }),
-/* 242 */
+/* 243 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
   \****************************************************************************/
@@ -23798,8 +23840,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 211));
-var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 225));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 212));
+var _index = _interopRequireDefault(__webpack_require__(/*! ../platform/index.js */ 226));
 var _default = _index.default.isStandardBrowserEnv ?
 // Standard browser envs have full support of the APIs needed to test
 // whether the request URL is of the same origin as current location.
@@ -23857,7 +23899,7 @@ function nonStandardBrowserEnv() {
 exports.default = _default;
 
 /***/ }),
-/* 243 */
+/* 244 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/parseProtocol.js ***!
   \**************************************************************************/
@@ -23877,7 +23919,7 @@ function parseProtocol(url) {
 }
 
 /***/ }),
-/* 244 */
+/* 245 */
 /*!************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/speedometer.js ***!
   \************************************************************************/
@@ -23934,7 +23976,7 @@ var _default = speedometer;
 exports.default = _default;
 
 /***/ }),
-/* 245 */
+/* 246 */
 /*!*********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/core/mergeConfig.js ***!
   \*********************************************************************/
@@ -23949,8 +23991,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = mergeConfig;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 211));
-var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./AxiosHeaders.js */ 231));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ../utils.js */ 212));
+var _AxiosHeaders = _interopRequireDefault(__webpack_require__(/*! ./AxiosHeaders.js */ 232));
 var headersToObject = function headersToObject(thing) {
   return thing instanceof _AxiosHeaders.default ? thing.toJSON() : thing;
 };
@@ -24055,7 +24097,7 @@ function mergeConfig(config1, config2) {
 }
 
 /***/ }),
-/* 246 */
+/* 247 */
 /*!**********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/validator.js ***!
   \**********************************************************************/
@@ -24071,8 +24113,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var _data = __webpack_require__(/*! ../env/data.js */ 247);
-var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 217));
+var _data = __webpack_require__(/*! ../env/data.js */ 248);
+var _AxiosError = _interopRequireDefault(__webpack_require__(/*! ../core/AxiosError.js */ 218));
 var validators = {};
 
 // eslint-disable-next-line func-names
@@ -24150,7 +24192,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 247 */
+/* 248 */
 /*!*************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/env/data.js ***!
   \*************************************************************/
@@ -24168,7 +24210,7 @@ var VERSION = "1.3.4";
 exports.VERSION = VERSION;
 
 /***/ }),
-/* 248 */
+/* 249 */
 /*!***********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/cancel/CancelToken.js ***!
   \***********************************************************************/
@@ -24185,7 +24227,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ./CanceledError.js */ 234));
+var _CanceledError = _interopRequireDefault(__webpack_require__(/*! ./CanceledError.js */ 235));
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
  *
@@ -24304,7 +24346,7 @@ var _default = CancelToken;
 exports.default = _default;
 
 /***/ }),
-/* 249 */
+/* 250 */
 /*!*******************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/spread.js ***!
   \*******************************************************************/
@@ -24346,7 +24388,7 @@ function spread(callback) {
 }
 
 /***/ }),
-/* 250 */
+/* 251 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/isAxiosError.js ***!
   \*************************************************************************/
@@ -24361,7 +24403,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = isAxiosError;
-var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 211));
+var _utils = _interopRequireDefault(__webpack_require__(/*! ./../utils.js */ 212));
 /**
  * Determines whether the payload is an error thrown by Axios
  *
@@ -24374,7 +24416,7 @@ function isAxiosError(payload) {
 }
 
 /***/ }),
-/* 251 */
+/* 252 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/node_modules/axios/lib/helpers/HttpStatusCode.js ***!
   \***************************************************************************/
@@ -24462,44 +24504,6 @@ Object.entries(HttpStatusCode).forEach(function (_ref) {
   HttpStatusCode[value] = key;
 });
 var _default = HttpStatusCode;
-exports.default = _default;
-
-/***/ }),
-/* 252 */
-/*!*******************************************!*\
-  !*** D:/毕设程序/ADRG_study/api/user/user.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 167));
-// 用户操作Api
-var _default = {
-  //  获取用户详情
-  getUserInfo: function getUserInfo(data) {
-    return _request.default.post('/applet/appletuser/getuserinfo', data);
-  },
-  // 修改用户信息
-  updateUserInfo: function updateUserInfo(data) {
-    return _request.default.post('/applet/appletuser/edit', data);
-  },
-  // 获取用户设置信息
-  getUserSetInfo: function getUserSetInfo() {
-    return _request.default.post('/applet/appletuserset/getusersetinfo');
-  },
-  // 修改用户的设置信息
-  updateUserSetInfo: function updateUserSetInfo(data) {
-    return _request.default.post('/applet/appletuserset/edituserset', data);
-  }
-};
 exports.default = _default;
 
 /***/ }),
@@ -33292,7 +33296,21 @@ exports.default = _default;
 /* 461 */,
 /* 462 */,
 /* 463 */,
-/* 464 */
+/* 464 */,
+/* 465 */,
+/* 466 */,
+/* 467 */,
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \******************************************************************************/
@@ -34313,14 +34331,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 465 */,
-/* 466 */,
-/* 467 */,
-/* 468 */,
-/* 469 */,
-/* 470 */,
-/* 471 */,
-/* 472 */
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-row/props.js ***!
   \*************************************************************************/
@@ -34357,14 +34375,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 473 */,
-/* 474 */,
-/* 475 */,
-/* 476 */,
-/* 477 */,
-/* 478 */,
-/* 479 */,
-/* 480 */
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-col/props.js ***!
   \*************************************************************************/
@@ -34411,14 +34429,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 481 */,
-/* 482 */,
-/* 483 */,
-/* 484 */,
-/* 485 */,
-/* 486 */,
-/* 487 */,
-/* 488 */
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-avatar/props.js ***!
   \****************************************************************************/
@@ -34514,14 +34532,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 489 */,
-/* 490 */,
-/* 491 */,
-/* 492 */,
-/* 493 */,
-/* 494 */,
-/* 495 */,
-/* 496 */
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-line/props.js ***!
   \**************************************************************************/
@@ -34572,14 +34590,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 497 */,
-/* 498 */,
-/* 499 */,
-/* 500 */,
-/* 501 */,
-/* 502 */,
-/* 503 */,
-/* 504 */
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-cell/props.js ***!
   \**************************************************************************/
@@ -34707,14 +34725,14 @@ exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 505 */,
-/* 506 */,
-/* 507 */,
-/* 508 */,
-/* 509 */,
-/* 510 */,
-/* 511 */,
-/* 512 */
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-list/props.js ***!
   \**************************************************************************/
@@ -34807,14 +34825,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 513 */,
-/* 514 */,
-/* 515 */,
-/* 516 */,
-/* 517 */,
-/* 518 */,
-/* 519 */,
-/* 520 */
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */,
+/* 534 */
 /*!*******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-list-item/props.js ***!
   \*******************************************************************************/
@@ -34841,21 +34859,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 521 */,
-/* 522 */,
-/* 523 */,
-/* 524 */,
-/* 525 */,
-/* 526 */,
-/* 527 */,
-/* 528 */,
-/* 529 */,
-/* 530 */,
-/* 531 */,
-/* 532 */,
-/* 533 */,
-/* 534 */,
-/* 535 */
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-empty/props.js ***!
   \***************************************************************************/
@@ -34932,21 +34950,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 536 */,
-/* 537 */,
-/* 538 */,
-/* 539 */,
-/* 540 */,
-/* 541 */,
-/* 542 */,
-/* 543 */,
-/* 544 */,
-/* 545 */,
-/* 546 */,
-/* 547 */,
-/* 548 */,
-/* 549 */,
-/* 550 */
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-search/props.js ***!
   \****************************************************************************/
@@ -35082,14 +35100,376 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 551 */,
-/* 552 */,
-/* 553 */,
-/* 554 */,
-/* 555 */,
-/* 556 */,
-/* 557 */,
-/* 558 */
+/* 565 */,
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */,
+/* 571 */,
+/* 572 */
+/*!***************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-popup/props.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 是否展示弹窗
+    show: {
+      type: Boolean,
+      default: uni.$u.props.popup.show
+    },
+    // 是否显示遮罩
+    overlay: {
+      type: Boolean,
+      default: uni.$u.props.popup.overlay
+    },
+    // 弹出的方向，可选值为 top bottom right left center
+    mode: {
+      type: String,
+      default: uni.$u.props.popup.mode
+    },
+    // 动画时长，单位ms
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.popup.duration
+    },
+    // 是否显示关闭图标
+    closeable: {
+      type: Boolean,
+      default: uni.$u.props.popup.closeable
+    },
+    // 自定义遮罩的样式
+    overlayStyle: {
+      type: [Object, String],
+      default: uni.$u.props.popup.overlayStyle
+    },
+    // 点击遮罩是否关闭弹窗
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: uni.$u.props.popup.closeOnClickOverlay
+    },
+    // 层级
+    zIndex: {
+      type: [String, Number],
+      default: uni.$u.props.popup.zIndex
+    },
+    // 是否为iPhoneX留出底部安全距离
+    safeAreaInsetBottom: {
+      type: Boolean,
+      default: uni.$u.props.popup.safeAreaInsetBottom
+    },
+    // 是否留出顶部安全距离（状态栏高度）
+    safeAreaInsetTop: {
+      type: Boolean,
+      default: uni.$u.props.popup.safeAreaInsetTop
+    },
+    // 自定义关闭图标位置，top-left为左上角，top-right为右上角，bottom-left为左下角，bottom-right为右下角
+    closeIconPos: {
+      type: String,
+      default: uni.$u.props.popup.closeIconPos
+    },
+    // 是否显示圆角
+    round: {
+      type: [Boolean, String, Number],
+      default: uni.$u.props.popup.round
+    },
+    // mode=center，也即中部弹出时，是否使用缩放模式
+    zoom: {
+      type: Boolean,
+      default: uni.$u.props.popup.zoom
+    },
+    // 弹窗背景色，设置为transparent可去除白色背景
+    bgColor: {
+      type: String,
+      default: uni.$u.props.popup.bgColor
+    },
+    // 遮罩的透明度，0-1之间
+    overlayOpacity: {
+      type: [Number, String],
+      default: uni.$u.props.popup.overlayOpacity
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 573 */,
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */
+/*!********************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/libs/mixin/button.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    lang: String,
+    sessionFrom: String,
+    sendMessageTitle: String,
+    sendMessagePath: String,
+    sendMessageImg: String,
+    showMessageCard: Boolean,
+    appParameter: String,
+    formType: String,
+    openType: String
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 581 */
+/*!**********************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/libs/mixin/openType.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    openType: String
+  },
+  methods: {
+    onGetUserInfo: function onGetUserInfo(event) {
+      this.$emit('getuserinfo', event.detail);
+    },
+    onContact: function onContact(event) {
+      this.$emit('contact', event.detail);
+    },
+    onGetPhoneNumber: function onGetPhoneNumber(event) {
+      this.$emit('getphonenumber', event.detail);
+    },
+    onError: function onError(event) {
+      this.$emit('error', event.detail);
+    },
+    onLaunchApp: function onLaunchApp(event) {
+      this.$emit('launchapp', event.detail);
+    },
+    onOpenSetting: function onOpenSetting(event) {
+      this.$emit('opensetting', event.detail);
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 582 */
+/*!****************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-button/props.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-16 10:04:04
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-16 10:04:24
+ * @FilePath     : /u-view2.0/uview-ui/components/u-button/props.js
+ */
+var _default = {
+  props: {
+    // 是否细边框
+    hairline: {
+      type: Boolean,
+      default: uni.$u.props.button.hairline
+    },
+    // 按钮的预置样式，info，primary，error，warning，success
+    type: {
+      type: String,
+      default: uni.$u.props.button.type
+    },
+    // 按钮尺寸，large，normal，small，mini
+    size: {
+      type: String,
+      default: uni.$u.props.button.size
+    },
+    // 按钮形状，circle（两边为半圆），square（带圆角）
+    shape: {
+      type: String,
+      default: uni.$u.props.button.shape
+    },
+    // 按钮是否镂空
+    plain: {
+      type: Boolean,
+      default: uni.$u.props.button.plain
+    },
+    // 是否禁止状态
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.button.disabled
+    },
+    // 是否加载中
+    loading: {
+      type: Boolean,
+      default: uni.$u.props.button.loading
+    },
+    // 加载中提示文字
+    loadingText: {
+      type: [String, Number],
+      default: uni.$u.props.button.loadingText
+    },
+    // 加载状态图标类型
+    loadingMode: {
+      type: String,
+      default: uni.$u.props.button.loadingMode
+    },
+    // 加载图标大小
+    loadingSize: {
+      type: [String, Number],
+      default: uni.$u.props.button.loadingSize
+    },
+    // 开放能力，具体请看uniapp稳定关于button组件部分说明
+    // https://uniapp.dcloud.io/component/button
+    openType: {
+      type: String,
+      default: uni.$u.props.button.openType
+    },
+    // 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件
+    // 取值为submit（提交表单），reset（重置表单）
+    formType: {
+      type: String,
+      default: uni.$u.props.button.formType
+    },
+    // 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效
+    // 只微信小程序、QQ小程序有效
+    appParameter: {
+      type: String,
+      default: uni.$u.props.button.appParameter
+    },
+    // 指定是否阻止本节点的祖先节点出现点击态，微信小程序有效
+    hoverStopPropagation: {
+      type: Boolean,
+      default: uni.$u.props.button.hoverStopPropagation
+    },
+    // 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。只微信小程序有效
+    lang: {
+      type: String,
+      default: uni.$u.props.button.lang
+    },
+    // 会话来源，open-type="contact"时有效。只微信小程序有效
+    sessionFrom: {
+      type: String,
+      default: uni.$u.props.button.sessionFrom
+    },
+    // 会话内消息卡片标题，open-type="contact"时有效
+    // 默认当前标题，只微信小程序有效
+    sendMessageTitle: {
+      type: String,
+      default: uni.$u.props.button.sendMessageTitle
+    },
+    // 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效
+    // 默认当前分享路径，只微信小程序有效
+    sendMessagePath: {
+      type: String,
+      default: uni.$u.props.button.sendMessagePath
+    },
+    // 会话内消息卡片图片，open-type="contact"时有效
+    // 默认当前页面截图，只微信小程序有效
+    sendMessageImg: {
+      type: String,
+      default: uni.$u.props.button.sendMessageImg
+    },
+    // 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，
+    // 用户点击后可以快速发送小程序消息，open-type="contact"时有效
+    showMessageCard: {
+      type: Boolean,
+      default: uni.$u.props.button.showMessageCard
+    },
+    // 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
+    dataName: {
+      type: String,
+      default: uni.$u.props.button.dataName
+    },
+    // 节流，一定时间内只能触发一次
+    throttleTime: {
+      type: [String, Number],
+      default: uni.$u.props.button.throttleTime
+    },
+    // 按住后多久出现点击态，单位毫秒
+    hoverStartTime: {
+      type: [String, Number],
+      default: uni.$u.props.button.hoverStartTime
+    },
+    // 手指松开后点击态保留时间，单位毫秒
+    hoverStayTime: {
+      type: [String, Number],
+      default: uni.$u.props.button.hoverStayTime
+    },
+    // 按钮文字，之所以通过props传入，是因为slot传入的话
+    // nvue中无法控制文字的样式
+    text: {
+      type: [String, Number],
+      default: uni.$u.props.button.text
+    },
+    // 按钮图标
+    icon: {
+      type: String,
+      default: uni.$u.props.button.icon
+    },
+    // 按钮图标
+    iconColor: {
+      type: String,
+      default: uni.$u.props.button.icon
+    },
+    // 按钮颜色，支持传入linear-gradient渐变色
+    color: {
+      type: String,
+      default: uni.$u.props.button.color
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-swiper/props.js ***!
   \****************************************************************************/
@@ -35232,14 +35612,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 559 */,
-/* 560 */,
-/* 561 */,
-/* 562 */,
-/* 563 */,
-/* 564 */,
-/* 565 */,
-/* 566 */
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */,
+/* 595 */,
+/* 596 */,
+/* 597 */,
+/* 598 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-grid/props.js ***!
   \**************************************************************************/
@@ -35276,14 +35656,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 567 */,
-/* 568 */,
-/* 569 */,
-/* 570 */,
-/* 571 */,
-/* 572 */,
-/* 573 */,
-/* 574 */
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
+/* 603 */,
+/* 604 */,
+/* 605 */,
+/* 606 */
 /*!*******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-grid-item/props.js ***!
   \*******************************************************************************/
@@ -35315,14 +35695,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 575 */,
-/* 576 */,
-/* 577 */,
-/* 578 */,
-/* 579 */,
-/* 580 */,
-/* 581 */,
-/* 582 */
+/* 607 */,
+/* 608 */,
+/* 609 */,
+/* 610 */,
+/* 611 */,
+/* 612 */,
+/* 613 */,
+/* 614 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-loadmore/props.js ***!
   \******************************************************************************/
@@ -35434,14 +35814,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 583 */,
-/* 584 */,
-/* 585 */,
-/* 586 */,
-/* 587 */,
-/* 588 */,
-/* 589 */,
-/* 590 */
+/* 615 */,
+/* 616 */,
+/* 617 */,
+/* 618 */,
+/* 619 */,
+/* 620 */,
+/* 621 */,
+/* 622 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-back-top/props.js ***!
   \******************************************************************************/
@@ -35513,14 +35893,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 591 */,
-/* 592 */,
-/* 593 */,
-/* 594 */,
-/* 595 */,
-/* 596 */,
-/* 597 */,
-/* 598 */
+/* 623 */,
+/* 624 */,
+/* 625 */,
+/* 626 */,
+/* 627 */,
+/* 628 */,
+/* 629 */,
+/* 630 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-collapse/props.js ***!
   \******************************************************************************/
@@ -35557,14 +35937,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 599 */,
-/* 600 */,
-/* 601 */,
-/* 602 */,
-/* 603 */,
-/* 604 */,
-/* 605 */,
-/* 606 */
+/* 631 */,
+/* 632 */,
+/* 633 */,
+/* 634 */,
+/* 635 */,
+/* 636 */,
+/* 637 */,
+/* 638 */
 /*!***********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-collapse-item/props.js ***!
   \***********************************************************************************/
@@ -35641,21 +36021,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 607 */,
-/* 608 */,
-/* 609 */,
-/* 610 */,
-/* 611 */,
-/* 612 */,
-/* 613 */,
-/* 614 */,
-/* 615 */,
-/* 616 */,
-/* 617 */,
-/* 618 */,
-/* 619 */,
-/* 620 */,
-/* 621 */
+/* 639 */,
+/* 640 */,
+/* 641 */,
+/* 642 */,
+/* 643 */,
+/* 644 */,
+/* 645 */,
+/* 646 */,
+/* 647 */,
+/* 648 */,
+/* 649 */,
+/* 650 */,
+/* 651 */,
+/* 652 */,
+/* 653 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-skeleton/props.js ***!
   \******************************************************************************/
@@ -35732,14 +36112,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 622 */,
-/* 623 */,
-/* 624 */,
-/* 625 */,
-/* 626 */,
-/* 627 */,
-/* 628 */,
-/* 629 */
+/* 654 */,
+/* 655 */,
+/* 656 */,
+/* 657 */,
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-parse/props.js ***!
   \***************************************************************************/
@@ -35799,7 +36179,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 630 */
+/* 662 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-parse/parser.js ***!
   \****************************************************************************/
@@ -36730,14 +37110,14 @@ module.exports = parser;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-/* 631 */,
-/* 632 */,
-/* 633 */,
-/* 634 */,
-/* 635 */,
-/* 636 */,
-/* 637 */,
-/* 638 */
+/* 663 */,
+/* 664 */,
+/* 665 */,
+/* 666 */,
+/* 667 */,
+/* 668 */,
+/* 669 */,
+/* 670 */
 /*!********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-cell-group/props.js ***!
   \********************************************************************************/
@@ -36769,14 +37149,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 639 */,
-/* 640 */,
-/* 641 */,
-/* 642 */,
-/* 643 */,
-/* 644 */,
-/* 645 */,
-/* 646 */
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */,
+/* 678 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-sticky/props.js ***!
   \****************************************************************************/
@@ -36828,14 +37208,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 647 */,
-/* 648 */,
-/* 649 */,
-/* 650 */,
-/* 651 */,
-/* 652 */,
-/* 653 */,
-/* 654 */
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */,
+/* 683 */,
+/* 684 */,
+/* 685 */,
+/* 686 */
 /*!********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-subsection/props.js ***!
   \********************************************************************************/
@@ -36902,21 +37282,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 655 */,
-/* 656 */,
-/* 657 */,
-/* 658 */,
-/* 659 */,
-/* 660 */,
-/* 661 */,
-/* 662 */,
-/* 663 */,
-/* 664 */,
-/* 665 */,
-/* 666 */,
-/* 667 */,
-/* 668 */,
-/* 669 */
+/* 687 */,
+/* 688 */,
+/* 689 */,
+/* 690 */,
+/* 691 */,
+/* 692 */,
+/* 693 */,
+/* 694 */,
+/* 695 */,
+/* 696 */,
+/* 697 */,
+/* 698 */,
+/* 699 */,
+/* 700 */,
+/* 701 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-textarea/props.js ***!
   \******************************************************************************/
@@ -37053,12 +37433,12 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 670 */,
-/* 671 */,
-/* 672 */,
-/* 673 */,
-/* 674 */,
-/* 675 */
+/* 702 */,
+/* 703 */,
+/* 704 */,
+/* 705 */,
+/* 706 */,
+/* 707 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-upload/utils.js ***!
   \****************************************************************************/
@@ -37202,7 +37582,7 @@ function chooseFile(_ref) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-/* 676 */
+/* 708 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-upload/mixin.js ***!
   \****************************************************************************/
@@ -37229,7 +37609,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 677 */
+/* 709 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-upload/props.js ***!
   \****************************************************************************/
@@ -37371,14 +37751,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 678 */,
-/* 679 */,
-/* 680 */,
-/* 681 */,
-/* 682 */,
-/* 683 */,
-/* 684 */,
-/* 685 */
+/* 710 */,
+/* 711 */,
+/* 712 */,
+/* 713 */,
+/* 714 */,
+/* 715 */,
+/* 716 */,
+/* 717 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-input/props.js ***!
   \***************************************************************************/
@@ -37583,270 +37963,12 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 686 */,
-/* 687 */,
-/* 688 */,
-/* 689 */,
-/* 690 */,
-/* 691 */
-/*!********************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/libs/mixin/button.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {
-    lang: String,
-    sessionFrom: String,
-    sendMessageTitle: String,
-    sendMessagePath: String,
-    sendMessageImg: String,
-    showMessageCard: Boolean,
-    appParameter: String,
-    formType: String,
-    openType: String
-  }
-};
-exports.default = _default;
-
-/***/ }),
-/* 692 */
-/*!**********************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/libs/mixin/openType.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {
-    openType: String
-  },
-  methods: {
-    onGetUserInfo: function onGetUserInfo(event) {
-      this.$emit('getuserinfo', event.detail);
-    },
-    onContact: function onContact(event) {
-      this.$emit('contact', event.detail);
-    },
-    onGetPhoneNumber: function onGetPhoneNumber(event) {
-      this.$emit('getphonenumber', event.detail);
-    },
-    onError: function onError(event) {
-      this.$emit('error', event.detail);
-    },
-    onLaunchApp: function onLaunchApp(event) {
-      this.$emit('launchapp', event.detail);
-    },
-    onOpenSetting: function onOpenSetting(event) {
-      this.$emit('opensetting', event.detail);
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-/* 693 */
-/*!****************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-button/props.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-/*
- * @Author       : LQ
- * @Description  :
- * @version      : 1.0
- * @Date         : 2021-08-16 10:04:04
- * @LastAuthor   : LQ
- * @lastTime     : 2021-08-16 10:04:24
- * @FilePath     : /u-view2.0/uview-ui/components/u-button/props.js
- */
-var _default = {
-  props: {
-    // 是否细边框
-    hairline: {
-      type: Boolean,
-      default: uni.$u.props.button.hairline
-    },
-    // 按钮的预置样式，info，primary，error，warning，success
-    type: {
-      type: String,
-      default: uni.$u.props.button.type
-    },
-    // 按钮尺寸，large，normal，small，mini
-    size: {
-      type: String,
-      default: uni.$u.props.button.size
-    },
-    // 按钮形状，circle（两边为半圆），square（带圆角）
-    shape: {
-      type: String,
-      default: uni.$u.props.button.shape
-    },
-    // 按钮是否镂空
-    plain: {
-      type: Boolean,
-      default: uni.$u.props.button.plain
-    },
-    // 是否禁止状态
-    disabled: {
-      type: Boolean,
-      default: uni.$u.props.button.disabled
-    },
-    // 是否加载中
-    loading: {
-      type: Boolean,
-      default: uni.$u.props.button.loading
-    },
-    // 加载中提示文字
-    loadingText: {
-      type: [String, Number],
-      default: uni.$u.props.button.loadingText
-    },
-    // 加载状态图标类型
-    loadingMode: {
-      type: String,
-      default: uni.$u.props.button.loadingMode
-    },
-    // 加载图标大小
-    loadingSize: {
-      type: [String, Number],
-      default: uni.$u.props.button.loadingSize
-    },
-    // 开放能力，具体请看uniapp稳定关于button组件部分说明
-    // https://uniapp.dcloud.io/component/button
-    openType: {
-      type: String,
-      default: uni.$u.props.button.openType
-    },
-    // 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件
-    // 取值为submit（提交表单），reset（重置表单）
-    formType: {
-      type: String,
-      default: uni.$u.props.button.formType
-    },
-    // 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效
-    // 只微信小程序、QQ小程序有效
-    appParameter: {
-      type: String,
-      default: uni.$u.props.button.appParameter
-    },
-    // 指定是否阻止本节点的祖先节点出现点击态，微信小程序有效
-    hoverStopPropagation: {
-      type: Boolean,
-      default: uni.$u.props.button.hoverStopPropagation
-    },
-    // 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文。只微信小程序有效
-    lang: {
-      type: String,
-      default: uni.$u.props.button.lang
-    },
-    // 会话来源，open-type="contact"时有效。只微信小程序有效
-    sessionFrom: {
-      type: String,
-      default: uni.$u.props.button.sessionFrom
-    },
-    // 会话内消息卡片标题，open-type="contact"时有效
-    // 默认当前标题，只微信小程序有效
-    sendMessageTitle: {
-      type: String,
-      default: uni.$u.props.button.sendMessageTitle
-    },
-    // 会话内消息卡片点击跳转小程序路径，open-type="contact"时有效
-    // 默认当前分享路径，只微信小程序有效
-    sendMessagePath: {
-      type: String,
-      default: uni.$u.props.button.sendMessagePath
-    },
-    // 会话内消息卡片图片，open-type="contact"时有效
-    // 默认当前页面截图，只微信小程序有效
-    sendMessageImg: {
-      type: String,
-      default: uni.$u.props.button.sendMessageImg
-    },
-    // 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，
-    // 用户点击后可以快速发送小程序消息，open-type="contact"时有效
-    showMessageCard: {
-      type: Boolean,
-      default: uni.$u.props.button.showMessageCard
-    },
-    // 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
-    dataName: {
-      type: String,
-      default: uni.$u.props.button.dataName
-    },
-    // 节流，一定时间内只能触发一次
-    throttleTime: {
-      type: [String, Number],
-      default: uni.$u.props.button.throttleTime
-    },
-    // 按住后多久出现点击态，单位毫秒
-    hoverStartTime: {
-      type: [String, Number],
-      default: uni.$u.props.button.hoverStartTime
-    },
-    // 手指松开后点击态保留时间，单位毫秒
-    hoverStayTime: {
-      type: [String, Number],
-      default: uni.$u.props.button.hoverStayTime
-    },
-    // 按钮文字，之所以通过props传入，是因为slot传入的话
-    // nvue中无法控制文字的样式
-    text: {
-      type: [String, Number],
-      default: uni.$u.props.button.text
-    },
-    // 按钮图标
-    icon: {
-      type: String,
-      default: uni.$u.props.button.icon
-    },
-    // 按钮图标
-    iconColor: {
-      type: String,
-      default: uni.$u.props.button.icon
-    },
-    // 按钮颜色，支持传入linear-gradient渐变色
-    color: {
-      type: String,
-      default: uni.$u.props.button.color
-    }
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 694 */,
-/* 695 */,
-/* 696 */,
-/* 697 */,
-/* 698 */,
-/* 699 */,
-/* 700 */,
-/* 701 */
+/* 718 */,
+/* 719 */,
+/* 720 */,
+/* 721 */,
+/* 722 */,
+/* 723 */
 /*!*********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-radio-group/props.js ***!
   \*********************************************************************************/
@@ -37948,14 +38070,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 702 */,
-/* 703 */,
-/* 704 */,
-/* 705 */,
-/* 706 */,
-/* 707 */,
-/* 708 */,
-/* 709 */
+/* 724 */,
+/* 725 */,
+/* 726 */,
+/* 727 */,
+/* 728 */,
+/* 729 */,
+/* 730 */,
+/* 731 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-radio/props.js ***!
   \***************************************************************************/
@@ -38037,14 +38159,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 710 */,
-/* 711 */,
-/* 712 */,
-/* 713 */,
-/* 714 */,
-/* 715 */,
-/* 716 */,
-/* 717 */
+/* 732 */,
+/* 733 */,
+/* 734 */,
+/* 735 */,
+/* 736 */,
+/* 737 */,
+/* 738 */,
+/* 739 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-picker/props.js ***!
   \****************************************************************************/
@@ -38141,21 +38263,381 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 718 */,
-/* 719 */,
-/* 720 */,
-/* 721 */,
-/* 722 */,
-/* 723 */,
-/* 724 */,
-/* 725 */,
-/* 726 */,
-/* 727 */,
-/* 728 */,
-/* 729 */,
-/* 730 */,
-/* 731 */,
-/* 732 */
+/* 740 */,
+/* 741 */,
+/* 742 */,
+/* 743 */,
+/* 744 */,
+/* 745 */,
+/* 746 */,
+/* 747 */,
+/* 748 */,
+/* 749 */,
+/* 750 */,
+/* 751 */,
+/* 752 */,
+/* 753 */,
+/* 754 */
+/*!***********************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-line-progress/props.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 激活部分的颜色
+    activeColor: {
+      type: String,
+      default: uni.$u.props.lineProgress.activeColor
+    },
+    inactiveColor: {
+      type: String,
+      default: uni.$u.props.lineProgress.color
+    },
+    // 进度百分比，数值
+    percentage: {
+      type: [String, Number],
+      default: uni.$u.props.lineProgress.inactiveColor
+    },
+    // 是否在进度条内部显示百分比的值
+    showText: {
+      type: Boolean,
+      default: uni.$u.props.lineProgress.showText
+    },
+    // 进度条的高度，单位px
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.lineProgress.height
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 755 */,
+/* 756 */,
+/* 757 */,
+/* 758 */,
+/* 759 */,
+/* 760 */,
+/* 761 */,
+/* 762 */
+/*!*************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-tag/props.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 标签类型info、primary、success、warning、error
+    type: {
+      type: String,
+      default: uni.$u.props.tag.type
+    },
+    // 不可用
+    disabled: {
+      type: [Boolean, String],
+      default: uni.$u.props.tag.disabled
+    },
+    // 标签的大小，large，medium，mini
+    size: {
+      type: String,
+      default: uni.$u.props.tag.size
+    },
+    // tag的形状，circle（两边半圆形）, square（方形，带圆角）
+    shape: {
+      type: String,
+      default: uni.$u.props.tag.shape
+    },
+    // 标签文字
+    text: {
+      type: [String, Number],
+      default: uni.$u.props.tag.text
+    },
+    // 背景颜色，默认为空字符串，即不处理
+    bgColor: {
+      type: String,
+      default: uni.$u.props.tag.bgColor
+    },
+    // 标签字体颜色，默认为空字符串，即不处理
+    color: {
+      type: String,
+      default: uni.$u.props.tag.color
+    },
+    // 标签的边框颜色
+    borderColor: {
+      type: String,
+      default: uni.$u.props.tag.borderColor
+    },
+    // 关闭按钮图标的颜色
+    closeColor: {
+      type: String,
+      default: uni.$u.props.tag.closeColor
+    },
+    // 点击时返回的索引值，用于区分例遍的数组哪个元素被点击了
+    name: {
+      type: [String, Number],
+      default: uni.$u.props.tag.name
+    },
+    // // 模式选择，dark|light|plain
+    // mode: {
+    // 	type: String,
+    // 	default: 'light'
+    // },
+    // 镂空时是否填充背景色
+    plainFill: {
+      type: Boolean,
+      default: uni.$u.props.tag.plainFill
+    },
+    // 是否镂空
+    plain: {
+      type: Boolean,
+      default: uni.$u.props.tag.plain
+    },
+    // 是否可关闭
+    closable: {
+      type: Boolean,
+      default: uni.$u.props.tag.closable
+    },
+    // 是否显示
+    show: {
+      type: Boolean,
+      default: uni.$u.props.tag.show
+    },
+    // 内置图标，或绝对路径的图片
+    icon: {
+      type: String,
+      default: uni.$u.props.tag.icon
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 763 */,
+/* 764 */,
+/* 765 */,
+/* 766 */,
+/* 767 */,
+/* 768 */,
+/* 769 */,
+/* 770 */
+/*!************************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-checkbox-group/props.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 标识符
+    name: {
+      type: String,
+      default: uni.$u.props.checkboxGroup.name
+    },
+    // 绑定的值
+    value: {
+      type: Array,
+      default: uni.$u.props.checkboxGroup.value
+    },
+    // 形状，circle-圆形，square-方形
+    shape: {
+      type: String,
+      default: uni.$u.props.checkboxGroup.shape
+    },
+    // 是否禁用全部checkbox
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.checkboxGroup.disabled
+    },
+    // 选中状态下的颜色，如设置此值，将会覆盖parent的activeColor值
+    activeColor: {
+      type: String,
+      default: uni.$u.props.checkboxGroup.activeColor
+    },
+    // 未选中的颜色
+    inactiveColor: {
+      type: String,
+      default: uni.$u.props.checkboxGroup.inactiveColor
+    },
+    // 整个组件的尺寸，默认px
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.checkboxGroup.size
+    },
+    // 布局方式，row-横向，column-纵向
+    placement: {
+      type: String,
+      default: uni.$u.props.checkboxGroup.placement
+    },
+    // label的字体大小，px单位
+    labelSize: {
+      type: [String, Number],
+      default: uni.$u.props.checkboxGroup.labelSize
+    },
+    // label的字体颜色
+    labelColor: {
+      type: [String],
+      default: uni.$u.props.checkboxGroup.labelColor
+    },
+    // 是否禁止点击文本操作
+    labelDisabled: {
+      type: Boolean,
+      default: uni.$u.props.checkboxGroup.labelDisabled
+    },
+    // 图标颜色
+    iconColor: {
+      type: String,
+      default: uni.$u.props.checkboxGroup.iconColor
+    },
+    // 图标的大小，单位px
+    iconSize: {
+      type: [String, Number],
+      default: uni.$u.props.checkboxGroup.iconSize
+    },
+    // 勾选图标的对齐方式，left-左边，right-右边
+    iconPlacement: {
+      type: String,
+      default: uni.$u.props.checkboxGroup.iconPlacement
+    },
+    // 竖向配列时，是否显示下划线
+    borderBottom: {
+      type: Boolean,
+      default: uni.$u.props.checkboxGroup.borderBottom
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 771 */,
+/* 772 */,
+/* 773 */,
+/* 774 */,
+/* 775 */,
+/* 776 */,
+/* 777 */,
+/* 778 */
+/*!******************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-checkbox/props.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // checkbox的名称
+    name: {
+      type: [String, Number, Boolean],
+      default: uni.$u.props.checkbox.name
+    },
+    // 形状，square为方形，circle为圆型
+    shape: {
+      type: String,
+      default: uni.$u.props.checkbox.shape
+    },
+    // 整体的大小
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.checkbox.size
+    },
+    // 是否默认选中
+    checked: {
+      type: Boolean,
+      default: uni.$u.props.checkbox.checked
+    },
+    // 是否禁用
+    disabled: {
+      type: [String, Boolean],
+      default: uni.$u.props.checkbox.disabled
+    },
+    // 选中状态下的颜色，如设置此值，将会覆盖parent的activeColor值
+    activeColor: {
+      type: String,
+      default: uni.$u.props.checkbox.activeColor
+    },
+    // 未选中的颜色
+    inactiveColor: {
+      type: String,
+      default: uni.$u.props.checkbox.inactiveColor
+    },
+    // 图标的大小，单位px
+    iconSize: {
+      type: [String, Number],
+      default: uni.$u.props.checkbox.iconSize
+    },
+    // 图标颜色
+    iconColor: {
+      type: String,
+      default: uni.$u.props.checkbox.iconColor
+    },
+    // label提示文字，因为nvue下，直接slot进来的文字，由于特殊的结构，无法修改样式
+    label: {
+      type: [String, Number],
+      default: uni.$u.props.checkbox.label
+    },
+    // label的字体大小，px单位
+    labelSize: {
+      type: [String, Number],
+      default: uni.$u.props.checkbox.labelSize
+    },
+    // label的颜色
+    labelColor: {
+      type: String,
+      default: uni.$u.props.checkbox.labelColor
+    },
+    // 是否禁止点击提示语选中复选框
+    labelDisabled: {
+      type: [String, Boolean],
+      default: uni.$u.props.checkbox.labelDisabled
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 779 */,
+/* 780 */,
+/* 781 */,
+/* 782 */,
+/* 783 */,
+/* 784 */,
+/* 785 */,
+/* 786 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-icon/icons.js ***!
   \**************************************************************************/
@@ -38386,7 +38868,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 733 */
+/* 787 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-icon/props.js ***!
   \**************************************************************************/
@@ -38493,14 +38975,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 734 */,
-/* 735 */,
-/* 736 */,
-/* 737 */,
-/* 738 */,
-/* 739 */,
-/* 740 */,
-/* 741 */
+/* 788 */,
+/* 789 */,
+/* 790 */,
+/* 791 */,
+/* 792 */,
+/* 793 */,
+/* 794 */,
+/* 795 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-text/props.js ***!
   \**************************************************************************/
@@ -38628,15 +39110,15 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 742 */,
-/* 743 */,
-/* 744 */,
-/* 745 */,
-/* 746 */,
-/* 747 */
-/*!**********************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-loading-icon/props.js ***!
-  \**********************************************************************************/
+/* 796 */,
+/* 797 */,
+/* 798 */,
+/* 799 */,
+/* 800 */,
+/* 801 */
+/*!*****************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-overlay/props.js ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38649,60 +39131,25 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   props: {
-    // 是否显示组件
+    // 是否显示遮罩
     show: {
       type: Boolean,
-      default: uni.$u.props.loadingIcon.show
+      default: uni.$u.props.overlay.show
     },
-    // 颜色
-    color: {
-      type: String,
-      default: uni.$u.props.loadingIcon.color
-    },
-    // 提示文字颜色
-    textColor: {
-      type: String,
-      default: uni.$u.props.loadingIcon.textColor
-    },
-    // 文字和图标是否垂直排列
-    vertical: {
-      type: Boolean,
-      default: uni.$u.props.loadingIcon.vertical
-    },
-    // 模式选择，circle-圆形，spinner-花朵形，semicircle-半圆形
-    mode: {
-      type: String,
-      default: uni.$u.props.loadingIcon.mode
-    },
-    // 图标大小，单位默认px
-    size: {
+    // 层级z-index
+    zIndex: {
       type: [String, Number],
-      default: uni.$u.props.loadingIcon.size
+      default: uni.$u.props.overlay.zIndex
     },
-    // 文字大小
-    textSize: {
-      type: [String, Number],
-      default: uni.$u.props.loadingIcon.textSize
-    },
-    // 文字内容
-    text: {
-      type: [String, Number],
-      default: uni.$u.props.loadingIcon.text
-    },
-    // 动画模式
-    timingFunction: {
-      type: String,
-      default: uni.$u.props.loadingIcon.timingFunction
-    },
-    // 动画执行周期时间
+    // 遮罩的过渡时间，单位为ms
     duration: {
       type: [String, Number],
-      default: uni.$u.props.loadingIcon.duration
+      default: uni.$u.props.overlay.duration
     },
-    // mode=circle时的暗边颜色
-    inactiveColor: {
-      type: String,
-      default: uni.$u.props.loadingIcon.inactiveColor
+    // 不透明度值，当做rgba的第四个参数
+    opacity: {
+      type: [String, Number],
+      default: uni.$u.props.overlay.opacity
     }
   }
 };
@@ -38710,68 +39157,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 748 */,
-/* 749 */,
-/* 750 */,
-/* 751 */,
-/* 752 */,
-/* 753 */,
-/* 754 */,
-/* 755 */
-/*!**************************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-swiper-indicator/props.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {
-    // 轮播的长度
-    length: {
-      type: [String, Number],
-      default: uni.$u.props.swiperIndicator.length
-    },
-    // 当前处于活动状态的轮播的索引
-    current: {
-      type: [String, Number],
-      default: uni.$u.props.swiperIndicator.current
-    },
-    // 指示器非激活颜色
-    indicatorActiveColor: {
-      type: String,
-      default: uni.$u.props.swiperIndicator.indicatorActiveColor
-    },
-    // 指示器的激活颜色
-    indicatorInactiveColor: {
-      type: String,
-      default: uni.$u.props.swiperIndicator.indicatorInactiveColor
-    },
-    // 指示器模式，line-线型，dot-点型
-    indicatorMode: {
-      type: String,
-      default: uni.$u.props.swiperIndicator.indicatorMode
-    }
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 756 */,
-/* 757 */,
-/* 758 */,
-/* 759 */,
-/* 760 */,
-/* 761 */,
-/* 762 */,
-/* 763 */
+/* 802 */,
+/* 803 */,
+/* 804 */,
+/* 805 */,
+/* 806 */,
+/* 807 */,
+/* 808 */,
+/* 809 */
 /*!********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-transition/props.js ***!
   \********************************************************************************/
@@ -38813,7 +39206,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 764 */
+/* 810 */
 /*!*************************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-transition/transition.js ***!
   \*************************************************************************************/
@@ -38830,7 +39223,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 55));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 57));
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 765));
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 811));
 // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
 var nextTick = function nextTick() {
   return new Promise(function (resolve) {
@@ -38922,7 +39315,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 765 */
+/* 811 */
 /*!***************************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
   \***************************************************************************************/
@@ -39115,47 +39508,17 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 766 */,
-/* 767 */,
-/* 768 */,
-/* 769 */,
-/* 770 */,
-/* 771 */,
-/* 772 */,
-/* 773 */,
-/* 774 */,
-/* 775 */,
-/* 776 */,
-/* 777 */,
-/* 778 */,
-/* 779 */,
-/* 780 */,
-/* 781 */,
-/* 782 */,
-/* 783 */,
-/* 784 */,
-/* 785 */,
-/* 786 */,
-/* 787 */,
-/* 788 */,
-/* 789 */,
-/* 790 */,
-/* 791 */,
-/* 792 */,
-/* 793 */,
-/* 794 */,
-/* 795 */,
-/* 796 */,
-/* 797 */,
-/* 798 */,
-/* 799 */,
-/* 800 */,
-/* 801 */,
-/* 802 */,
-/* 803 */
-/*!***************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-popup/props.js ***!
-  \***************************************************************************/
+/* 812 */,
+/* 813 */,
+/* 814 */,
+/* 815 */,
+/* 816 */,
+/* 817 */,
+/* 818 */,
+/* 819 */
+/*!********************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-status-bar/props.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39168,80 +39531,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   props: {
-    // 是否展示弹窗
-    show: {
-      type: Boolean,
-      default: uni.$u.props.popup.show
-    },
-    // 是否显示遮罩
-    overlay: {
-      type: Boolean,
-      default: uni.$u.props.popup.overlay
-    },
-    // 弹出的方向，可选值为 top bottom right left center
-    mode: {
-      type: String,
-      default: uni.$u.props.popup.mode
-    },
-    // 动画时长，单位ms
-    duration: {
-      type: [String, Number],
-      default: uni.$u.props.popup.duration
-    },
-    // 是否显示关闭图标
-    closeable: {
-      type: Boolean,
-      default: uni.$u.props.popup.closeable
-    },
-    // 自定义遮罩的样式
-    overlayStyle: {
-      type: [Object, String],
-      default: uni.$u.props.popup.overlayStyle
-    },
-    // 点击遮罩是否关闭弹窗
-    closeOnClickOverlay: {
-      type: Boolean,
-      default: uni.$u.props.popup.closeOnClickOverlay
-    },
-    // 层级
-    zIndex: {
-      type: [String, Number],
-      default: uni.$u.props.popup.zIndex
-    },
-    // 是否为iPhoneX留出底部安全距离
-    safeAreaInsetBottom: {
-      type: Boolean,
-      default: uni.$u.props.popup.safeAreaInsetBottom
-    },
-    // 是否留出顶部安全距离（状态栏高度）
-    safeAreaInsetTop: {
-      type: Boolean,
-      default: uni.$u.props.popup.safeAreaInsetTop
-    },
-    // 自定义关闭图标位置，top-left为左上角，top-right为右上角，bottom-left为左下角，bottom-right为右下角
-    closeIconPos: {
-      type: String,
-      default: uni.$u.props.popup.closeIconPos
-    },
-    // 是否显示圆角
-    round: {
-      type: [Boolean, String, Number],
-      default: uni.$u.props.popup.round
-    },
-    // mode=center，也即中部弹出时，是否使用缩放模式
-    zoom: {
-      type: Boolean,
-      default: uni.$u.props.popup.zoom
-    },
-    // 弹窗背景色，设置为transparent可去除白色背景
     bgColor: {
       type: String,
-      default: uni.$u.props.popup.bgColor
-    },
-    // 遮罩的透明度，0-1之间
-    overlayOpacity: {
-      type: [Number, String],
-      default: uni.$u.props.popup.overlayOpacity
+      default: uni.$u.props.statusBar.bgColor
     }
   }
 };
@@ -39249,14 +39541,209 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 804 */,
-/* 805 */,
-/* 806 */,
-/* 807 */,
-/* 808 */,
-/* 809 */,
-/* 810 */,
-/* 811 */
+/* 820 */,
+/* 821 */,
+/* 822 */,
+/* 823 */,
+/* 824 */,
+/* 825 */,
+/* 826 */,
+/* 827 */
+/*!*********************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-safe-bottom/props.js ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {}
+};
+exports.default = _default;
+
+/***/ }),
+/* 828 */,
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */
+/*!**********************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-loading-icon/props.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 是否显示组件
+    show: {
+      type: Boolean,
+      default: uni.$u.props.loadingIcon.show
+    },
+    // 颜色
+    color: {
+      type: String,
+      default: uni.$u.props.loadingIcon.color
+    },
+    // 提示文字颜色
+    textColor: {
+      type: String,
+      default: uni.$u.props.loadingIcon.textColor
+    },
+    // 文字和图标是否垂直排列
+    vertical: {
+      type: Boolean,
+      default: uni.$u.props.loadingIcon.vertical
+    },
+    // 模式选择，circle-圆形，spinner-花朵形，semicircle-半圆形
+    mode: {
+      type: String,
+      default: uni.$u.props.loadingIcon.mode
+    },
+    // 图标大小，单位默认px
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.size
+    },
+    // 文字大小
+    textSize: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.textSize
+    },
+    // 文字内容
+    text: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.text
+    },
+    // 动画模式
+    timingFunction: {
+      type: String,
+      default: uni.$u.props.loadingIcon.timingFunction
+    },
+    // 动画执行周期时间
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.duration
+    },
+    // mode=circle时的暗边颜色
+    inactiveColor: {
+      type: String,
+      default: uni.$u.props.loadingIcon.inactiveColor
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */,
+/* 841 */,
+/* 842 */,
+/* 843 */
+/*!**************************************************************************************!*\
+  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-swiper-indicator/props.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 轮播的长度
+    length: {
+      type: [String, Number],
+      default: uni.$u.props.swiperIndicator.length
+    },
+    // 当前处于活动状态的轮播的索引
+    current: {
+      type: [String, Number],
+      default: uni.$u.props.swiperIndicator.current
+    },
+    // 指示器非激活颜色
+    indicatorActiveColor: {
+      type: String,
+      default: uni.$u.props.swiperIndicator.indicatorActiveColor
+    },
+    // 指示器的激活颜色
+    indicatorInactiveColor: {
+      type: String,
+      default: uni.$u.props.swiperIndicator.indicatorInactiveColor
+    },
+    // 指示器模式，line-线型，dot-点型
+    indicatorMode: {
+      type: String,
+      default: uni.$u.props.swiperIndicator.indicatorMode
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 844 */,
+/* 845 */,
+/* 846 */,
+/* 847 */,
+/* 848 */,
+/* 849 */,
+/* 850 */,
+/* 851 */,
+/* 852 */,
+/* 853 */,
+/* 854 */,
+/* 855 */,
+/* 856 */,
+/* 857 */,
+/* 858 */,
+/* 859 */,
+/* 860 */,
+/* 861 */,
+/* 862 */,
+/* 863 */,
+/* 864 */,
+/* 865 */,
+/* 866 */,
+/* 867 */,
+/* 868 */,
+/* 869 */,
+/* 870 */,
+/* 871 */,
+/* 872 */,
+/* 873 */,
+/* 874 */,
+/* 875 */,
+/* 876 */,
+/* 877 */,
+/* 878 */,
+/* 879 */,
+/* 880 */,
+/* 881 */
 /*!*****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-toolbar/props.js ***!
   \*****************************************************************************/
@@ -39308,14 +39795,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 812 */,
-/* 813 */,
-/* 814 */,
-/* 815 */,
-/* 816 */,
-/* 817 */,
-/* 818 */,
-/* 819 */
+/* 882 */,
+/* 883 */,
+/* 884 */,
+/* 885 */,
+/* 886 */,
+/* 887 */,
+/* 888 */,
+/* 889 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-text/value.js ***!
   \**************************************************************************/
@@ -39423,123 +39910,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 820 */,
-/* 821 */,
-/* 822 */,
-/* 823 */,
-/* 824 */,
-/* 825 */,
-/* 826 */,
-/* 827 */
-/*!*****************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-overlay/props.js ***!
-  \*****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {
-    // 是否显示遮罩
-    show: {
-      type: Boolean,
-      default: uni.$u.props.overlay.show
-    },
-    // 层级z-index
-    zIndex: {
-      type: [String, Number],
-      default: uni.$u.props.overlay.zIndex
-    },
-    // 遮罩的过渡时间，单位为ms
-    duration: {
-      type: [String, Number],
-      default: uni.$u.props.overlay.duration
-    },
-    // 不透明度值，当做rgba的第四个参数
-    opacity: {
-      type: [String, Number],
-      default: uni.$u.props.overlay.opacity
-    }
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 828 */,
-/* 829 */,
-/* 830 */,
-/* 831 */,
-/* 832 */,
-/* 833 */,
-/* 834 */,
-/* 835 */
-/*!********************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-status-bar/props.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {
-    bgColor: {
-      type: String,
-      default: uni.$u.props.statusBar.bgColor
-    }
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 836 */,
-/* 837 */,
-/* 838 */,
-/* 839 */,
-/* 840 */,
-/* 841 */,
-/* 842 */,
-/* 843 */
-/*!*********************************************************************************!*\
-  !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-safe-bottom/props.js ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  props: {}
-};
-exports.default = _default;
-
-/***/ }),
-/* 844 */,
-/* 845 */,
-/* 846 */,
-/* 847 */,
-/* 848 */,
-/* 849 */,
-/* 850 */,
-/* 851 */
+/* 890 */,
+/* 891 */,
+/* 892 */,
+/* 893 */,
+/* 894 */,
+/* 895 */,
+/* 896 */,
+/* 897 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-link/props.js ***!
   \**************************************************************************/
