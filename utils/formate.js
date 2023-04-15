@@ -11,3 +11,19 @@ export function formateDate(date) {
   return `${hour}时${minute}分${second}秒`
 }
 
+
+
+/**
+ * 格式化时间 00:00 分：秒
+ * @param date
+ * @returns {string}
+ */
+export function formateDateToMinuteAndSecond(date) {
+  date = Number(date)
+  let minute = Math.floor(date / 60)
+  let second = Math.floor(date % 60)
+  minute = minute < 10 ? '0' + minute : minute;
+  second = second <10 ? '0' + second : second;
+  return `${minute}:${second}`
+}
+

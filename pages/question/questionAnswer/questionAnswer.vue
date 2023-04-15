@@ -1,7 +1,7 @@
 <template>
-	<view class="question-answer">
+	<view class="question-answer" @touchstart="onHandleTouchStart" @touchend="onHandleTouchEnd">
 		<view class="top-info">
-			<view class="time">00:12</view>
+			<view class="time">{{formateDateToMinuteAndSecond(time)}}</view>
 			<view class="record" @click="showPop = true">答题卡</view>
 		</view>
 		<view class="percent-container">
@@ -13,11 +13,14 @@
 				<text>/{{questions.length}}</text>
 			</view>
 		</view>
-		<view class="question" v-for="(item,index) in questions" :key="item.id" v-if="index===currentIndex">
+		<view class="question" v-for="(item,index) in questions" :key="item.id" v-show="index===currentIndex">
 			<view class="tag">
-				<u-tag :text="questionLevel(item.level).key" class="tag-item" :type="questionLevel(item.level).type"
-					></u-tag>
-				<u-tag :text="questionType(item.type)" class="tag-item"></u-tag>
+				<view class="tag-item">
+					<u-tag :text="questionLevel(item.level).key" plain :type="questionLevel(item.level).type"></u-tag>
+				</view>
+				<view class="tag-item">
+					<u-tag :text="questionType(item.type).key" :type="questionType(item.type).type" class="tag-item"></u-tag>
+				</view>
 			</view>
 			<view class="title">
 				{{item.title}}
@@ -38,20 +41,29 @@
 					</u-checkbox-group>
 				</view>
 				<view class="text" v-if="item.type == 2">
-					<u--input placeholder="请输入内容" border="surround" clearable v-model="answers[index][0]"></u--input>
+					<u--input placeholder="请输入答案" border="surround" clearable v-model="answers[index][0]"></u--input>
 				</view>
 				<view class="textarea" v-if="item.type == 3">
-					<u--textarea v-model="answers[index][0]" placeholder="请输入内容"></u--textarea>
+					<u--textarea v-model="answers[index][0]" placeholder="请输入答案"></u--textarea>
 				</view>
 			</view>
 		</view>
 		<view class="do">
 			<u-button :text="currentIndex === 0?'无':'上一题'" :disabled="currentIndex === 0" class="btn"
-				@click="onHandleToPrevQuestion"></u-button>
+				@click="onHandleToPrevQuestion" :customStyle="{width: '40%',
+				margin: '0 20px',
+				fontWeight: 700,
+				color: '#000',}"></u-button>
 			<u-button v-if="currentIndex !== questions.length-1" type="primary" text="下一题" class="btn next"
-				@click="onHandleToNextQuestion"></u-button>
+				@click="onHandleToNextQuestion" :customStyle="{width: '40%',
+				margin: '0 20px',
+				fontWeight: 700,
+				color: '#fff',}"></u-button>
 			<u-button v-if="currentIndex === questions.length-1" type="primary" text="交卷" class="btn next"
-				@click="onHandleSubmit"></u-button>
+				@click="showPop = true" :customStyle="{width: '40%',
+				margin: '0 20px',
+				fontWeight: 700,
+				color: '#fff',}"></u-button>
 		</view>
 		<view class="pop-container">
 			<u-popup :show="showPop" @close="showPop = false" :closeable="true">
@@ -72,10 +84,10 @@
 						</view>
 					</view>
 					<view class="content">
-						<view class="item" v-for="index in questions.length"
-							:class="{done:isDone(index),ing:currentIndex === index-1}" :key="index"
-							@click="onHandleToQuestion(index)">
-							{{index}}
+						<view class="item" v-for="(index,item) in questions.length"
+							:class="{done:isDone(item),ing:currentIndex === item}" :key="item"
+							@click="onHandleToQuestion(item)">
+							{{item + 1}}
 						</view>
 					</view>
 					<view class="submit">
@@ -88,15 +100,21 @@
 </template>
 
 <script>
+	import {
+		formateDateToMinuteAndSecond
+	} from "@/utils/formate.js"
+
 	export default {
 		data() {
 			return {
 				category: '',
-				currentIndex: 8,
-				radiovalue1: '',
-				answers: [],
-				showPop: false,
-				questions: []
+				currentIndex: 0,
+				answers: [], // 答案列表
+				showPop: false, // 显示答题卡
+				startX: 0, // 起始位置
+				questions: [], // 题目列表
+				time: 0, // 答题时长
+				timer: null,
 			};
 		},
 		computed: {
@@ -107,18 +125,17 @@
 			// 判断是否已经答题
 			isDone(index) {
 				return index => {
-					console.log(this.questions, index, this.answers, this.answers[index - 1]);
-					// console.log(this.questions, index, this.answers, this.answers[index - 1]);
-					if(this.questions.length !== 0){
-						if (this.questions[index - 1].type <= 1) {
-							if (this.answers[index - 1].length == 0) {
+					// console.log(this.questions, index, this.answers, this.answers[index]);
+					if (this.questions.length !== 0) {
+						if (this.questions[index].type <= 1) {
+							if (this.answers[index].length == 0) {
 								return false;
 							} else {
 								return true;
 							}
 						} else {
-							if (this.answers[index - 1]) {
-								if (this.answers[index - 1][0] === '') {
+							if (this.answers[index]) {
+								if (this.answers[index][0] === '') {
 									return false;
 								} else {
 									return true;
@@ -137,7 +154,7 @@
 						case 0:
 							return {
 								key: '简单',
-									type: 'primary'
+									type: 'success'
 							};
 						case 1:
 							return {
@@ -163,15 +180,30 @@
 				return type => {
 					switch (type) {
 						case 0:
-							return '单选题';
+							return {
+								key: '单选题',
+								type: 'primary'
+							};
 						case 1:
-							return '多选题';
+							return {
+								key:'多选题',
+								type:'warning'
+							};
 						case 2:
-							return '填空题';
+							return {
+								key:'填空题',
+								type:'success'
+							};
 						case 3:
-							return '问答题';
+							return {
+								key:'问答题',
+								type:'info'
+							};
 						default:
-							return '未知';
+							return {
+								key:'未知',
+								type:''
+							};
 					}
 				}
 			}
@@ -298,14 +330,22 @@
 						},
 						"question_category_id": 1,
 						"status": 1
-					}]
+					}
+				]
 				this.initAnswer();
 
+				this.timer = setInterval(() => {
+					this.time++;
+				}, 1000)
 			} else {
 				uni.navigateBack();
 			}
 		},
+		onUnload() {
+			clearInterval(this.timer);
+		},
 		methods: {
+			formateDateToMinuteAndSecond,
 			// 初始化答案数据
 			initAnswer() {
 				for (let i = 0; i < this.questions.length; i++) {
@@ -332,160 +372,28 @@
 			},
 			// 点击答题卡跳转到指定的题目
 			onHandleToQuestion(index) {
-				this.currentIndex = index - 1;
+				this.currentIndex = index;
 
 				this.showPop = false
+			},
+			// 监听左滑
+			onHandleTouchStart(e) {
+				this.startX = e.changedTouches[0].clientX
+			},
+			// 监听右滑
+			onHandleTouchEnd(e) {
+				const moveX = e.changedTouches[0].clientX
+				const deltaX = moveX - this.startX
+				if (deltaX > 60) { // 右滑
+					this.currentIndex = Math.max(0, this.currentIndex - 1)
+				} else if (deltaX < -60) { // 左滑
+					this.currentIndex = Math.min(this.questions.length - 1, this.currentIndex + 1)
+				}
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.question-answer {
-		.top-info {
-			display: flex;
-			padding: 10px;
-			justify-content: space-between;
-		}
-
-		.percent-container {
-			display: flex;
-			padding: 10px;
-			padding-top: 0;
-			justify-content: space-between;
-
-			.percent {
-				width: 85%;
-				padding: 5px 0;
-
-			}
-
-			.text {
-				padding-right: 10px;
-
-				.current {
-					color: rgb(60, 156, 255);
-				}
-			}
-		}
-
-		.tag {
-			display: flex;
-
-			.tag-item {
-				margin: 0 10px;
-			}
-		}
-
-		.question {
-			margin-top: 10px;
-
-			.title {
-				padding: 10px;
-				font-weight: 700;
-				font-size: 18px;
-			}
-
-			.options {
-				.radio {
-					padding: 10px;
-				}
-
-				.text {
-					padding: 10px;
-				}
-			}
-		}
-
-		.do {
-			margin-top: 50px;
-			display: flex;
-			justify-content: space-between;
-
-			.btn {
-				margin: 0 20px;
-				font-weight: 700;
-				color: #000;
-
-				&.next {
-					color: #fff;
-				}
-			}
-		}
-
-		.pop-container {
-			.container {
-				padding: 10px;
-
-				.title {
-					text-align: center;
-					font-weight: 700;
-					font-size: 18px;
-				}
-
-				.info {
-					margin-top: 40rpx;
-					display: flex;
-
-					.info-item {
-						font-size: 14px;
-						margin: 0 10px;
-
-						.circle {
-							display: inline-block;
-							width: 10px;
-							height: 10px;
-							border-radius: 50%;
-							margin-right: 5px;
-
-							&.done {
-								background-color: rgb(60, 156, 255);
-							}
-
-							&.ing {
-								background-color: $green;
-							}
-
-							&.no {
-								background-color: $gray;
-							}
-						}
-					}
-				}
-
-				.content {
-					margin-top: 30px;
-					display: flex;
-					flex-wrap: wrap;
-
-					.item {
-						width: 100rpx;
-						height: 100rpx;
-						line-height: 100rpx;
-						margin: 10px;
-						background-color: $gray;
-						color: #828080;
-						border-radius: 50%;
-						text-align: center;
-
-						&.done {
-							color: $white;
-							background-color: rgb(60, 156, 255);
-						}
-
-						&.ing {
-							color: $white;
-							background-color: $green;
-						}
-					}
-				}
-
-				.submit {
-					display: flex;
-					width: 80%;
-					margin: 30px auto 10px;
-				}
-			}
-		}
-	}
+	@import "./questionAnswer.scss";
 </style>
