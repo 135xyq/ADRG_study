@@ -7,7 +7,7 @@
 						试卷名称
 					</view>
 					<view class="time">
-						10:20:00
+						{{formateDateToHMS(time)}}
 					</view>
 				</view>
 				<view class="title">
@@ -78,6 +78,7 @@
 
 <script>
 	import questionApi from "@/api/question/question.js"
+	import {formateDateToHMS} from "@/utils/formate.js"
 	export default {
 		data() {
 			return {
@@ -88,6 +89,7 @@
 				currentCount: 0, // 正确题的数量
 				noAnswerCount: 0, // 未答题的数量
 				errorCount: 0, // 错题数量
+				time:0 ,// 用户做题时间
 			};
 		},
 		computed:{
@@ -113,6 +115,7 @@
 			}
 		},
 		methods: {
+			formateDateToHMS,
 			/**
 			 * 获取做题报告
 			 */
@@ -123,6 +126,7 @@
 
 				if (res.code === 0) {
 					this.total = res.data.total;
+					this.time = res.data.record.total_time;
 					this.recordInfo = res.data.record;
 					this.questionList = res.data.data
 				}
