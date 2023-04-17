@@ -1,7 +1,8 @@
 <template>
-	<view class="question-answer" @touchstart="onHandleTouchStart" @touchend="onHandleTouchEnd">
+	<view class="question-answer" v-if="answers.length > 0" @touchstart="onHandleTouchStart"
+		@touchend="onHandleTouchEnd">
 		<view class="top-info">
-			<view class="time">{{formateDateToMinuteAndSecond(time)}}</view>
+			<!-- <view class="time">{{formateDateToMinuteAndSecond(time)}}</view> -->
 			<view class="record" @click="showPop = true">答题卡</view>
 		</view>
 		<view class="percent-container">
@@ -35,7 +36,7 @@
 					</u-radio-group>
 				</view>
 				<view class="checkbox" v-if="item.type == 1">
-					<u-checkbox-group v-model="answers[index][0]" placement="column">
+					<u-checkbox-group v-model="answers[index]" placement="column">
 						<u-checkbox :customStyle="{marginBottom: '8px'}" v-for="(value, key) in item.options" :key="key"
 							:label="key + '. '+ value" :name="key" labelSize="18">
 						</u-checkbox>
@@ -115,16 +116,17 @@
 			return {
 				category: '',
 				currentIndex: 0,
-				total: 9, // 题目数量
+				total: 0, // 题目数量
 				answers: [], // 答案列表
 				showPop: false, // 显示答题卡
 				startX: 0, // 起始位置
 				questions: [], // 题目列表
-				time:0, // 答题时长
+				time: 0, // 答题时长
 				timer: null,
 				record_id: '', // 试卷id
 				questionType,
 				questionLevel,
+				loading: true
 			};
 		},
 		computed: {
@@ -136,6 +138,7 @@
 		async onLoad(option) {
 			if (option.category) {
 				this.category = option.category
+
 
 				this.questions = [{
 						"id": 19,
@@ -152,7 +155,7 @@
 					},
 					{
 						"id": 152,
-						"type": 2,
+						"type": 1,
 						"title": "js的使用1",
 						"level": 0,
 						"options": {
@@ -165,7 +168,7 @@
 					},
 					{
 						"id": 151,
-						"type": 1,
+						"type": 0,
 						"title": "js的使用",
 						"level": 1,
 						"options": {
@@ -178,7 +181,7 @@
 					},
 					{
 						"id": 154,
-						"type": 0,
+						"type": 1,
 						"title": "js的使用3",
 						"level": 2,
 						"options": {
@@ -191,7 +194,7 @@
 					},
 					{
 						"id": 153,
-						"type": 0,
+						"type": 2,
 						"title": "js的使用2",
 						"level": 0,
 						"options": {
@@ -230,7 +233,7 @@
 					},
 					{
 						"id": 158,
-						"type": 1,
+						"type": 0,
 						"title": "测试1111",
 						"level": 0,
 						"options": {
@@ -255,13 +258,17 @@
 						"status": 1
 					}
 				]
-				// await this.getRandomQuestion();
-				// console.log(this.total,this.questions,this.record_id);
-				this.initAnswer();
 
+				this.total = 9;
+				this.record_id = 46
+				
+				// await this.getRandomQuestion();
+				// // console.log(this.total,this.questions,this.record_id);
+				
+				this.initAnswer();
+				// 开启答题计时
 				this.timer = setInterval(() => {
 					this.time++;
-					Object.freeze(this.time)
 				}, 1000)
 			} else {
 				uni.navigateBack();
@@ -296,18 +303,16 @@
 			},
 			// 判断是否已经答题
 			isDone(index) {
-				const questions = [...this.questions];
-				const answers = [...this.answers];
-				if (questions.length !== 0 &&this.showPop) {
-					if (questions[index].type <= 1) {
-						if (answers[index].length == 0) {
+				if (this.questions.length !== 0 && this.showPop) {
+					if (this.questions[index].type <= 1) {
+						if (this.answers[index].length == 0) {
 							return false;
 						} else {
 							return true;
 						}
 					} else {
-						if (answers[index]) {
-							if (answers[index][0] === '') {
+						if (this.answers[index]) {
+							if (this.answers[index][0] === '') {
 								return false;
 							} else {
 								return true;
@@ -327,8 +332,30 @@
 				this.currentIndex = (this.currentIndex + 1) % this.questions.length;
 			},
 			// 交卷
-			onHandleSubmit() {
-				console.log(this.answers);
+			async onHandleSubmit() {
+				const answers = []
+				for(let i = 0;i < this.answers.length; i++) {
+					const temp = {
+						id: this.questions[i].id,
+						answer: this.answers[i]
+					}
+					
+					answers.push(temp);
+				}
+				
+				// 组合数据
+				const data = {
+					record: this.record_id,
+					time: this.time,
+					answers: answers
+				}
+				
+				// console.log(data);
+				
+				const res =  await questionApi.postQuestionToValidate(data);
+				
+				console.log(res);
+				
 			},
 			// 点击答题卡跳转到指定的题目
 			onHandleToQuestion(index) {
