@@ -10,16 +10,17 @@
 			</view>
 			<view class="text">
 				<text class="current">{{currentIndex + 1}}</text>
-				<text>/{{questions.length}}</text>
+				<text>/{{total}}</text>
 			</view>
 		</view>
 		<view class="question" v-for="(item,index) in questions" :key="item.id" v-show="index===currentIndex">
 			<view class="tag">
 				<view class="tag-item">
-					<u-tag :text="questionLevel(item.level).key" plain :type="questionLevel(item.level).type"></u-tag>
+					<u-tag :text="questionLevel[item.level].key" plain :type="questionLevel[item.level].type"></u-tag>
 				</view>
 				<view class="tag-item">
-					<u-tag :text="questionType(item.type).key" :type="questionType(item.type).type" class="tag-item"></u-tag>
+					<u-tag :text="questionType[item.type].key" :type="questionType[item.type].type"
+						class="tag-item"></u-tag>
 				</view>
 			</view>
 			<view class="title">
@@ -54,13 +55,13 @@
 				margin: '0 20px',
 				fontWeight: 700,
 				color: '#000',}"></u-button>
-			<u-button v-if="currentIndex !== questions.length-1" type="primary" text="下一题" class="btn next"
+			<u-button v-if="currentIndex !== total-1" type="primary" text="下一题" class="btn next"
 				@click="onHandleToNextQuestion" :customStyle="{width: '40%',
 				margin: '0 20px',
 				fontWeight: 700,
 				color: '#fff',}"></u-button>
-			<u-button v-if="currentIndex === questions.length-1" type="primary" text="交卷" class="btn next"
-				@click="showPop = true" :customStyle="{width: '40%',
+			<u-button v-if="currentIndex === total-1" type="primary" text="交卷" class="btn next" @click="showPop = true"
+				:customStyle="{width: '40%',
 				margin: '0 20px',
 				fontWeight: 700,
 				color: '#fff',}"></u-button>
@@ -84,7 +85,7 @@
 						</view>
 					</view>
 					<view class="content">
-						<view class="item" v-for="(index,item) in questions.length"
+						<view class="item" v-for="(index,item) in total"
 							:class="{done:isDone(item),ing:currentIndex === item}" :key="item"
 							@click="onHandleToQuestion(item)">
 							{{item + 1}}
@@ -103,117 +104,39 @@
 	import {
 		formateDateToMinuteAndSecond
 	} from "@/utils/formate.js"
+	import questionApi from "@/api/question/question.js"
+	import {
+		questionLevel,
+		questionType
+	} from "@/utils/question.js"
 
 	export default {
 		data() {
 			return {
 				category: '',
 				currentIndex: 0,
+				total: 9, // 题目数量
 				answers: [], // 答案列表
 				showPop: false, // 显示答题卡
 				startX: 0, // 起始位置
 				questions: [], // 题目列表
-				time: 0, // 答题时长
+				time:0, // 答题时长
 				timer: null,
+				record_id: '', // 试卷id
+				questionType,
+				questionLevel,
 			};
 		},
 		computed: {
 			// 答题进度
 			getPercent() {
-				return Math.floor((this.currentIndex + 1) / this.questions.length * 100);
-			},
-			// 判断是否已经答题
-			isDone(index) {
-				return index => {
-					// console.log(this.questions, index, this.answers, this.answers[index]);
-					if (this.questions.length !== 0) {
-						if (this.questions[index].type <= 1) {
-							if (this.answers[index].length == 0) {
-								return false;
-							} else {
-								return true;
-							}
-						} else {
-							if (this.answers[index]) {
-								if (this.answers[index][0] === '') {
-									return false;
-								} else {
-									return true;
-								}
-							}
-							return false;
-						}
-					}
-					return false;
-				}
-			},
-			// 题目难度
-			questionLevel(level) {
-				return level => {
-					switch (level) {
-						case 0:
-							return {
-								key: '简单',
-									type: 'success'
-							};
-						case 1:
-							return {
-								key: '中等',
-									type: 'warning'
-							};
-						case 2:
-							return {
-								key: '困难',
-									type: 'error'
-							};
-						default: {
-							return {
-								key: '未知',
-								type: ''
-							}
-						}
-					}
-				}
-			},
-			// 题目类型
-			questionType(type) {
-				return type => {
-					switch (type) {
-						case 0:
-							return {
-								key: '单选题',
-								type: 'primary'
-							};
-						case 1:
-							return {
-								key:'多选题',
-								type:'warning'
-							};
-						case 2:
-							return {
-								key:'填空题',
-								type:'success'
-							};
-						case 3:
-							return {
-								key:'问答题',
-								type:'info'
-							};
-						default:
-							return {
-								key:'未知',
-								type:''
-							};
-					}
-				}
+				return Math.floor((this.currentIndex + 1) / this.total * 100);
 			}
 		},
 		async onLoad(option) {
-			console.log(this.questions);
 			if (option.category) {
 				this.category = option.category
 
-				console.log(this.category);
 				this.questions = [{
 						"id": 19,
 						"type": 0,
@@ -332,10 +255,13 @@
 						"status": 1
 					}
 				]
+				// await this.getRandomQuestion();
+				// console.log(this.total,this.questions,this.record_id);
 				this.initAnswer();
 
 				this.timer = setInterval(() => {
 					this.time++;
+					Object.freeze(this.time)
 				}, 1000)
 			} else {
 				uni.navigateBack();
@@ -346,6 +272,17 @@
 		},
 		methods: {
 			formateDateToMinuteAndSecond,
+			async getRandomQuestion() {
+				const res = await questionApi.getRandomQuestions({
+					category: this.category
+				});
+
+				if (res.code === 0) {
+					this.total = res.data.total;
+					this.record_id = res.data.record_id;
+					this.questions = res.data.data
+				}
+			},
 			// 初始化答案数据
 			initAnswer() {
 				for (let i = 0; i < this.questions.length; i++) {
@@ -357,7 +294,30 @@
 
 				}
 			},
-
+			// 判断是否已经答题
+			isDone(index) {
+				const questions = [...this.questions];
+				const answers = [...this.answers];
+				if (questions.length !== 0 &&this.showPop) {
+					if (questions[index].type <= 1) {
+						if (answers[index].length == 0) {
+							return false;
+						} else {
+							return true;
+						}
+					} else {
+						if (answers[index]) {
+							if (answers[index][0] === '') {
+								return false;
+							} else {
+								return true;
+							}
+						}
+						return false;
+					}
+				}
+				return false;
+			},
 			// 前一题
 			onHandleToPrevQuestion() {
 				this.currentIndex = (this.currentIndex - 1) % this.questions.length;
