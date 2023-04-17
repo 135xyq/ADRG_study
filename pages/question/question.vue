@@ -6,7 +6,8 @@
 				<uni-icons type="tune-filled" size="30" @click="onHandleOpenPopup"></uni-icons>
 			</view>
 			<view class="btn">
-				<uni-icons custom-prefix="iconfont" type="icon-zuotijilu" size="30" @click="onHandleGoToQuestionHistory"></uni-icons>
+				<uni-icons custom-prefix="iconfont" type="icon-zuotijilu" size="30"
+					@click="onHandleGoToQuestionHistory"></uni-icons>
 			</view>
 		</view>
 		<view class="category">
@@ -35,7 +36,8 @@
 							单次出题数
 						</view>
 						<view class="count-content">
-							<view class="count-item" :class="{active:item===userSet.question_count}" v-for="(item,index) in questionCount" :key="index" @click="onHandleChangeCount(item)">
+							<view class="count-item" :class="{active:item===userSet.question_count}"
+								v-for="(item,index) in questionCount" :key="index" @click="onHandleChangeCount(item)">
 								{{item}}
 							</view>
 						</view>
@@ -45,17 +47,20 @@
 							出题来源
 						</view>
 						<view class="count-content">
-							<view class="count-item" :class="{active:item.value===userSet.question_type}" v-for="item in questionType" :key="item.value" @click="onHandleChangeType(item.value)">
+							<view class="count-item" :class="{active:item.value===userSet.question_type}"
+								v-for="item in questionType" :key="item.value" @click="onHandleChangeType(item.value)">
 								{{item.key}}
 							</view>
 						</view>
 					</view>
 					<view class="count">
 						<view class="count-title">
-							出题来源
+							题目难度
 						</view>
 						<view class="count-content">
-							<view class="count-item" :class="{active:item.value===userSet.level}" v-for="item in questionLevel" :key="item.value" @click="onHandleChangeLevel(item.value)">
+							<view class="count-item" :class="{active:item.value===userSet.level}"
+								v-for="item in questionLevel" :key="item.value"
+								@click="onHandleChangeLevel(item.value)">
 								{{item.key}}
 							</view>
 						</view>
@@ -75,7 +80,7 @@
 	import {
 		onLoad
 	} from "../../uni_modules/uview-ui/libs/mixin/mixin";
-	
+
 
 	export default {
 		data() {
@@ -83,33 +88,33 @@
 				keyword: '',
 				categoryList: [],
 				show: false, // 展示修改刷题设置
-				userSet:{},// 用户设置
-				questionCount: [10,15,20,25],
-				questionType:[{
-					key:'只出新题',
-					value:1
-				},{
-					key:'只出错题',
-					value:2
-				},{
-					key:'错题+新题',
-					value:3
-				},{
-					key:'不限制',
-					value:4
+				userSet: {}, // 用户设置
+				questionCount: [10, 15, 20, 25],
+				questionType: [{
+					key: '只出新题',
+					value: 1
+				}, {
+					key: '只出错题',
+					value: 2
+				}, {
+					key: '错题+新题',
+					value: 3
+				}, {
+					key: '不限制',
+					value: 4
 				}],
-				questionLevel:[{
-					key:'简单',
-					value:1
-				},{
-					key:'中等',
-					value:2
-				},{
-					key:'困难',
-					value:3
-				},{
-					key:'不限制',
-					value:4
+				questionLevel: [{
+					key: '简单',
+					value: 0
+				}, {
+					key: '中等',
+					value: 1
+				}, {
+					key: '困难',
+					value: 2
+				}, {
+					key: '不限制',
+					value: 3
 				}],
 			}
 		},
@@ -118,9 +123,9 @@
 			await this.getUserSetInfo();
 		},
 		methods: {
-			async getUserSetInfo(){
+			async getUserSetInfo() {
 				const res = await userApi.getUserSetInfo();
-				
+
 				this.userSet = res.data;
 			},
 			/**
@@ -135,8 +140,9 @@
 			 * @param {Object} category
 			 */
 			onHandleGoToQuestionList(category) {
+				console.log(category);
 				uni.navigateTo({
-					url:'/pages/question/questionAnswer/questionAnswer?category=' + category
+					url: '/pages/question/questionAnswer/questionAnswer?category=' + category
 				})
 			},
 			/**
@@ -147,7 +153,6 @@
 			},
 			async onHandleClosePopup() {
 				this.show = false
-				await this.getUserSetInfo()
 			},
 			/**
 			 * 修改出题数量
@@ -176,25 +181,26 @@
 			async onHandleSubmitUserSet() {
 				// 修改
 				const res = await userApi.updateUserSetInfo(this.userSet);
-				
-				if(res.code === 1) {
+
+				if (res.code === 1) {
 					uni.showToast({
-						title:res.msg,
-						icon:'success',
-						duration:1000
+						title: res.msg,
+						icon: 'success',
+						duration: 1000
 					})
 				}
-				
+
 				// 关闭弹窗
-				await this.onHandleClosePopup();
-				
+				this.onHandleClosePopup();
+				await this.getUserSetInfo()
+
 			},
 			/**
 			 * 前往历史记录页
 			 */
 			onHandleGoToQuestionHistory() {
 				uni.navigateTo({
-					url:'/pages/QuestionRecordHistory/QuestionRecordHistory'
+					url: '/pages/QuestionRecordHistory/QuestionRecordHistory'
 				})
 			}
 		}
@@ -265,24 +271,26 @@
 				position: relative;
 				height: 900rpx;
 				padding: 10px;
-				
-				.title{
+
+				.title {
 					text-align: center;
 					font-size: 18px;
 					font-weight: 700;
 					margin-bottom: 20px;
 				}
-				
-				.count{
+
+				.count {
 					margin: 20px 0;
-					.count-title{
+
+					.count-title {
 						margin-bottom: 20px;
 						font-weight: 600;
 					}
-					
-					.count-content{
+
+					.count-content {
 						display: flex;
-						.count-item{
+
+						.count-item {
 							width: 25%;
 							margin: 0 10rpx;
 							padding: 5px 0px;
@@ -290,8 +298,8 @@
 							background-color: #80808033;
 							border-radius: 10rpx;
 							border: 1px solid transparent;
-							
-							&.active{
+
+							&.active {
 								border: 1px solid $primary;
 								background-color: #55aaff42;
 								color: $primary;
@@ -299,7 +307,8 @@
 						}
 					}
 				}
-				.button{
+
+				.button {
 					position: absolute;
 					bottom: 20px;
 					width: 80%;
