@@ -352,9 +352,15 @@
 				
 				// console.log(data);
 				
-				const res =  await questionApi.postQuestionToValidate(data);
+				// const res =  await questionApi.postQuestionToValidate(data);
+				const res = {code:0}
 				
-				console.log(res);
+				// 交卷成功,跳转到练习报告界面
+				if(res.code === 0) {
+					uni.navigateTo({
+						url:'/pages/question/questionResult/questionResult?record=' + this.record_id
+					})
+				}
 				
 			},
 			// 点击答题卡跳转到指定的题目
