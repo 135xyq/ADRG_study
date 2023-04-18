@@ -178,26 +178,22 @@
 			}
 
 
+		}, {
+			"path": "pages/question/questionResult/questionResult",
+			"style": {
+				"navigationBarTitleText": "练习报告",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/question/questionParse/questionParse",
+			"style": {
+				"navigationBarTitleText": "解析",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/question/questionResult/questionResult",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "练习报告",
-                "enablePullDownRefresh": false
-            }
-             
-        }
-        ,{
-            "path" : "pages/question/questionParse/questionParse",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "解析",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

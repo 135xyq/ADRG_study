@@ -140,129 +140,131 @@
 				this.category = option.category
 
 
-				this.questions = [{
-						"id": 19,
-						"type": 0,
-						"title": "花园与户外",
-						"level": 0,
-						"options": {
-							"A": "测试对不对的被无情而后进入 去不让回好人 好人 入21他任何别人",
-							"B": "js的",
-							"C": "未访问"
-						},
-						"question_category_id": 1,
-						"status": 1
-					},
-					{
-						"id": 152,
-						"type": 1,
-						"title": "js的使用1",
-						"level": 0,
-						"options": {
-							"A": "1",
-							"B": "2",
-							"C": "3"
-						},
-						"question_category_id": 1,
-						"status": 1
-					},
-					{
-						"id": 151,
-						"type": 0,
-						"title": "js的使用",
-						"level": 1,
-						"options": {
-							"A": "测试对不对的被无情而后进入 去不让回好人 好人 入21他任何别人",
-							"B": "js的",
-							"C": "未访问"
-						},
-						"question_category_id": 1,
-						"status": 1
-					},
-					{
-						"id": 154,
-						"type": 1,
-						"title": "js的使用3",
-						"level": 2,
-						"options": {
-							"A": "测试对不对的被无情而后进入 去不让回好人 好人 入21他任何别人",
-							"B": "js的",
-							"C": "未访问"
-						},
-						"question_category_id": 1,
-						"status": 1
-					},
-					{
-						"id": 153,
-						"type": 2,
-						"title": "js的使用2",
-						"level": 0,
-						"options": {
-							"A": "1",
-							"B": "2",
-							"C": "3"
-						},
-						"question_category_id": 1,
-						"status": 1
-					},
-					{
-						"id": 160,
-						"type": 0,
-						"title": "我很好",
-						"level": 0,
-						"options": {
-							"A": "对",
-							"B": "good",
-							"C": "very good"
-						},
-						"question_category_id": 1,
-						"status": 1
-					},
-					{
-						"id": 149,
-						"type": 3,
-						"title": "js的使用4",
-						"level": 0,
-						"options": {
-							"A": "1",
-							"B": "2",
-							"C": "3"
-						},
-						"question_category_id": 1,
-						"status": 1
-					},
-					{
-						"id": 158,
-						"type": 0,
-						"title": "测试1111",
-						"level": 0,
-						"options": {
-							"A": "1",
-							"B": "2",
-							"C": "3"
-						},
-						"question_category_id": 1,
-						"status": 1
-					},
-					{
-						"id": 157,
-						"type": 2,
-						"title": "测试111",
-						"level": 0,
-						"options": {
-							"A": "1",
-							"B": "2",
-							"C": "3"
-						},
-						"question_category_id": 1,
-						"status": 1
-					}
-				]
+				// 调试
 
-				this.total = 9;
-				this.record_id = 51
+				// this.questions = [{
+				// 		"id": 19,
+				// 		"type": 0,
+				// 		"title": "花园与户外",
+				// 		"level": 0,
+				// 		"options": {
+				// 			"A": "测试对不对的被无情而后进入 去不让回好人 好人 入21他任何别人",
+				// 			"B": "js的",
+				// 			"C": "未访问"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	},
+				// 	{
+				// 		"id": 152,
+				// 		"type": 1,
+				// 		"title": "js的使用1",
+				// 		"level": 0,
+				// 		"options": {
+				// 			"A": "1",
+				// 			"B": "2",
+				// 			"C": "3"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	},
+				// 	{
+				// 		"id": 151,
+				// 		"type": 0,
+				// 		"title": "js的使用",
+				// 		"level": 1,
+				// 		"options": {
+				// 			"A": "测试对不对的被无情而后进入 去不让回好人 好人 入21他任何别人",
+				// 			"B": "js的",
+				// 			"C": "未访问"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	},
+				// 	{
+				// 		"id": 154,
+				// 		"type": 1,
+				// 		"title": "js的使用3",
+				// 		"level": 2,
+				// 		"options": {
+				// 			"A": "测试对不对的被无情而后进入 去不让回好人 好人 入21他任何别人",
+				// 			"B": "js的",
+				// 			"C": "未访问"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	},
+				// 	{
+				// 		"id": 153,
+				// 		"type": 2,
+				// 		"title": "js的使用2",
+				// 		"level": 0,
+				// 		"options": {
+				// 			"A": "1",
+				// 			"B": "2",
+				// 			"C": "3"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	},
+				// 	{
+				// 		"id": 160,
+				// 		"type": 0,
+				// 		"title": "我很好",
+				// 		"level": 0,
+				// 		"options": {
+				// 			"A": "对",
+				// 			"B": "good",
+				// 			"C": "very good"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	},
+				// 	{
+				// 		"id": 149,
+				// 		"type": 3,
+				// 		"title": "js的使用4",
+				// 		"level": 0,
+				// 		"options": {
+				// 			"A": "1",
+				// 			"B": "2",
+				// 			"C": "3"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	},
+				// 	{
+				// 		"id": 158,
+				// 		"type": 0,
+				// 		"title": "测试1111",
+				// 		"level": 0,
+				// 		"options": {
+				// 			"A": "1",
+				// 			"B": "2",
+				// 			"C": "3"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	},
+				// 	{
+				// 		"id": 157,
+				// 		"type": 2,
+				// 		"title": "测试111",
+				// 		"level": 0,
+				// 		"options": {
+				// 			"A": "1",
+				// 			"B": "2",
+				// 			"C": "3"
+				// 		},
+				// 		"question_category_id": 1,
+				// 		"status": 1
+				// 	}
+				// ]
+
+				// this.total = 9;
+				// this.record_id = 51
 				
-				// await this.getRandomQuestion();
+				await this.getRandomQuestion();
 				// // console.log(this.total,this.questions,this.record_id);
 				
 				this.initAnswer();
@@ -352,8 +354,8 @@
 				
 				// console.log(data);
 				
-				// const res =  await questionApi.postQuestionToValidate(data);
-				const res = {code:0}
+				const res =  await questionApi.postQuestionToValidate(data);
+				// const res = {code:0}
 				
 				// 交卷成功,跳转到练习报告界面
 				if(res.code === 0) {
