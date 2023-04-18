@@ -1,10 +1,18 @@
 <template>
 	<view class="container" @touchstart="onHandleTouchStart" @touchend="onHandleTouchEnd">
 		<view class="record-info">
-			<view class="record-title">{{recordInfo.QuestionCategory ? recordInfo.QuestionCategory.title:''}}-专项练习
+			<view class="flex-item">
+				<view class="record-title">
+					{{recordInfo.QuestionCategory ? recordInfo.QuestionCategory.title:''}}-专项练习
+				</view>
+				<view class="question-number">
+					第{{getIndex}}题
+				</view>
 			</view>
-			<view class="question-number">
-				第{{getIndex}}题
+			<view class="flex-item">
+				<view class="answer-record">
+					答题卡
+				</view>
 			</view>
 		</view>
 		<view v-for="(item,index) in questionList" :key="item.id" v-show="index === currentIndex">
@@ -68,6 +76,24 @@
 				</view>
 			</view>
 		</view>
+		<view class="show-tips">
+			<u-overlay :show="showTips" @click="showTips = false">
+				<view class="warp" @tap.stop>
+					<view class="content">
+						再接再厉，继续提升
+					</view>
+					<view class="close">
+						<u-icon name="close" size="18" @click="showTips = false"></u-icon>
+					</view>
+					<view class="button">
+						<view class="btn"> <u-button text="返回首页" size="normal" @click="onHandleGoToHome"></u-button>
+						</view>
+						<view class="btn"> <u-button type="primary" text="返回报告" size="normal"
+								@click="onHandleGoToBack"></u-button></view>
+					</view>
+				</view>
+			</u-overlay>
+		</view>
 	</view>
 </template>
 
@@ -91,6 +117,7 @@
 				startX: 0, // 起始位置
 				tempQuestionList: [], //题目列表原始数据
 				questionList: [], //题目列表筛选后的数据
+				showTips: false, // 显示用户下一步的操作
 			};
 		},
 		async onLoad(options) {
@@ -176,10 +203,20 @@
 					this.currentIndex = Math.max(0, this.currentIndex - 1)
 				} else if (deltaX < -60) { // 左滑
 					this.currentIndex = Math.min(this.questionList.length - 1, this.currentIndex + 1)
-					if(this.currentIndex === this.questionList.length - 1) {
-						console.log(1);
+					if (this.currentIndex === this.questionList.length - 1) {
+						this.showTips = true
 					}
 				}
+			},
+			// 返回首页
+			onHandleGoToHome() {
+				uni.switchTab({
+					url: '/pages/question/question'
+				})
+			},
+			// 返回报告页
+			onHandleGoToBack() {
+				uni.navigateBack()
 			}
 		}
 	}
