@@ -1,6 +1,8 @@
 .container{
 	.record-info{
 		padding: 10px;
+		display: flex;
+		justify-content: space-between;
 		
 		.record-title{
 			font-size: 18px;
@@ -12,6 +14,11 @@
 			font-size: 16px;
 			color: #00000096;
 			margin-top: 10rpx;
+		}
+		
+		.answer-record{
+			color: #3c9cff;
+			font-weight: 700;
 		}
 	}
 	
