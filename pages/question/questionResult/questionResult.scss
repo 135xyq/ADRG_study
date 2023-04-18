@@ -1,7 +1,7 @@
 .container{
 	.record-info{
 		background-color: #18171705;
-		height: 600rpx;
+		height: 320px;
 		width: 95%;
 		margin: 10px auto;
 		border-radius: 20px;
@@ -117,11 +117,11 @@
 					margin-right: 5px;
 		
 					&.error {
-						background-color: red;
+						background-color: #ff0000a3;
 					}
 		
 					&.right {
-						background-color: $green;
+						background-color: #008000c4;
 					}
 		
 					&.no {
@@ -147,12 +147,12 @@
 		
 				&.error {
 					color: $white;
-					background-color: red;
+					background-color: #ff0000a3;
 				}
 		
 				&.right {
 					color: $white;
-					background-color: $green;
+					background-color: #008000c4;
 				}
 			}
 		}

@@ -26,7 +26,7 @@
     "pages/QuestionRecordHistory/QuestionRecordHistory",
     "pages/question/questionAnswer/questionAnswer",
     "pages/question/questionResult/questionResult",
-    "pages/question/QuestionParse/QuestionParse"
+    "pages/question/questionParse/questionParse"
   ],
   "subPackages": [],
   "window": {

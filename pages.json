@@ -186,6 +186,15 @@
                 "navigationBarTitleText": "练习报告",
                 "enablePullDownRefresh": false
             }
+             
+        }
+        ,{
+            "path" : "pages/question/questionParse/questionParse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "解析",
+                "enablePullDownRefresh": false
+            }
             
         }
     ],

@@ -67,7 +67,7 @@
 
 		<view class="botttom-info">
 			<view class="btn">
-				<u-button shape="circle" text="全部解析"></u-button>
+				<u-button shape="circle" text="全部解析" @click="onHandleToParse"></u-button>
 			</view>
 			<view class="btn">
 				<u-button type="primary" shape="circle" text="错题解析"></u-button>
@@ -184,6 +184,11 @@
 					}
 				}
 				return false;
+			},
+			onHandleToParse() {
+				uni.navigateTo({
+					url:'/pages/question/questionParse/questionParse'
+				})
 			}
 		}
 	}
