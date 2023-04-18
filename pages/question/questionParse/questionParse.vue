@@ -10,7 +10,7 @@
 				</view>
 			</view>
 			<view class="flex-item">
-				<view class="answer-record">
+				<view class="answer-record" @click="showPop = true">
 					答题卡
 				</view>
 			</view>
@@ -94,6 +94,34 @@
 				</view>
 			</u-overlay>
 		</view>
+		<view class="pop-container">
+			<u-popup :show="showPop" @close="showPop = false" :closeable="true">
+				<view class="container">
+					<view class="title">答题卡</view>
+					<view class="info">
+						<view class="info-item">
+							<text class="circle right"></text>
+							<text>正确</text>
+						</view>
+						<view class="info-item">
+							<text class="circle error"></text>
+							<text>错误</text>
+						</view>
+						<view class="info-item">
+							<text class="circle no"></text>
+							<text>未作答</text>
+						</view>
+					</view>
+					<view class="content">
+						<view class="item" v-for="(item,index) in questionList" :key="index"
+							:class="{right:item.is_current === 1,error:(item.is_current === 0  && isDone(item)),no:(item.is_current === 0  && !isDone(item))}"
+							@click="onHandleChangeQuestion(index)">
+							{{getRecordIndex(index)}}
+						</view>
+					</view>
+				</view>
+			</u-popup>
+		</view>
 	</view>
 </template>
 
@@ -118,6 +146,7 @@
 				tempQuestionList: [], //题目列表原始数据
 				questionList: [], //题目列表筛选后的数据
 				showTips: false, // 显示用户下一步的操作
+				showPop:false, // 答题卡显示
 			};
 		},
 		async onLoad(options) {
@@ -132,6 +161,7 @@
 			await this.getValidateResult();
 		},
 		computed: {
+			//  获取题目的下标
 			getIndex() {
 				if (this.questionList.length > 0) {
 					for (let i = 0; i < this.tempQuestionList.length; i++) {
@@ -142,6 +172,19 @@
 					return 1;
 				}
 				return 1;
+			},
+			// 计算答题卡的题目编号
+			getRecordIndex(index) {
+				return index=>{
+					if (this.questionList.length > 0) {
+						for (let i = 0; i < this.tempQuestionList.length; i++) {
+							if (this.tempQuestionList[i].id === this.questionList[index].id) {
+								return i + 1;
+							}
+						}
+						return 1;
+					}
+				}
 			}
 		},
 		methods: {
@@ -161,6 +204,7 @@
 
 					if (this.type === 'error') {
 						this.questionList = this.questionList.filter(item => item.is_current === 0)
+						this.total = this.questionList.length
 					}
 				}
 
@@ -217,6 +261,14 @@
 			// 返回报告页
 			onHandleGoToBack() {
 				uni.navigateBack()
+			},
+			/**
+			 * 切题
+			 * @param {Object} index
+			 */
+			onHandleChangeQuestion(index) {
+				this.currentIndex = index
+				this.showPop = false
 			}
 		}
 	}
