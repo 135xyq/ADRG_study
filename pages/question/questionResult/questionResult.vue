@@ -59,7 +59,7 @@
 			</view>
 			<view class="content">
 				<view class="item" v-for="(item,index) in questionList" :key="item.id"
-				:class="{right:item.is_current === 1,error:isDoneError(item)}">
+				:class="{right:item.is_current === 1,error:isDoneError(item)}" @click="onHandleToParse('all',index)">
 					{{index + 1}}
 				</view>
 			</view>
@@ -67,10 +67,10 @@
 
 		<view class="botttom-info">
 			<view class="btn">
-				<u-button shape="circle" text="全部解析" @click="onHandleToParse"></u-button>
+				<u-button shape="circle" text="全部解析" @click="onHandleToParse('all')"></u-button>
 			</view>
 			<view class="btn">
-				<u-button type="primary" shape="circle" text="错题解析"></u-button>
+				<u-button type="primary" shape="circle" text="错题解析" @click="onHandleToParse('error')"></u-button>
 			</view>
 		</view>
 	</view>
@@ -185,9 +185,23 @@
 				}
 				return false;
 			},
-			onHandleToParse() {
+			/**
+			 * 前往解析页
+			 * @param {Object} type 是看全部解析还是错题
+			 * @param {Object} index 点击单一题时对应的题目
+			 */
+			onHandleToParse(type,index) {
+				let url = '/pages/question/questionParse/questionParse'
+				
+				if(type === 'all') {
+					url += '?record='+ this.record + '&type=all&' + 'index=' +  (index ? index:0);
+				}else if(type === 'error'){
+					url += '?record=' + this.record + '&type=error&index=0';
+				}
+				// console.log(url);
+				
 				uni.navigateTo({
-					url:'/pages/question/questionParse/questionParse'
+					url:url
 				})
 			}
 		}

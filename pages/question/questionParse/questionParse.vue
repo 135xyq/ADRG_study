@@ -1,68 +1,71 @@
 <template>
-	<view class="container">
+	<view class="container" @touchstart="onHandleTouchStart" @touchend="onHandleTouchEnd">
 		<view class="record-info">
-			<view class="record-title">试卷测试</view>
+			<view class="record-title">{{recordInfo.QuestionCategory ? recordInfo.QuestionCategory.title:''}}-专项练习
+			</view>
 			<view class="question-number">
-				第2题
+				第{{getIndex}}题
 			</view>
 		</view>
-		<view class="question-info">
-			<view class="question-type-level">
-				<view class="tag-item">
-					<u-tag :text="questionLevel[1].key" plain :type="questionLevel[1].type"></u-tag>
-				</view>
-				<view class="tag-item">
-					<u-tag :text="questionType[2].key" :type="questionType[2].type" class="tag-item"></u-tag>
-				</view>
-			</view>
-			<view class="question">
-				<view class="question-title">
-					DHTML的优点是什么？
-				</view>
-				<view class="has-option">
-					<view class="options">
-						<view class="option right">
-							A. 动态样式
-						</view>
-						<view class="option">
-							B. 动态样式
-						</view>
-						<view class="option error">
-							C. 动态样式
-						</view>
-						<view class="option">
-							D. 动态样式
-						</view>
+		<view v-for="(item,index) in questionList" :key="item.id" v-show="index === currentIndex">
+			<view class="question-info">
+				<view class="question-type-level">
+					<view class="tag-item">
+						<u-tag :text="questionLevel[item.question.level].key" plain
+							:type="questionLevel[item.question.level].type"></u-tag>
 					</view>
-					<view class="answer-info">
-						<view class="right-answer answer">
-							正确答案：A
-						</view>
-						<view class="user-answer  answer">
-							你的答案：C
-						</view>
+					<view class="tag-item">
+						<u-tag :text="questionType[item.question.type].key"
+							:type="questionType[item.question.type].type" class="tag-item"></u-tag>
 					</view>
 				</view>
-				<view class="no-option">
-					<view class="answer-info">
-						<view class="right-answer answer">
-							<view class="answer-title">正确答案：</view>
-							<view class="answer-content">测试网全国人不太 进入前往后台为u途虎体温枪图画图为何 u委托函</view>
+				<view class="question">
+					<view class="question-title">
+						{{item.question.title}}
+					</view>
+					<view class="has-option" v-if="item.question.type <= 1">
+						<view class="options">
+							<view class="option" v-for="(option,key) in item.question.options" :key="option.index">
+								{{key}}. {{option}}
+							</view>
 						</view>
-						<view class="user-answer  answer">
-							<view class="answer-title">你的答案：</view>
-							<view class="answer-content">测试网全国人不太 进入前往后台为u途虎体温枪图画图为何 u委托函</view>
+						<view class="answer-info">
+							<view class="right-answer answer">
+								正确答案：{{item.question.answer.join('')}}
+							</view>
+							<view class="user-answer  answer"
+								:class="{'error-answer':(item.is_current === 0 && isDone(item)),'right-answer':item.is_current === 1}">
+								你的答案：{{isDone(item) ? item.answer.join('') : '空'}}
+							</view>
+						</view>
+					</view>
+					<view class="no-option" v-if="item.question.type > 1">
+						<view class="answer-info">
+							<view class="right-answer answer">
+								<view class="answer-title">正确答案：</view>
+								<view class="answer-content">{{item.question.answer.join('')}}</view>
+							</view>
+							<view class="user-answer  answer"
+								:class="{'error-answer':(item.is_current === 0 && isDone(item)),'right-answer':item.is_current === 1}">
+								<view class="answer-title">你的答案：</view>
+								<view class="answer-content">{{isDone(item)? item.answer.join('') : '空'}}</view>
+							</view>
+							<view class="answer">
+								<view>答案匹配度：<text class="user-answer"
+										:class="{'error-answer':(item.is_current === 0 && isDone(item)),'right-answer':item.is_current === 1}">{{(item.current_probability * 100).toFixed(2)}}%</text>
+								</view>
+							</view>
 						</view>
 					</view>
 				</view>
 			</view>
-		</view>
-		<view class="parse-info">
-			<view class="parse-title">
-				解析
-			</view>
-			<view class="parse-content">
-				解析内容呀哈哈哈
+			<view class="parse-info">
+				<view class="parse-title">
+					解析
+				</view>
+				<view class="parse-content">
+					{{item.question.parse ? item.question.parse : "暂无解析"}}
+				</view>
 			</view>
 		</view>
 	</view>
@@ -73,16 +76,111 @@
 		questionLevel,
 		questionType
 	} from "@/utils/question.js"
+	import questionApi from "@/api/question/question.js"
 
 	export default {
 		data() {
 			return {
 				questionLevel,
-				questionType
+				questionType,
+				type: 'all', // 解析的题目类型
+				currentIndex: 0, // 当前所看到的题目
+				record: '', // 试卷id
+				total: '', // 题目数量
+				recordInfo: '',
+				startX: 0, // 起始位置
+				tempQuestionList: [], //题目列表原始数据
+				questionList: [], //题目列表筛选后的数据
 			};
 		},
-		onLoad(options) {
-			console.log(options);
+		async onLoad(options) {
+			if (!options.record) {
+				uni.navigateBack();
+			} else {
+				this.record = options.record;
+				this.type = options.type || 'all';
+				this.currentIndex = Number(options.index) || 0;
+			}
+
+			await this.getValidateResult();
+		},
+		computed: {
+			getIndex() {
+				if (this.questionList.length > 0) {
+					for (let i = 0; i < this.tempQuestionList.length; i++) {
+						if (this.tempQuestionList[i].id === this.questionList[this.currentIndex].id) {
+							return i + 1;
+						}
+					}
+					return 1;
+				}
+				return 1;
+			}
+		},
+		methods: {
+			/**
+			 * 获取做题报告
+			 */
+			async getValidateResult() {
+				const res = await questionApi.getQuestionRecordValidateResult({
+					record: this.record
+				})
+
+				if (res.code === 0) {
+					this.total = res.data.total;
+					this.recordInfo = res.data.record;
+					this.questionList = res.data.data;
+					this.tempQuestionList = res.data.data
+
+					if (this.type === 'error') {
+						this.questionList = this.questionList.filter(item => item.is_current === 0)
+					}
+				}
+
+				// console.log(this.total, this.recordInfo, this.questionList);
+
+			},
+			/**
+			 * 判断用户是否做题
+			 * @param {Object} question
+			 */
+			isDone(question) {
+				// console.log(question.id);
+				if (question.is_current === 0) {
+					if (question.question.type <= 1) {
+						// console.log(question.id,question.answer,question.answer.length);
+						if (!question.answer || question.answer.length == 0) {
+							return false
+						} else {
+							return true
+						}
+					} else {
+						if (question.answer[0] === '') {
+							return false
+						} else {
+							return true
+						}
+					}
+				}
+				return true;
+			},
+			// 监听左滑
+			onHandleTouchStart(e) {
+				this.startX = e.changedTouches[0].clientX
+			},
+			// 监听右滑
+			onHandleTouchEnd(e) {
+				const moveX = e.changedTouches[0].clientX
+				const deltaX = moveX - this.startX
+				if (deltaX > 60) { // 右滑
+					this.currentIndex = Math.max(0, this.currentIndex - 1)
+				} else if (deltaX < -60) { // 左滑
+					this.currentIndex = Math.min(this.questionList.length - 1, this.currentIndex + 1)
+					if(this.currentIndex === this.questionList.length - 1) {
+						console.log(1);
+					}
+				}
+			}
 		}
 	}
 </script>
