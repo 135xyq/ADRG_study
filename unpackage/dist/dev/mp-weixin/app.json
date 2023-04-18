@@ -24,7 +24,9 @@
     "pages/like/like",
     "pages/AppletAbout/AppletAbout",
     "pages/QuestionRecordHistory/QuestionRecordHistory",
-    "pages/question/questionAnswer/questionAnswer"
+    "pages/question/questionAnswer/questionAnswer",
+    "pages/question/questionResult/questionResult",
+    "pages/question/QuestionParse/QuestionParse"
   ],
   "subPackages": [],
   "window": {

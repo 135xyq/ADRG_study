@@ -1,6 +1,6 @@
 <template>
   <view class="circle-container">
-    <canvas class="circle-canvas" canvas-id="canvas" :style="`width: ${diameter}px; height: ${diameter}px;`"></canvas>
+    <canvas class="circle-canvas" canvas-id="canvas" :style="{width: diameter +'px', height: diameter+'px'}"></canvas>
     <view class="circle-label" >
 		<view class="">
 			正确率

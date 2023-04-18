@@ -1556,7 +1556,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8913,7 +8913,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8934,14 +8934,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9037,7 +9037,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"ADRG_study","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -20518,6 +20518,18 @@ var _default = {
   // 随机组卷
   getRandomQuestions: function getRandomQuestions(data) {
     return _request.default.post('/applet/question/getRandomQuestions', data);
+  },
+  // 判断是否还能组卷，能出得题目数量不为0
+  isHasQuestion: function isHasQuestion(data) {
+    return _request.default.post('/applet/question/ishasquestion', data);
+  },
+  // 交卷判题
+  postQuestionToValidate: function postQuestionToValidate(data) {
+    return _request.default.post('/applet/question/validatequestionanswer', data);
+  },
+  // 获取判题的结果
+  getQuestionRecordValidateResult: function getQuestionRecordValidateResult(data) {
+    return _request.default.post('/applet/question/getvalidateresult', data);
   }
 };
 exports.default = _default;
@@ -33144,6 +33156,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.formateDate = formateDate;
+exports.formateDateToHMS = formateDateToHMS;
 exports.formateDateToMinuteAndSecond = formateDateToMinuteAndSecond;
 /**
  * 格式化时间 x时x分x秒
@@ -33170,6 +33183,22 @@ function formateDateToMinuteAndSecond(date) {
   minute = minute < 10 ? '0' + minute : minute;
   second = second < 10 ? '0' + second : second;
   return "".concat(minute, ":").concat(second);
+}
+
+/**
+ * 格式化时间 00:00:00
+ * @param date
+ * @returns {string}
+ */
+function formateDateToHMS(date) {
+  date = Number(date);
+  var hour = Math.floor(date / 3600);
+  var minute = Math.floor((date - hour * 3600) / 60);
+  var second = Math.floor(date % 60);
+  hour = hour < 10 ? '0' + hour : hour;
+  minute = minute < 10 ? '0' + minute : minute;
+  second = second < 10 ? '0' + second : second;
+  return "".concat(hour, ":").concat(minute, ":").concat(second);
 }
 
 /***/ }),
@@ -33318,14 +33347,72 @@ exports.default = _default;
 /* 468 */,
 /* 469 */,
 /* 470 */,
-/* 471 */,
+/* 471 */
+/*!********************************************!*\
+  !*** D:/毕设程序/ADRG_study/utils/question.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.questionType = exports.questionLevel = void 0;
+// 题目难度
+var questionLevel = [{
+  key: '简单',
+  type: 'success'
+}, {
+  key: '中等',
+  type: 'warning'
+}, {
+  key: '困难',
+  type: 'error'
+}];
+
+// 题目类型
+exports.questionLevel = questionLevel;
+var questionType = [{
+  key: '单选题',
+  type: 'primary'
+}, {
+  key: '多选题',
+  type: 'warning'
+}, {
+  key: '填空题',
+  type: 'success'
+}, {
+  key: '问答题',
+  type: 'info'
+}];
+exports.questionType = questionType;
+
+/***/ }),
 /* 472 */,
 /* 473 */,
 /* 474 */,
 /* 475 */,
 /* 476 */,
 /* 477 */,
-/* 478 */
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-search/props.js ***!
   \****************************************************************************/
@@ -33461,14 +33548,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 479 */,
-/* 480 */,
-/* 481 */,
-/* 482 */,
-/* 483 */,
-/* 484 */,
-/* 485 */,
-/* 486 */
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \******************************************************************************/
@@ -34489,14 +34576,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 487 */,
-/* 488 */,
-/* 489 */,
-/* 490 */,
-/* 491 */,
-/* 492 */,
-/* 493 */,
-/* 494 */
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-popup/props.js ***!
   \***************************************************************************/
@@ -34593,14 +34680,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 495 */,
-/* 496 */,
-/* 497 */,
-/* 498 */,
-/* 499 */,
-/* 500 */,
-/* 501 */,
-/* 502 */
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */
 /*!********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/libs/mixin/button.js ***!
   \********************************************************************/
@@ -34630,7 +34717,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 503 */
+/* 518 */
 /*!**********************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/libs/mixin/openType.js ***!
   \**********************************************************************/
@@ -34672,7 +34759,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 504 */
+/* 519 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-button/props.js ***!
   \****************************************************************************/
@@ -34851,14 +34938,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 505 */,
-/* 506 */,
-/* 507 */,
-/* 508 */,
-/* 509 */,
-/* 510 */,
-/* 511 */,
-/* 512 */
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */,
+/* 527 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-row/props.js ***!
   \*************************************************************************/
@@ -34895,14 +34982,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 513 */,
-/* 514 */,
-/* 515 */,
-/* 516 */,
-/* 517 */,
-/* 518 */,
-/* 519 */,
-/* 520 */
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */,
+/* 534 */,
+/* 535 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-col/props.js ***!
   \*************************************************************************/
@@ -34949,14 +35036,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 521 */,
-/* 522 */,
-/* 523 */,
-/* 524 */,
-/* 525 */,
-/* 526 */,
-/* 527 */,
-/* 528 */
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-avatar/props.js ***!
   \****************************************************************************/
@@ -35052,14 +35139,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 529 */,
-/* 530 */,
-/* 531 */,
-/* 532 */,
-/* 533 */,
-/* 534 */,
-/* 535 */,
-/* 536 */
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-line/props.js ***!
   \**************************************************************************/
@@ -35110,14 +35197,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 537 */,
-/* 538 */,
-/* 539 */,
-/* 540 */,
-/* 541 */,
-/* 542 */,
-/* 543 */,
-/* 544 */
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-cell/props.js ***!
   \**************************************************************************/
@@ -35245,14 +35332,14 @@ exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 545 */,
-/* 546 */,
-/* 547 */,
-/* 548 */,
-/* 549 */,
-/* 550 */,
-/* 551 */,
-/* 552 */
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */,
+/* 567 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-list/props.js ***!
   \**************************************************************************/
@@ -35345,14 +35432,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 553 */,
-/* 554 */,
-/* 555 */,
-/* 556 */,
-/* 557 */,
-/* 558 */,
-/* 559 */,
-/* 560 */
+/* 568 */,
+/* 569 */,
+/* 570 */,
+/* 571 */,
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */
 /*!*******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-list-item/props.js ***!
   \*******************************************************************************/
@@ -35379,21 +35466,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 561 */,
-/* 562 */,
-/* 563 */,
-/* 564 */,
-/* 565 */,
-/* 566 */,
-/* 567 */,
-/* 568 */,
-/* 569 */,
-/* 570 */,
-/* 571 */,
-/* 572 */,
-/* 573 */,
-/* 574 */,
-/* 575 */
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-empty/props.js ***!
   \***************************************************************************/
@@ -35470,21 +35557,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 576 */,
-/* 577 */,
-/* 578 */,
-/* 579 */,
-/* 580 */,
-/* 581 */,
-/* 582 */,
-/* 583 */,
-/* 584 */,
-/* 585 */,
-/* 586 */,
-/* 587 */,
-/* 588 */,
-/* 589 */,
-/* 590 */
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */,
+/* 595 */,
+/* 596 */,
+/* 597 */,
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
+/* 603 */,
+/* 604 */,
+/* 605 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-swiper/props.js ***!
   \****************************************************************************/
@@ -35627,14 +35714,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 591 */,
-/* 592 */,
-/* 593 */,
-/* 594 */,
-/* 595 */,
-/* 596 */,
-/* 597 */,
-/* 598 */
+/* 606 */,
+/* 607 */,
+/* 608 */,
+/* 609 */,
+/* 610 */,
+/* 611 */,
+/* 612 */,
+/* 613 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-grid/props.js ***!
   \**************************************************************************/
@@ -35671,14 +35758,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 599 */,
-/* 600 */,
-/* 601 */,
-/* 602 */,
-/* 603 */,
-/* 604 */,
-/* 605 */,
-/* 606 */
+/* 614 */,
+/* 615 */,
+/* 616 */,
+/* 617 */,
+/* 618 */,
+/* 619 */,
+/* 620 */,
+/* 621 */
 /*!*******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-grid-item/props.js ***!
   \*******************************************************************************/
@@ -35710,14 +35797,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 607 */,
-/* 608 */,
-/* 609 */,
-/* 610 */,
-/* 611 */,
-/* 612 */,
-/* 613 */,
-/* 614 */
+/* 622 */,
+/* 623 */,
+/* 624 */,
+/* 625 */,
+/* 626 */,
+/* 627 */,
+/* 628 */,
+/* 629 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-loadmore/props.js ***!
   \******************************************************************************/
@@ -35829,14 +35916,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 615 */,
-/* 616 */,
-/* 617 */,
-/* 618 */,
-/* 619 */,
-/* 620 */,
-/* 621 */,
-/* 622 */
+/* 630 */,
+/* 631 */,
+/* 632 */,
+/* 633 */,
+/* 634 */,
+/* 635 */,
+/* 636 */,
+/* 637 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-back-top/props.js ***!
   \******************************************************************************/
@@ -35908,14 +35995,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 623 */,
-/* 624 */,
-/* 625 */,
-/* 626 */,
-/* 627 */,
-/* 628 */,
-/* 629 */,
-/* 630 */
+/* 638 */,
+/* 639 */,
+/* 640 */,
+/* 641 */,
+/* 642 */,
+/* 643 */,
+/* 644 */,
+/* 645 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-collapse/props.js ***!
   \******************************************************************************/
@@ -35952,14 +36039,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 631 */,
-/* 632 */,
-/* 633 */,
-/* 634 */,
-/* 635 */,
-/* 636 */,
-/* 637 */,
-/* 638 */
+/* 646 */,
+/* 647 */,
+/* 648 */,
+/* 649 */,
+/* 650 */,
+/* 651 */,
+/* 652 */,
+/* 653 */
 /*!***********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-collapse-item/props.js ***!
   \***********************************************************************************/
@@ -36036,21 +36123,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 639 */,
-/* 640 */,
-/* 641 */,
-/* 642 */,
-/* 643 */,
-/* 644 */,
-/* 645 */,
-/* 646 */,
-/* 647 */,
-/* 648 */,
-/* 649 */,
-/* 650 */,
-/* 651 */,
-/* 652 */,
-/* 653 */
+/* 654 */,
+/* 655 */,
+/* 656 */,
+/* 657 */,
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */,
+/* 662 */,
+/* 663 */,
+/* 664 */,
+/* 665 */,
+/* 666 */,
+/* 667 */,
+/* 668 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-skeleton/props.js ***!
   \******************************************************************************/
@@ -36127,14 +36214,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 654 */,
-/* 655 */,
-/* 656 */,
-/* 657 */,
-/* 658 */,
-/* 659 */,
-/* 660 */,
-/* 661 */
+/* 669 */,
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-parse/props.js ***!
   \***************************************************************************/
@@ -36194,7 +36281,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 662 */
+/* 677 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-parse/parser.js ***!
   \****************************************************************************/
@@ -37125,14 +37212,14 @@ module.exports = parser;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-/* 663 */,
-/* 664 */,
-/* 665 */,
-/* 666 */,
-/* 667 */,
-/* 668 */,
-/* 669 */,
-/* 670 */
+/* 678 */,
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */,
+/* 683 */,
+/* 684 */,
+/* 685 */
 /*!********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-cell-group/props.js ***!
   \********************************************************************************/
@@ -37164,14 +37251,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 671 */,
-/* 672 */,
-/* 673 */,
-/* 674 */,
-/* 675 */,
-/* 676 */,
-/* 677 */,
-/* 678 */
+/* 686 */,
+/* 687 */,
+/* 688 */,
+/* 689 */,
+/* 690 */,
+/* 691 */,
+/* 692 */,
+/* 693 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-sticky/props.js ***!
   \****************************************************************************/
@@ -37223,14 +37310,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 679 */,
-/* 680 */,
-/* 681 */,
-/* 682 */,
-/* 683 */,
-/* 684 */,
-/* 685 */,
-/* 686 */
+/* 694 */,
+/* 695 */,
+/* 696 */,
+/* 697 */,
+/* 698 */,
+/* 699 */,
+/* 700 */,
+/* 701 */
 /*!********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-subsection/props.js ***!
   \********************************************************************************/
@@ -37297,21 +37384,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 687 */,
-/* 688 */,
-/* 689 */,
-/* 690 */,
-/* 691 */,
-/* 692 */,
-/* 693 */,
-/* 694 */,
-/* 695 */,
-/* 696 */,
-/* 697 */,
-/* 698 */,
-/* 699 */,
-/* 700 */,
-/* 701 */
+/* 702 */,
+/* 703 */,
+/* 704 */,
+/* 705 */,
+/* 706 */,
+/* 707 */,
+/* 708 */,
+/* 709 */,
+/* 710 */,
+/* 711 */,
+/* 712 */,
+/* 713 */,
+/* 714 */,
+/* 715 */,
+/* 716 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-textarea/props.js ***!
   \******************************************************************************/
@@ -37448,12 +37535,12 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 702 */,
-/* 703 */,
-/* 704 */,
-/* 705 */,
-/* 706 */,
-/* 707 */
+/* 717 */,
+/* 718 */,
+/* 719 */,
+/* 720 */,
+/* 721 */,
+/* 722 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-upload/utils.js ***!
   \****************************************************************************/
@@ -37597,7 +37684,7 @@ function chooseFile(_ref) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-/* 708 */
+/* 723 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-upload/mixin.js ***!
   \****************************************************************************/
@@ -37624,7 +37711,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 709 */
+/* 724 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-upload/props.js ***!
   \****************************************************************************/
@@ -37766,14 +37853,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 710 */,
-/* 711 */,
-/* 712 */,
-/* 713 */,
-/* 714 */,
-/* 715 */,
-/* 716 */,
-/* 717 */
+/* 725 */,
+/* 726 */,
+/* 727 */,
+/* 728 */,
+/* 729 */,
+/* 730 */,
+/* 731 */,
+/* 732 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-input/props.js ***!
   \***************************************************************************/
@@ -37978,12 +38065,12 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 718 */,
-/* 719 */,
-/* 720 */,
-/* 721 */,
-/* 722 */,
-/* 723 */
+/* 733 */,
+/* 734 */,
+/* 735 */,
+/* 736 */,
+/* 737 */,
+/* 738 */
 /*!*********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-radio-group/props.js ***!
   \*********************************************************************************/
@@ -38085,14 +38172,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 724 */,
-/* 725 */,
-/* 726 */,
-/* 727 */,
-/* 728 */,
-/* 729 */,
-/* 730 */,
-/* 731 */
+/* 739 */,
+/* 740 */,
+/* 741 */,
+/* 742 */,
+/* 743 */,
+/* 744 */,
+/* 745 */,
+/* 746 */
 /*!***************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-radio/props.js ***!
   \***************************************************************************/
@@ -38174,14 +38261,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 732 */,
-/* 733 */,
-/* 734 */,
-/* 735 */,
-/* 736 */,
-/* 737 */,
-/* 738 */,
-/* 739 */
+/* 747 */,
+/* 748 */,
+/* 749 */,
+/* 750 */,
+/* 751 */,
+/* 752 */,
+/* 753 */,
+/* 754 */
 /*!****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-picker/props.js ***!
   \****************************************************************************/
@@ -38278,21 +38365,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 740 */,
-/* 741 */,
-/* 742 */,
-/* 743 */,
-/* 744 */,
-/* 745 */,
-/* 746 */,
-/* 747 */,
-/* 748 */,
-/* 749 */,
-/* 750 */,
-/* 751 */,
-/* 752 */,
-/* 753 */,
-/* 754 */
+/* 755 */,
+/* 756 */,
+/* 757 */,
+/* 758 */,
+/* 759 */,
+/* 760 */,
+/* 761 */,
+/* 762 */,
+/* 763 */,
+/* 764 */,
+/* 765 */,
+/* 766 */,
+/* 767 */,
+/* 768 */,
+/* 769 */
 /*!***********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-line-progress/props.js ***!
   \***********************************************************************************/
@@ -38338,14 +38425,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 755 */,
-/* 756 */,
-/* 757 */,
-/* 758 */,
-/* 759 */,
-/* 760 */,
-/* 761 */,
-/* 762 */
+/* 770 */,
+/* 771 */,
+/* 772 */,
+/* 773 */,
+/* 774 */,
+/* 775 */,
+/* 776 */,
+/* 777 */
 /*!*************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-tag/props.js ***!
   \*************************************************************************/
@@ -38447,14 +38534,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 763 */,
-/* 764 */,
-/* 765 */,
-/* 766 */,
-/* 767 */,
-/* 768 */,
-/* 769 */,
-/* 770 */
+/* 778 */,
+/* 779 */,
+/* 780 */,
+/* 781 */,
+/* 782 */,
+/* 783 */,
+/* 784 */,
+/* 785 */
 /*!************************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-checkbox-group/props.js ***!
   \************************************************************************************/
@@ -38551,14 +38638,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 771 */,
-/* 772 */,
-/* 773 */,
-/* 774 */,
-/* 775 */,
-/* 776 */,
-/* 777 */,
-/* 778 */
+/* 786 */,
+/* 787 */,
+/* 788 */,
+/* 789 */,
+/* 790 */,
+/* 791 */,
+/* 792 */,
+/* 793 */
 /*!******************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-checkbox/props.js ***!
   \******************************************************************************/
@@ -38645,14 +38732,21 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 779 */,
-/* 780 */,
-/* 781 */,
-/* 782 */,
-/* 783 */,
-/* 784 */,
-/* 785 */,
-/* 786 */
+/* 794 */,
+/* 795 */,
+/* 796 */,
+/* 797 */,
+/* 798 */,
+/* 799 */,
+/* 800 */,
+/* 801 */,
+/* 802 */,
+/* 803 */,
+/* 804 */,
+/* 805 */,
+/* 806 */,
+/* 807 */,
+/* 808 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-icon/icons.js ***!
   \**************************************************************************/
@@ -38883,7 +38977,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 787 */
+/* 809 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-icon/props.js ***!
   \**************************************************************************/
@@ -38990,14 +39084,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 788 */,
-/* 789 */,
-/* 790 */,
-/* 791 */,
-/* 792 */,
-/* 793 */,
-/* 794 */,
-/* 795 */
+/* 810 */,
+/* 811 */,
+/* 812 */,
+/* 813 */,
+/* 814 */,
+/* 815 */,
+/* 816 */,
+/* 817 */
 /*!*****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-overlay/props.js ***!
   \*****************************************************************************/
@@ -39039,14 +39133,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 796 */,
-/* 797 */,
-/* 798 */,
-/* 799 */,
-/* 800 */,
-/* 801 */,
-/* 802 */,
-/* 803 */
+/* 818 */,
+/* 819 */,
+/* 820 */,
+/* 821 */,
+/* 822 */,
+/* 823 */,
+/* 824 */,
+/* 825 */
 /*!********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-transition/props.js ***!
   \********************************************************************************/
@@ -39088,7 +39182,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 804 */
+/* 826 */
 /*!*************************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-transition/transition.js ***!
   \*************************************************************************************/
@@ -39105,7 +39199,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 55));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 57));
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 805));
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 827));
 // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
 var nextTick = function nextTick() {
   return new Promise(function (resolve) {
@@ -39197,7 +39291,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 805 */
+/* 827 */
 /*!***************************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
   \***************************************************************************************/
@@ -39390,14 +39484,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 806 */,
-/* 807 */,
-/* 808 */,
-/* 809 */,
-/* 810 */,
-/* 811 */,
-/* 812 */,
-/* 813 */
+/* 828 */,
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */
 /*!********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-status-bar/props.js ***!
   \********************************************************************************/
@@ -39423,14 +39517,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 814 */,
-/* 815 */,
-/* 816 */,
-/* 817 */,
-/* 818 */,
-/* 819 */,
-/* 820 */,
-/* 821 */
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */,
+/* 841 */,
+/* 842 */,
+/* 843 */
 /*!*********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-safe-bottom/props.js ***!
   \*********************************************************************************/
@@ -39450,14 +39544,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 822 */,
-/* 823 */,
-/* 824 */,
-/* 825 */,
-/* 826 */,
-/* 827 */,
-/* 828 */,
-/* 829 */
+/* 844 */,
+/* 845 */,
+/* 846 */,
+/* 847 */,
+/* 848 */,
+/* 849 */,
+/* 850 */,
+/* 851 */
 /*!**********************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-loading-icon/props.js ***!
   \**********************************************************************************/
@@ -39534,14 +39628,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 830 */,
-/* 831 */,
-/* 832 */,
-/* 833 */,
-/* 834 */,
-/* 835 */,
-/* 836 */,
-/* 837 */
+/* 852 */,
+/* 853 */,
+/* 854 */,
+/* 855 */,
+/* 856 */,
+/* 857 */,
+/* 858 */,
+/* 859 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-text/props.js ***!
   \**************************************************************************/
@@ -39669,12 +39763,12 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 838 */,
-/* 839 */,
-/* 840 */,
-/* 841 */,
-/* 842 */,
-/* 843 */
+/* 860 */,
+/* 861 */,
+/* 862 */,
+/* 863 */,
+/* 864 */,
+/* 865 */
 /*!**************************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-swiper-indicator/props.js ***!
   \**************************************************************************************/
@@ -39721,28 +39815,6 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 844 */,
-/* 845 */,
-/* 846 */,
-/* 847 */,
-/* 848 */,
-/* 849 */,
-/* 850 */,
-/* 851 */,
-/* 852 */,
-/* 853 */,
-/* 854 */,
-/* 855 */,
-/* 856 */,
-/* 857 */,
-/* 858 */,
-/* 859 */,
-/* 860 */,
-/* 861 */,
-/* 862 */,
-/* 863 */,
-/* 864 */,
-/* 865 */,
 /* 866 */,
 /* 867 */,
 /* 868 */,
@@ -39758,7 +39830,29 @@ exports.default = _default;
 /* 878 */,
 /* 879 */,
 /* 880 */,
-/* 881 */
+/* 881 */,
+/* 882 */,
+/* 883 */,
+/* 884 */,
+/* 885 */,
+/* 886 */,
+/* 887 */,
+/* 888 */,
+/* 889 */,
+/* 890 */,
+/* 891 */,
+/* 892 */,
+/* 893 */,
+/* 894 */,
+/* 895 */,
+/* 896 */,
+/* 897 */,
+/* 898 */,
+/* 899 */,
+/* 900 */,
+/* 901 */,
+/* 902 */,
+/* 903 */
 /*!*****************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-toolbar/props.js ***!
   \*****************************************************************************/
@@ -39810,14 +39904,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 882 */,
-/* 883 */,
-/* 884 */,
-/* 885 */,
-/* 886 */,
-/* 887 */,
-/* 888 */,
-/* 889 */
+/* 904 */,
+/* 905 */,
+/* 906 */,
+/* 907 */,
+/* 908 */,
+/* 909 */,
+/* 910 */,
+/* 911 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-text/value.js ***!
   \**************************************************************************/
@@ -39925,14 +40019,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 890 */,
-/* 891 */,
-/* 892 */,
-/* 893 */,
-/* 894 */,
-/* 895 */,
-/* 896 */,
-/* 897 */
+/* 912 */,
+/* 913 */,
+/* 914 */,
+/* 915 */,
+/* 916 */,
+/* 917 */,
+/* 918 */,
+/* 919 */
 /*!**************************************************************************!*\
   !*** D:/毕设程序/ADRG_study/uni_modules/uview-ui/components/u-link/props.js ***!
   \**************************************************************************/
