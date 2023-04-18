@@ -80,6 +80,9 @@
 				questionLevel,
 				questionType
 			};
+		},
+		onLoad(options) {
+			console.log(options);
 		}
 	}
 </script>
