@@ -43,12 +43,6 @@
     "height": "50px",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "iconPath": "static/icon/index.png",
-        "selectedIconPath": "static/icon/index_active.png",
-        "text": "首页"
-      },
-      {
         "pagePath": "pages/class/class",
         "iconPath": "static/icon/class.png",
         "selectedIconPath": "static/icon/class_active.png",
@@ -59,12 +53,6 @@
         "iconPath": "static/icon/problem.png",
         "selectedIconPath": "static/icon/problem_active.png",
         "text": "题库"
-      },
-      {
-        "pagePath": "pages/message/message",
-        "iconPath": "static/icon/message.png",
-        "selectedIconPath": "static/icon/message_active.png",
-        "text": "消息"
       },
       {
         "pagePath": "pages/me/me",
