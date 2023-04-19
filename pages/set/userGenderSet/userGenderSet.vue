@@ -59,13 +59,6 @@
 
 <style lang="scss" scoped>
 .button-container{
-	margin-top: 10px;
-	position: relative;
-	.button{
-		width: 180rpx;
-		position: absolute;
-		right: 10px;
-		top: 10px;
-	}
+	margin-top: 30px;
 }
 </style>

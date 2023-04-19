@@ -9,23 +9,24 @@
 					<u-avatar :src="config.baseUrl+userInfo.avatar" size="80"></u-avatar>
 				</view>
 			</u-cell>
-			<u-cell isLink center class="item" @click="onHandleSetName">
-				<view slot="title" class="u-slot-title">
-					<text class="u-cell-text">昵称</text>
-				</view>
-				<view slot="value" class="u-slot-title">
-					{{userInfo.nick_name}}
-				</view>
-			</u-cell>
-			<u-cell isLink center class="item" @click="onHandleSetGender">
-				<view slot="title" class="u-slot-title">
-					<text class="u-cell-text">性别</text>
-				</view>
-				<view slot="value" class="u-slot-title">
-					<text>{{getGender(userInfo.gender)}}</text>
-				</view>
-			</u-cell>
-<!-- 			<u-cell isLink center class="item" @click="onHandleSetQuestion">
+				<u-cell isLink center @click="onHandleSetName" size="large">
+					<view slot="title" class="u-slot-title">
+						<text class="u-cell-text">昵称</text>
+					</view>
+					<view slot="value" class="u-slot-title">
+						{{userInfo.nick_name}}
+					</view>
+				</u-cell>
+				<u-cell isLink center @click="onHandleSetGender" size="large">
+					<view slot="title" class="u-slot-title">
+						<text class="u-cell-text">性别</text>
+					</view>
+					<view slot="value" class="u-slot-title">
+						<text>{{getGender(userInfo.gender)}}</text>
+					</view>
+				</u-cell>
+
+			<!-- 			<u-cell isLink center class="item" @click="onHandleSetQuestion">
 				<view slot="title" class="u-slot-title">
 					<text class="u-cell-text">一次出题数量</text>
 				</view>
@@ -145,9 +146,4 @@
 </script>
 
 <style lang="scss" scoped>
-	.set-container {
-		.item {
-			line-height: 50px;
-		}
-	}
 </style>
