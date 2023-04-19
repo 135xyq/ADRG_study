@@ -1,0 +1,64 @@
+.container{
+	.record-content{
+		.record-item{
+			.item-time{
+				display: flex;
+				justify-content: left;
+				height: 20px;
+				.icon{
+					width: 8px;
+					height: 8px;
+					margin: 6px;
+					background-color: $gray;
+					border-radius: 50%;
+					
+				}
+				
+				.time{
+					font-size: 14px;
+					height: 20px;
+					line-height: 20px;
+					color: #00000096;				
+				}
+			}
+			
+			.question-record-item{
+				background-color: #d2d2d240;
+				height: 60px;
+				padding: 10px;
+				width: 90%;
+				margin: 10px auto;
+				border-radius: 10px;
+				.title{
+					font-size: 16px;
+					color: #000;
+					font-weight: 700;
+				}
+				
+				.info{
+					display: flex;
+					margin-top: 10px;
+					font-size: 14px;
+					color: #636363b8;
+					.type{
+						background-color: #fff;
+						padding: 0 10px;
+						border-radius: 5px;
+						line-height: 25px;
+						height: 25px;
+						
+						&.no-submit{
+							background-color: #ff00001c;
+							color: #f20202;
+						}
+					}
+					.count{
+						height: 25px;
+						line-height: 25px;
+						margin-left: 40rpx;
+					}
+				}
+			}
+		}
+	}
+}

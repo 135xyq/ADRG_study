@@ -4,40 +4,72 @@
 			<u-subsection :list="list" bgColor="#fff" fontSize="14" mode="button" :current="current"
 				@change="sectionChange"></u-subsection>
 		</u-sticky>
+		<view class="record-content">
+			<view class="record-item" v-for="(value,key) in orderByDate" :key="key">
+				<view class="item-time">
+					<view class="icon"></view>
+					<view class="time">{{key}}</view>
+				</view>
+				<view class="question-record-item" v-for="item in value" :key="item.id">
+					<view class="title">{{item.questionCategory.title}}-专项练习</view>
+					<view class="info">
+						<view class="type" :class="{'no-submit':!item.is_submit}">{{item.is_submit ? '已完成' :'未完成'}}
+						</view>
+						<view class="count">题目数量 ：{{item.question_history_record_count}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
 		<view class="bottom-container">
-			<u-loadmore :status="loadStatus" height="50" :line="true" nomoreText="已经到底了" />
+			<u-loadmore :status="loadStatus" height="50" :line="true" nomoreText="没有更多记录了" />
 		</view>
 	</view>
 </template>
 
 <script>
 	import questionApi from "@/api/question/question.js";
-	
+
 	export default {
 		data() {
 			return {
-				list: ['全部','已完成','未完成'],
-				typeList:[-1,0,1],
-				current:0,
+				list: ['全部', '已完成', '未完成'],
+				typeList: [-1, 1, 0],
+				current: 0,
 				total: 0,
 				searchInfo: {
-					page:1,
-					limit:10,
-					type:-1
+					page: 1,
+					limit: 10,
+					type: -1
 				},
-				questionRecordList:[],
+				questionRecordList: [],
 				loadStatus: 'loading', // 加载更多的状态
 			};
 		},
+		computed: {
+			// 将记录按照时间进行分类
+			orderByDate() {
+				const tempList = {};
+				for (let i = 0; i < this.questionRecordList.length; i++) {
+					const date = this.questionRecordList[i].create_time.split(' ')[0];
+					if (tempList[date]) {
+						tempList[date].push(this.questionRecordList[i])
+					} else {
+						tempList[date] = [this.questionRecordList[i]]
+					}
+				}
+				return tempList;
+			}
+		},
 		async onLoad() {
 			await this.getQuestionRecord();
+			// console.log(this.orderByDate);
 		},
 		/**
 		 * 页面到底底部事件
 		 */
 		async onReachBottom() {
 			// 没有数据了
-			if (this.searchInfo.page * this.searchInfo.limit >= this.searchInfo.total) {
+			if (this.searchInfo.page * this.searchInfo.limit >= this.total) {
 				this.loadStatus = 'nomore'
 			} else {
 				// 每次请求下一页
@@ -45,20 +77,20 @@
 				await this.getQuestionRecord()
 			}
 		},
-		methods:{
+		methods: {
 			/**
 			 * 分页获取刷题记录
 			 */
-			async getQuestionRecord(){
-				const res = await questionApi.getQuestionRecord();
-				
-				if(res.code === 0) {
+			async getQuestionRecord() {
+				const res = await questionApi.getQuestionRecord(this.searchInfo);
+
+				if (res.code === 0) {
 					this.total = res.data.total;
-					this.questionRecordList = res.data.data
+					this.questionRecordList = [...this.questionRecordList, ...res.data.data]
 				}
-				
-				console.log(this.total,this.questionRecordList);
-				
+
+				// console.log(this.total, this.questionRecordList);
+
 				// 没有数据了
 				if (this.searchInfo.page * this.searchInfo.limit >= this.total) {
 					this.loadStatus = 'nomore'
@@ -69,14 +101,28 @@
 			 * @param {Object} index
 			 */
 			async sectionChange(index) {
-				console.log(index);
+				// console.log(index);
+				
 				this.current = index;
 				this.searchInfo.type = this.typeList[index]
+
+
+				// 数据重置
+				this.total = 0;
+				this.searchInfo = {
+					...this.searchInfo,
+					page: 1,
+					limit: 10
+				}
+				this.questionRecordList = [];
+
+				// 切换标签重新获取数据
+				await this.getQuestionRecord();
 			},
 		}
 	}
 </script>
 
 <style lang="scss">
-
+	@import "./questionRecordHistory.scss";
 </style>
