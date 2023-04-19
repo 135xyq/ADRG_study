@@ -20,5 +20,9 @@ export default{
 	// 获取判题的结果
 	getQuestionRecordValidateResult(data) {
 		return request.post('/applet/question/getvalidateresult',data);
+	},
+	// 分页获取刷题记录
+	getQuestionRecord(data) {
+		return request.post('/applet/questionrecord/getrecordpage',data)
 	}
 }

@@ -4,17 +4,17 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/me/me",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		}, {
 			"path": "pages/question/question",
 			"style": {
 				"navigationBarTitleText": "题库"
 			}
 		},
-		{
-			"path": "pages/me/me",
-			"style": {
-				"navigationBarTitleText": "个人中心"
-			}
-		},
+
 		{
 			"path": "pages/class/class",
 			"style": {
@@ -166,7 +166,7 @@
 		}, {
 			"path": "pages/QuestionRecordHistory/QuestionRecordHistory",
 			"style": {
-				"navigationBarTitleText": "刷题记录",
+				"navigationBarTitleText": "做题记录",
 				"enablePullDownRefresh": false
 			}
 
