@@ -96,7 +96,7 @@
 		</view>
 		<view class="pop-container">
 			<u-popup :show="showPop" @close="showPop = false" :closeable="true">
-				<view class="container">
+				<view class="container" :style="{height:recordHeight + 'px'}">
 					<view class="title">答题卡</view>
 					<view class="info">
 						<view class="info-item">
@@ -147,6 +147,7 @@
 				questionList: [], //题目列表筛选后的数据
 				showTips: false, // 显示用户下一步的操作
 				showPop:false, // 答题卡显示
+				recordHeight:400
 			};
 		},
 		async onLoad(options) {
@@ -159,6 +160,12 @@
 			}
 
 			await this.getValidateResult();
+			
+			// 获取页面的高度等信息
+			const pageInfo = uni.getSystemInfoSync();
+			// console.log(pageInfo);
+			// 答题卡的高度
+			this.recordHeight = pageInfo.windowHeight;
 		},
 		computed: {
 			//  获取题目的下标
