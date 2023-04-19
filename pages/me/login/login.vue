@@ -76,9 +76,9 @@
 							})
 
 							setTimeout(() => {
-								// 跳转回首页
-								uni.reLaunch({
-									url: '/pages/index/index'
+								// 跳转回题库
+								uni.switchTab({
+									url: '/pages/question/question'
 								})
 							}, 1500)
 						} else {
