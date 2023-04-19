@@ -10,7 +10,7 @@
 					<view class="icon"></view>
 					<view class="time">{{key}}</view>
 				</view>
-				<view class="question-record-item" v-for="item in value" :key="item.id">
+				<view class="question-record-item" v-for="item in value" :key="item.id" @click="onHandleGoToPage(item)">
 					<view class="title">{{item.questionCategory.title}}-专项练习</view>
 					<view class="info">
 						<view class="type" :class="{'no-submit':!item.is_submit}">{{item.is_submit ? '已完成' :'未完成'}}
@@ -119,6 +119,23 @@
 				// 切换标签重新获取数据
 				await this.getQuestionRecord();
 			},
+			/**
+			 * 跳转至指定的页面，做题界面或者是做练习报告页
+			 * @param {Object} record
+			 */
+			onHandleGoToPage(record) {
+				// 已完成，前往练习报告
+				if(record.is_submit === 1) {
+					uni.navigateTo({
+						url:'/pages/question/questionResult/questionResult?record=' + record.id
+					})
+				}else{
+					// 前往答题页
+					uni.navigateTo({
+						url:'/pages/question/questionAnswer/questionAnswer?record=' + record.id
+					})
+				}
+			}
 		}
 	}
 </script>
