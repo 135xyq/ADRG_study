@@ -145,8 +145,8 @@ exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 55));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 57));
 var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ 210));
-var _login = _interopRequireDefault(__webpack_require__(/*! @/api/user/login.js */ 178));
-var _user = _interopRequireDefault(__webpack_require__(/*! @/api/user/user.js */ 169));
+var _login = _interopRequireDefault(__webpack_require__(/*! @/api/user/login.js */ 166));
+var _user = _interopRequireDefault(__webpack_require__(/*! @/api/user/user.js */ 178));
 //
 //
 //

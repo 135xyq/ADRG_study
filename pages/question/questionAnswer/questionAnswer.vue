@@ -314,6 +314,10 @@
 					this.record_id = res.data.record_id;
 					this.questions = res.data.data
 					
+					// 题目数量为0，跳回原页面
+					if(this.total === 0) {
+						uni.navigateBack();
+					}
 					
 					// 初始化答案
 					this.initAnswer();
