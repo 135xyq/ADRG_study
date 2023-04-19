@@ -24,5 +24,9 @@ export default{
 	// 分页获取刷题记录
 	getQuestionRecord(data) {
 		return request.post('/applet/questionrecord/getrecordpage',data)
+	},
+	// 根据试卷获取题目
+	getQuestionListByRecordId(data) {
+		return request.post('/applet/questionhistoryrecord/getrecordinfo',data)
 	}
 }

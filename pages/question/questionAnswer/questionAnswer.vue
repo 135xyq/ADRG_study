@@ -136,9 +136,9 @@
 			}
 		},
 		async onLoad(option) {
+			// 从题目分类列表出题
 			if (option.category) {
 				this.category = option.category
-
 
 				// 调试
 
@@ -265,14 +265,17 @@
 				// this.record_id = 51
 				
 				await this.getRandomQuestion();
-				// // console.log(this.total,this.questions,this.record_id);
+				// console.log(this.total,this.questions,this.record_id);
 				
-				this.initAnswer();
-				// 开启答题计时
-				this.timer = setInterval(() => {
-					this.time++;
-				}, 1000)
-			} else {
+
+			} else if(option.record){
+				// 从刷题历史记录跳转，需要继续答题
+				this.record_id = option.record;
+				
+				// 获取题目列表
+				await this.getQuestionListByRecord()
+			}else{
+				// 出错，回到原页面
 				uni.navigateBack();
 			}
 		},
@@ -281,16 +284,48 @@
 		},
 		methods: {
 			formateDateToMinuteAndSecond,
-			async getRandomQuestion() {
-				const res = await questionApi.getRandomQuestions({
+			/**
+			 * 组卷
+			 */
+			getRandomQuestion() {
+				questionApi.getRandomQuestions({
 					category: this.category
-				});
-
-				if (res.code === 0) {
+				}).then(res=>{
 					this.total = res.data.total;
 					this.record_id = res.data.record_id;
 					this.questions = res.data.data
-				}
+					
+					this.initAnswer();
+					// 开启答题计时
+					this.timer = setInterval(() => {
+						this.time++;
+					}, 1000)
+				}).catch((res)=>{
+					uni.navigateBack()
+				});
+
+			},
+			/**
+			 * 根据试卷获取题目
+			 */
+			getQuestionListByRecord() {
+				questionApi.getQuestionListByRecordId({record:this.record_id}).then(res=>{
+					this.total = res.data.total;
+					this.record_id = res.data.record_id;
+					this.questions = res.data.data
+					
+					
+					// 初始化答案
+					this.initAnswer();
+					
+					
+					// 开启答题计时
+					this.timer = setInterval(() => {
+						this.time++;
+					}, 1000)
+				}).catch(res=>{
+					uni.navigateBack();
+				})
 			},
 			// 初始化答案数据
 			initAnswer() {
@@ -300,8 +335,8 @@
 					} else {
 						this.answers.push([''])
 					}
-
 				}
+				
 			},
 			// 判断是否已经答题
 			isDone(index) {
