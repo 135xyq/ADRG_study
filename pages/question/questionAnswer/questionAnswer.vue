@@ -69,7 +69,7 @@
 		</view>
 		<view class="pop-container">
 			<u-popup :show="showPop" @close="showPop = false" :closeable="true">
-				<view class="container">
+				<view class="container" :style="{height:recordHeight + 'px'}">
 					<view class="title">答题卡</view>
 					<view class="info">
 						<view class="info-item">
@@ -126,7 +126,8 @@
 				record_id: '', // 试卷id
 				questionType,
 				questionLevel,
-				loading: true
+				loading: true,
+				recordHeight:400 // 答题卡的高度
 			};
 		},
 		computed: {
@@ -278,6 +279,12 @@
 				// 出错，回到原页面
 				uni.navigateBack();
 			}
+			
+			// 获取页面的高度等信息
+			const pageInfo = uni.getSystemInfoSync();
+			// console.log(pageInfo);
+			// 答题卡的高度
+			this.recordHeight = pageInfo.windowHeight;
 		},
 		onUnload() {
 			clearInterval(this.timer);
@@ -422,6 +429,11 @@
 					this.currentIndex = Math.max(0, this.currentIndex - 1)
 				} else if (deltaX < -60) { // 左滑
 					this.currentIndex = Math.min(this.questions.length - 1, this.currentIndex + 1)
+					
+					// 最后一题显示答题卡交卷
+					if (this.currentIndex === this.questions.length - 1) {
+						this.showPop = true
+					}
 				}
 			}
 		}

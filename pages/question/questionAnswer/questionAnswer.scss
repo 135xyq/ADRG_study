@@ -84,10 +84,12 @@
 		}
 
 		.pop-container {
+			
 			.container {
-				padding: 10px;
-
+				position: relative;
+				padding: 0 10px;
 				.title {
+					margin-top: 20px;
 					text-align: center;
 					font-weight: 700;
 					font-size: 18px;
@@ -153,7 +155,10 @@
 				.submit {
 					display: flex;
 					width: 80%;
-					margin: 30px auto 10px;
+					position: absolute;
+					bottom: 20px;
+					left: 50%;
+					transform: translateX(-50%);
 				}
 			}
 		}
