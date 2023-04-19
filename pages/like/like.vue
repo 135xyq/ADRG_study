@@ -12,7 +12,7 @@
 			</uni-list>
 		</view>
 		<view class="bottom-container">
-			<u-loadmore :status="loadStatus" height="50" :line="true" nomoreText="已经到底了" />
+			<u-loadmore :status="loadStatus" height="50" :line="true" nomoreText="没有更多喜欢了" />
 		</view>
 		<u-back-top :scrollTop="scrollTop" :duration="200" mode="circle" :iconStyle="{fontSize: '32rpx',
 			color: '#2979ff'}"></u-back-top>
@@ -27,12 +27,12 @@
 	export default {
 		data() {
 			return {
-				list: ['文章', '视频', '帖子'],
+				list: ['文章', '视频'],
 				current: 0,
 				loadStatus: 'loading', // 加载更多的状态
 				pageInfo: {
 					page: 1,
-					limit: 4,
+					limit: 10,
 					total: 0
 				},
 				status: 0,
@@ -92,7 +92,7 @@
 				//  数据重置
 				this.pageInfo = {
 					page: 1,
-					limit: 4,
+					limit: 10,
 					total: 0
 				}
 				this.likeList = []
