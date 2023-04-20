@@ -6,7 +6,7 @@
 					<view class="title">{{item.title}}</view>
 					<view class="count">{{item.errorQuestionCount}}题</view>
 				</view>
-				<view class="detail" @click="onHandleGoToErrorDetailPage">查看</view>
+				<view class="detail" @click="onHandleGoToErrorDetailPage(item.id)">查看</view>
 			</view>
 		</view>
 		<view class="no" v-else>
@@ -50,8 +50,10 @@
 				})
 			},
 			// 前往错题详情页
-			onHandleGoToErrorDetailPage() {
-				
+			onHandleGoToErrorDetailPage(category) {
+				uni.navigateTo({
+					url:'/pages/errorQuestion/errorQuestionDetail/errorQuestionDetail?category=' + category
+				})
 			}
 		}
 	}
