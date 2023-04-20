@@ -28,5 +28,17 @@ export default{
 	// 根据试卷获取题目
 	getQuestionListByRecordId(data) {
 		return request.post('/applet/questionhistoryrecord/getrecordinfo',data)
+	},
+	// 获取用户每一种分类错题的数量
+	getQuestionCategoryCount(data){
+		return request.post('/applet/questionhistoryrecord/getQuestionCategoryCount',data)
+	},
+	// 获取指定分类下的所有错题id
+	getAllErrorQuestionId(data){
+		return request.post('/applet/questionhistoryrecord/getAllErrorQuestionId',data)
+	},
+	// 获取题目详情
+	getQuestionDetail(data) {
+		return request.post('/applet/questionhistoryrecord/getQuestionDetail',data)
 	}
 }
