@@ -11,7 +11,7 @@
 					</view>
 				</view>
 				<view class="title">
-					{{recordInfo.QuestionCategory ? recordInfo.QuestionCategory.title:''}}-专项练习
+					{{recordInfo.questionCategory ? recordInfo.questionCategory.title:''}}-专项练习
 				</view>
 
 				<view class="true">
