@@ -30,7 +30,7 @@
 	export default {
 		data() {
 			return {
-				list: ['视频', '文章', '帖子'],
+				list: ['视频', '文章'],
 				current: 0,
 				loadStatus: 'loading', // 加载更多的状态
 				pageInfo: {
@@ -41,7 +41,7 @@
 				type: 1,
 				historyList: [],
 				statusName: 'video',
-				statusNameList: ['video', 'article', 'blog'],
+				statusNameList: ['video', 'article'],
 				scrollTop: 0,
 				config,
 			};
