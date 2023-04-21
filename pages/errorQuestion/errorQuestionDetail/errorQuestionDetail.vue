@@ -25,7 +25,7 @@
 						{{item.title}}
 					</view>
 					<view class="options" v-if="item.type <= 1">
-						<view class="option" v-for="(value,key) in item.options" :key="key">
+						<view class="option" v-for="(value,key) in item.options" :key="key" :class="{'right':(item.answer.indexOf(key) !== -1 && isShowAnswerAndParse)}">
 							{{key}} . {{value}}
 						</view>
 					</view>
