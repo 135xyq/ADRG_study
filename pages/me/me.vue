@@ -61,14 +61,14 @@
 						<view class="select-item">做题记录</view>
 					</view>
 				</u-cell>
-				<u-cell size="large" isLink @click="onHandleGoPageNote">
+<!-- 				<u-cell size="large" isLink @click="onHandleGoPageNote">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-a-bijibenbiji" size="25"></uni-icons>
 					</view>
 					<view slot="title" class="u-slot-title">
 						<view class="select-item">笔记</view>
 					</view>
-				</u-cell>
+				</u-cell> -->
 				<u-cell size="large" isLink @click="onHandleGoPageFeedBack">
 					<view slot="icon" class="u-slot-icon">
 						<uni-icons custom-prefix="iconfont" type="icon-yijianfankui" size="25"></uni-icons>
