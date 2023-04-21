@@ -33,8 +33,8 @@
 					</view>
 					<view class="has-option" v-if="item.question.type <= 1">
 						<view class="options">
-							<view class="option" v-for="(option,key) in item.question.options" :key="option.index">
-								{{key}}. {{option}}
+							<view class="option" v-for="(option,key) in item.question.options" :key="option.id" :class="{'right':item.question.answer.indexOf(key) !== -1 ,'error':item.answer.indexOf(key) !==-1&& item.is_current == 0}">
+								{{key}}. {{option}}{{Object.keys(item.question.options)}}
 							</view>
 						</view>
 						<view class="answer-info">
