@@ -417,11 +417,11 @@
 
 				this.showPop = false
 			},
-			// 监听左滑
+			// 监听开始滑动
 			onHandleTouchStart(e) {
 				this.startX = e.changedTouches[0].clientX
 			},
-			// 监听右滑
+			// 监听结束滑动
 			onHandleTouchEnd(e) {
 				const moveX = e.changedTouches[0].clientX
 				const deltaX = moveX - this.startX
