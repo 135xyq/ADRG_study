@@ -1,0 +1,139 @@
+.container{
+	.title-info{
+		width: 100%;
+		background-color: #9d9d9d70;
+		display: flex;
+		height:40px;
+		line-height: 40px;
+		color: #000;
+		font-size: 14px;
+		justify-content: space-between;
+		
+		.title{
+			font-weight: 700;
+			margin-left: 15px;
+		}
+		
+		.count{
+			margin-right: 20px;
+			color: #00000096;
+			
+			.current{
+				color: rgb(60, 156, 255);
+				font-weight: 600;
+			}
+		}
+	}
+	
+	.question-info{
+		background-color: #18171705;
+		width: 95%;
+		margin: 10px auto;
+		border-radius: 20px;
+		box-shadow: 5px 5px 5px #4d444447;
+		
+		.question-type-level{
+			padding: 20px 10px;
+			display: flex;
+			.tag-item {
+				margin: 0 10px;
+			}
+			
+		}
+		
+		.question{
+			padding: 10px;
+			
+			.question-title{
+				font-size: 18px;
+				font-weight: 700;
+				color: #000;
+				margin-bottom: 20px;
+			}
+			
+			.options{
+				.option{
+					margin: 10px 0px;
+					color: #00000096;
+					background-color: #fff;
+					padding: 15px;
+					border-radius: 15px;
+					
+					&.error{
+						background-color: #ff0000a3;
+						color: #fff;
+					}
+					
+					&.right{
+						background-color: #008000c4;
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+	
+	.btn-container{
+		width: 80%;
+		margin: 20px auto;
+		padding:20px 0;
+	}
+	
+	.answer-info{
+		background-color: #18171705;
+		width: 95%;
+		margin: 10px auto;
+		border-radius: 10px;
+		box-shadow: 5px 5px 5px #4d444447;
+		
+		.answer-title{
+			padding: 20px 15px;
+			color: #000;
+			font-weight: 700;
+			font-size: 34rpx;
+		}
+		
+		.answer-content{
+			display: flex;
+			font-size: 14px;
+			.answer{
+				margin: 20px 10px;
+			}
+			.user-answer{
+				color: #00000096;
+				&.error-answer{
+					color: #ff0000a3;
+				}
+			}
+			.right-answer{
+				color: #008000c4;
+			}
+		}
+		
+	}
+	
+	.parse-info{
+		background-color: #18171705;
+		width: 95%;
+		margin: 10px auto;
+		border-radius: 10px;
+		box-shadow: 5px 5px 5px #4d444447;
+		
+		.parse-title{
+			padding: 20px 15px;
+			color: #000;
+			font-weight: 700;
+			font-size: 34rpx;
+		}
+		
+		.parse-content{
+			padding:0 15px;
+			padding-bottom: 20px;
+			color: #00000096;
+		}
+	}
+	
+	.bottom{
+		height: 10px;
+	}
+}
