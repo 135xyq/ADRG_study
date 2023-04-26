@@ -6,6 +6,8 @@
 				<view class="user">
 					<view class="name">
 						{{commentData.user.nick_name}}
+						<text class="description" v-if="commentData.status === 0">(待审核)</text>
+						<text class="description no-pass" v-if="commentData.status === 2">(审核未通过)</text>
 					</view>
 					<view class="date">
 						{{commentData.create_time}}
@@ -79,6 +81,15 @@
 
 				.name {
 					padding-bottom: 5px;
+					
+					.description{
+						margin-left: 10px;
+						color: #409EFF;
+						
+						&.no-pass{
+							color: red;
+						}
+					}
 				}
 			}
 		}
