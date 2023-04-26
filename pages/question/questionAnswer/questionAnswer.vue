@@ -409,7 +409,7 @@
 				
 				// 交卷成功,跳转到练习报告界面
 				if(res.code === 0) {
-					uni.navigateTo({
+					uni.redirectTo({
 						url:'/pages/question/questionResult/questionResult?record=' + this.record_id
 					})
 				}
