@@ -25,7 +25,8 @@
 						{{item.title}}
 					</view>
 					<view class="options" v-if="item.type <= 1">
-						<view class="option" v-for="(value,key) in item.options" :key="key" :class="{'right':(item.answer.indexOf(key) !== -1 && isShowAnswerAndParse)}">
+						<view class="option" v-for="(value,key) in item.options" :key="key"
+							:class="{'right':(item.answer.indexOf(key) !== -1 && isShowAnswerAndParse)}">
 							{{key}} . {{value}}
 						</view>
 					</view>
@@ -61,7 +62,25 @@
 					{{item.parse ? item.parse : '暂无解析'}}
 				</view>
 			</view>
+			<view class="show-tips">
+				<u-overlay :show="showTips" @click="showTips = false">
+					<view class="warp" @tap.stop>
+						<view class="content">
+							此类错题已经浏览完毕
+						</view>
+						<view class="close">
+							<u-icon name="close" size="18" @click="showTips = false"></u-icon>
+						</view>
+						<view class="button">
+							<view class="btn"> <u-button text="继续浏览" size="normal" @click="showTips = false"></u-button>
+							</view>
+							<view class="btn"> <u-button type="primary" text="返回首页" size="normal" @click="onHandleGoToHome"></u-button></view>
+						</view>
+					</view>
+				</u-overlay>
+			</view>
 			<view class="bottom"></view>
+
 		</view>
 	</view>
 </template>
@@ -86,6 +105,7 @@
 				questionList: [], //题目列表
 				hasGetIdList: [], // 已经获取过数据的题目id
 				recordHeight: 500, // 页面的最小高度
+				showTips: false, // 显示用户下一步的操作
 			};
 		},
 		async onLoad(option) {
@@ -94,7 +114,7 @@
 
 				// 获取错题id
 				await this.getErrorQuetionIdList();
-				
+
 				// 没有错题则返回
 				if (this.errorQuestionIdList.length === 0) {
 					uni.navigateBack();
@@ -176,8 +196,11 @@
 
 					// console.log(this.currentIndex,this.errorQuestionIdList.length);
 
-					// 如果最后一页已经获取，不再重复获取
+					// 如果最后一页已经获取，不再重复获取,弹出提示框
 					if (this.errorQuestionIdList.length === this.questionList.length) {
+
+						this.showTips = true
+
 						return;
 					}
 
@@ -187,7 +210,13 @@
 					}
 				}
 
-			}
+			},
+			// 返回首页
+			onHandleGoToHome() {
+				uni.switchTab({
+					url: '/pages/question/question'
+				})
+			},
 		}
 	}
 </script>
