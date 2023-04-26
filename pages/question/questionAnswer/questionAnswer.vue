@@ -2,6 +2,7 @@
 	<view class="question-answer" v-if="answers.length > 0" @touchstart="onHandleTouchStart"
 		@touchend="onHandleTouchEnd">
 		<view class="top-info">
+			<MySetInterval ref="childTime"></MySetInterval>
 			<!-- <view class="time">{{formateDateToMinuteAndSecond(time)}}</view> -->
 			<view class="record" @click="showPop = true">答题卡</view>
 		</view>
@@ -286,9 +287,9 @@
 			// 答题卡的高度
 			this.recordHeight = pageInfo.windowHeight;
 		},
-		onUnload() {
-			clearInterval(this.timer);
-		},
+		// onUnload() {
+		// 	clearInterval(this.timer);
+		// },
 		methods: {
 			formateDateToMinuteAndSecond,
 			/**
@@ -304,9 +305,9 @@
 					
 					this.initAnswer();
 					// 开启答题计时
-					this.timer = setInterval(() => {
-						this.time++;
-					}, 1000)
+					// this.timer = setInterval(() => {
+					// 	this.time++;
+					// }, 1000)
 				}).catch((res)=>{
 					uni.navigateBack()
 				});
@@ -331,9 +332,9 @@
 					
 					
 					// 开启答题计时
-					this.timer = setInterval(() => {
-						this.time++;
-					}, 1000)
+					// this.timer = setInterval(() => {
+					// 	this.time++;
+					// }, 1000)
 				}).catch(res=>{
 					uni.navigateBack();
 				})
@@ -381,6 +382,9 @@
 			},
 			// 交卷
 			async onHandleSubmit() {
+				// 获取答题时长
+				this.onHandleGetTotalTime();
+				
 				const answers = []
 				for(let i = 0;i < this.answers.length; i++) {
 					const temp = {
@@ -420,6 +424,13 @@
 			// 监听开始滑动
 			onHandleTouchStart(e) {
 				this.startX = e.changedTouches[0].clientX
+			},
+			// 获取答题总时长
+			onHandleGetTotalTime(){
+				// 获取答题时长
+				this.time = this.$refs.childTime.time;
+				// 停止子组件的定时器
+				this.$refs.childTime.stopTime()
 			},
 			// 监听结束滑动
 			onHandleTouchEnd(e) {
