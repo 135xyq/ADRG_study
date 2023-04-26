@@ -16,24 +16,24 @@
 			<scroll-view scroll-y="true" scroll-top="0">
 				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选视频" :isLink="true" value="更多"
 					@click="onHandleGoToMoreVideo" arrow-direction="right"></u-cell>
-				<view class="video-list-container" v-if="getVideoData.length > 0">
-					<view class="" v-for="item in getVideoData" :key="item.id" @click="onHandleToVideoDetail(item.id)">
+				<view class="video-list-container" v-if="videoList.length > 0">
+					<view class="" v-for="item in videoList" :key="item.id" @click="onHandleToVideoDetail(item.id)">
 						<MyVideo :videoData="item"></MyVideo>
 					</view>
 				</view>
 				<view v-else>
-					<u-empty mode="list" >
+					<u-empty mode="list" text="暂无视频">
 					</u-empty>
 				</view>
 				<u-cell :titleStyle="{fontSize:'18px',fontWeight:'bolder'}" title="精选文章" :isLink="true" value="更多" @click="onHandleGoToMoreArticle"
 					arrow-direction="right"></u-cell>
-				<view class="video-list-container" v-if="getArticleData.length > 0">
-					<view class="" v-for="item in getArticleData" :key="item.id" @click="onHandleToArticleDetail(item.id)">
+				<view class="video-list-container" v-if="articleList.length > 0">
+					<view class="" v-for="item in articleList" :key="item.id" @click="onHandleToArticleDetail(item.id)">
 						<MyArticle :articleData="item"></MyArticle>
 					</view>
 				</view>
 				<view v-else>
-					<u-empty mode="list" >
+					<u-empty mode="list"  text="暂无文章">
 					</u-empty>
 				</view>
 			</scroll-view>
@@ -42,13 +42,15 @@
 </template>
 
 <script>
-	import api from "@/api/studySource/category.js"
+	import studySourceApi from "@/api/studySource/category.js"
 	export default {
 		data() {
 			return {
 				listData: [],
 				activeCategory: '',
-				show: false
+				show: false,
+				videoList:[],
+				articleList:[]
 			};
 		},
 		computed: {
@@ -80,18 +82,38 @@
 			 * 获取分类列表
 			 */
 			async getCategoryList() {
-				const res = await api.getCategoryList()
+				const res = await studySourceApi.getStudyCategoryList()
 				this.listData = res.data.data
-				this.activeCategory = this.listData[0].id
-
+				
+				// 默认展示第一个
+				if(this.listData.length > 0) {
+					this.activeCategory = this.listData[0].id
+					
+					// 获取第一个分类的数据
+					await this.getSourceList()
+				}
 			},
 			/**
-			 * 切换分类
+			 * 根据资源分类获取封面资源
+			 */
+			async getSourceList() {
+				const res = await studySourceApi.getSources({category:this.activeCategory});
+				
+				// 为视频列表和文章列表赋值
+				this.videoList = res.data.video
+				this.articleList = res.data.article
+				
+			},
+			/**
+			 * 切换分类，重新获取资源
 			 * @param {Object} id
 			 */
-			onHandleChangeCategory(id) {
+			async onHandleChangeCategory(id) {
 				this.activeCategory = id
 				// console.log(id);
+				
+				// 重新获取资源
+				await this.getSourceList()
 			},
 			/**
 			 * 跳转到视频列表页
