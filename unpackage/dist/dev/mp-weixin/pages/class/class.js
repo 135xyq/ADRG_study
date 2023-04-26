@@ -140,8 +140,8 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var g0 = _vm.getVideoData.length
-  var g1 = _vm.getArticleData.length
+  var g0 = _vm.videoList.length
+  var g1 = _vm.articleList.length
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -242,7 +242,9 @@ var _default = {
     return {
       listData: [],
       activeCategory: '',
-      show: false
+      show: false,
+      videoList: [],
+      articleList: []
     };
   },
   computed: {
@@ -299,12 +301,22 @@ var _default = {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _category.default.getCategoryList();
+                return _category.default.getStudyCategoryList();
               case 2:
                 res = _context2.sent;
                 _this4.listData = res.data.data;
+
+                // 默认展示第一个
+                if (!(_this4.listData.length > 0)) {
+                  _context2.next = 8;
+                  break;
+                }
                 _this4.activeCategory = _this4.listData[0].id;
-              case 5:
+
+                // 获取第一个分类的数据
+                _context2.next = 8;
+                return _this4.getSourceList();
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -313,12 +325,57 @@ var _default = {
       }))();
     },
     /**
-     * 切换分类
+     * 根据资源分类获取封面资源
+     */
+    getSourceList: function getSourceList() {
+      var _this5 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        var res;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _category.default.getSources({
+                  category: _this5.activeCategory
+                });
+              case 2:
+                res = _context3.sent;
+                // 为视频列表和文章列表赋值
+                _this5.videoList = res.data.video;
+                _this5.articleList = res.data.article;
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    /**
+     * 切换分类，重新获取资源
      * @param {Object} id
      */
     onHandleChangeCategory: function onHandleChangeCategory(id) {
-      this.activeCategory = id;
-      // console.log(id);
+      var _this6 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4() {
+        return _regenerator.default.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this6.activeCategory = id;
+                // console.log(id);
+
+                // 重新获取资源
+                _context4.next = 3;
+                return _this6.getSourceList();
+              case 3:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     },
     /**
      * 跳转到视频列表页

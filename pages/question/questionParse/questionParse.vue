@@ -3,7 +3,7 @@
 		<view class="record-info">
 			<view class="flex-item">
 				<view class="record-title">
-					{{recordInfo.QuestionCategory ? recordInfo.QuestionCategory.title:''}}-专项练习
+					{{recordInfo.questionCategory ? recordInfo.questionCategory.title:''}}-专项练习
 				</view>
 				<view class="question-number">
 					第{{getIndex}}题
