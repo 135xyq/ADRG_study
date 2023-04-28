@@ -1,8 +1,8 @@
 <template>
 	<view class="video-list-container">
-		<view class="swiper-container">
+<!-- 		<view class="swiper-container">
 			<u-swiper :list="list1"></u-swiper>
-		</view>
+		</view> -->
 		<view class="list-container">
 			<view class="title">
 				<uni-icons custom-prefix="iconfont" type="icon-shipin" size="22"></uni-icons>
@@ -19,7 +19,7 @@
 			</view>
 		</view>
 		<view class="bottom-container">
-			<u-loadmore :status="status" height="50" :line="true" nomoreText="已经到底了" />
+			<u-loadmore :status="status" height="50" :line="true" nomoreText="没有更多视频了" />
 		</view>
 		<view class="top">
 			<u-back-top :scrollTop="scrollTop" :duration="500" mode="circle" :iconStyle="{fontSize: '32rpx',
