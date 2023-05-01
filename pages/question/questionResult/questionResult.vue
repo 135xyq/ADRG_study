@@ -70,7 +70,7 @@
 				<u-button shape="circle" text="全部解析" @click="onHandleToParse('all')"></u-button>
 			</view>
 			<view class="btn">
-				<u-button type="primary" shape="circle" text="错题解析" @click="onHandleToParse('error')"></u-button>
+				<u-button type="primary" :disabled="errorCount === 0" shape="circle" text="错题解析" @click="onHandleToParse('error')"></u-button>
 			</view>
 		</view>
 	</view>
@@ -196,6 +196,15 @@
 				if(type === 'all') {
 					url += '?record='+ this.record + '&type=all&' + 'index=' +  (index ? index:0);
 				}else if(type === 'error'){
+					// 错题数量为0则无法直接查看错题解析
+					if(this.errorCount === 0) {
+						uni.showToast({
+							title: '恭喜你全部回答正确，可以查看全部解析',
+							icon:'none'
+						})
+						return;
+					}
+					
 					url += '?record=' + this.record + '&type=error&index=0';
 				}
 				// console.log(url);
