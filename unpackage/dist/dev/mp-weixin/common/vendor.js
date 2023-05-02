@@ -20693,6 +20693,10 @@ var _default = {
   // 获取题目详情
   getQuestionDetail: function getQuestionDetail(data) {
     return _request.default.post('/applet/questionhistoryrecord/getQuestionDetail', data);
+  },
+  // 获取题目详情
+  getQuestionDetailFinal: function getQuestionDetailFinal(data) {
+    return _request.default.post('/applet/question/getQuestionDetail', data);
   }
 };
 exports.default = _default;

@@ -40,5 +40,9 @@ export default{
 	// 获取题目详情
 	getQuestionDetail(data) {
 		return request.post('/applet/questionhistoryrecord/getQuestionDetail',data)
+	},
+	// 获取题目详情
+	getQuestionDetailFinal(data) {
+		return request.post('/applet/question/getQuestionDetail',data)
 	}
 }
