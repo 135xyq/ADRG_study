@@ -1,10 +1,10 @@
 <template>
 	<view class="container">
-		<u-sticky class="search" bgColor="#fff">
+		<view class="search" bgColor="#fff">
 			<u-search placeholder="请输入要搜索的内容" v-model="keyword" :clearabled="true" @custom="onHandleUserSearch"
 				@search="onHandleUserSearch"
 				@change="onHandleSearchDataChange"></u-search>
-		</u-sticky>
+		</view>
 		<view class="type-container" v-if="isHasSubmitSearch">
 			<u-subsection :list="list" bgColor="#fff" fontSize="14" mode="button" :current="current"
 				@change="sectionChange"></u-subsection>
@@ -184,8 +184,10 @@
 <style lang="scss" scoped>
 	.container {
 		.search {
-			padding: 10px;
+			width: 90%;
+			margin: 10px;
 			background-color: #fff;
+			margin-bottom: 20px;
 		}
 
 		.type-container {
