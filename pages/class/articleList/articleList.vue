@@ -1,8 +1,12 @@
 <template>
 	<view class="article-list-container">
-<!-- 		<view class="swiper-container">
+		<!-- 		<view class="swiper-container">
 			<u-swiper :list="list1"></u-swiper>
 		</view> -->
+
+		<view class="search">
+			<u-search placeholder="请输入搜索内容" :disabled="true" :showAction="false" @click="onHandleGoToSearch"></u-search>
+		</view>
 		<view class="list-container">
 			<view class="title">
 				<uni-icons custom-prefix="iconfont" type="icon-wenzhang-copy" size="22"></uni-icons>
@@ -89,7 +93,7 @@
 				});
 				this.pageInfo.total = res.data.total;
 				this.articleList = [...this.articleList, ...res.data.data];
-				
+
 				// 没有数据了
 				if (this.pageInfo.page * this.pageInfo.limit >= this.pageInfo.total) {
 					this.status = 'nomore'
@@ -101,7 +105,15 @@
 			 */
 			onHandleGoToArticleRead(id) {
 				uni.navigateTo({
-					url:"/pages/class/articleread/articleread?id=" + id
+					url: "/pages/class/articleread/articleread?id=" + id
+				})
+			},
+			/**
+			 * 前往搜索页
+			 */
+			onHandleGoToSearch() {
+				uni.navigateTo({
+					url: '/pages/search/search'
 				})
 			}
 		}
@@ -110,7 +122,12 @@
 
 <style lang="scss">
 	.article-list-container {
+		.search{
+			margin: 10px auto;
+			width: 90%;
+		}
 		.list-container {
+			margin-top: 30px;
 			.title {
 				font-size: 20px;
 				font-weight: 600;
