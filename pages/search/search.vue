@@ -2,14 +2,14 @@
 	<view class="container">
 		<view class="search" bgColor="#fff">
 			<u-search placeholder="请输入要搜索的内容" v-model="keyword" :clearabled="true" @custom="onHandleUserSearch"
-				@search="onHandleUserSearch"
-				@change="onHandleSearchDataChange"></u-search>
+				@search="onHandleUserSearch" @change="onHandleSearchDataChange"></u-search>
 		</view>
 		<view class="type-container" v-if="isHasSubmitSearch">
-			<u-subsection :list="list" bgColor="#fff" fontSize="14" mode="button" :current="current"
-				@change="sectionChange"></u-subsection>
+			<u-sticky><u-subsection :list="list" bgColor="#fff" fontSize="14" mode="button" :current="current"
+					@change="sectionChange"></u-subsection></u-sticky>
 			<view class="content">
-				<view class="data-item" v-for="item in searchData" :key="item.id" @click="onHandleGoToDetailPage(item.id)">
+				<view class="data-item" v-for="item in searchData" :key="item.id"
+					@click="onHandleGoToDetailPage(item.id)">
 					{{item.title}}
 				</view>
 			</view>
@@ -146,8 +146,8 @@
 			 */
 			onHandleSearchDataChange() {
 				// console.log(this.keyword);
-				
-				if(this.keyword.trim() === '') {
+
+				if (this.keyword.trim() === '') {
 					this.isHasSubmitSearch = false
 				}
 			},
@@ -157,23 +157,23 @@
 			 */
 			onHandleGoToDetailPage(id) {
 				const type = this.listValue[this.current];
-				
+
 				// 文章
-				if(type === 'article') {
+				if (type === 'article') {
 					uni.navigateTo({
-						url:'/pages/class/articleread/articleread?id=' + id
+						url: '/pages/class/articleread/articleread?id=' + id
 					})
-				}else if(type === 'video') {
+				} else if (type === 'video') {
 					// 视频
-					
+
 					uni.navigateTo({
-						url:'/pages/class/videoplay/videoplay?id=' + id
+						url: '/pages/class/videoplay/videoplay?id=' + id
 					})
-				}else if(type === 'question') {
+				} else if (type === 'question') {
 					// 题目
-					
+
 					uni.navigateTo({
-						url:'/pages/question/questionDetail/questionDetail?id=' + id
+						url: '/pages/question/questionDetail/questionDetail?id=' + id
 					})
 				}
 			}
@@ -185,7 +185,7 @@
 	.container {
 		.search {
 			width: 90%;
-			margin: 10px;
+			margin: 10px auto;
 			background-color: #fff;
 			margin-bottom: 20px;
 		}
