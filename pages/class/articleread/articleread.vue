@@ -5,11 +5,11 @@
 			<view class="title">
 				{{article.title}}
 			</view>
-			<view class="time">
+<!-- 			<view class="time">
 				{{article.create_time}}
-			</view>
+			</view> -->
 			<view class="content">
-				<u-parse :content="articleContent"></u-parse>
+				<u-parse :content="articleContent" :tagStyle="style"></u-parse>
 			</view>
 			<view class="end">
 				<u-loadmore status="nomore" color="rgb(0 0 0 / 40%)" nomoreText="文章到底了"  :line="true"/>
@@ -65,6 +65,7 @@
 	import starApi from "@/api/star/star.js"
 	import likeApi from "@/api/like/like.js"
 	import historyApi from "@/api/studyHistory/studyHistory.js"
+	import style from "@/utils/articleStyle.js"
 
 	export default {
 		data() {
@@ -85,6 +86,7 @@
 				isStar: false, // 是否已经收藏
 				isLike: false, // 是否已经点赞
 				startTime: 0 ,// 阅读开始时间
+				style,
 			};
 		},
 		async onLoad(option) {
@@ -361,21 +363,24 @@
 		padding: 24rpx;
 
 		.title {
-			font-size: 16px;
+			font-size: 20px;
 			font-weight: 700;
 			margin-bottom: 20rpx;
 			letter-spacing: 2px;
+			text-align: center;
 		}
 		
 		.time{
 			font-size: 14px;
 			color: $gray;
 			margin-bottom: 20px;
+			text-align: right;
 		}
 
 		.content {
+			margin-top:30px;
 			font-size: 28rpx;
-			color: $u-content-color;
+			color: #0c0c0c;
 			line-height: 1.6;
 		}
 		.end{
