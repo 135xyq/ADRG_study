@@ -27,7 +27,9 @@
     "pages/question/questionAnswer/questionAnswer",
     "pages/question/questionResult/questionResult",
     "pages/question/questionParse/questionParse",
-    "pages/errorQuestion/errorQuestionDetail/errorQuestionDetail"
+    "pages/errorQuestion/errorQuestionDetail/errorQuestionDetail",
+    "pages/search/search",
+    "pages/question/questionDetail/questionDetail"
   ],
   "subPackages": [],
   "window": {

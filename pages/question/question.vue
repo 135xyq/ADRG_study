@@ -1,7 +1,7 @@
 <template>
 	<view class="question-container">
 		<view class="top-btn">
-			<u-search placeholder="请输入搜索内容" v-model="keyword" :showAction="false"></u-search>
+			<u-search placeholder="请输入搜索内容" :disabled="true" v-model="keyword" :showAction="false" @click="onHandleGoToSearch"></u-search>
 			<view class="btn">
 				<uni-icons type="tune-filled" size="30" @click="onHandleOpenPopup"></uni-icons>
 			</view>
@@ -214,6 +214,14 @@
 			onHandleGoToQuestionHistory() {
 				uni.navigateTo({
 					url: '/pages/QuestionRecordHistory/QuestionRecordHistory'
+				})
+			},
+			/**
+			 * 前往搜索页
+			 */
+			onHandleGoToSearch() {
+				uni.navigateTo({
+					url: '/pages/search/search'
 				})
 			}
 		}
