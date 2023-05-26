@@ -1,1 +1,0 @@
-<view class="login-contianer data-v-fc2c1bf6"><image class="login-avatar data-v-fc2c1bf6" src="/static/default_avatar.jpg" size="100"></image><button data-event-opts="{{[['tap',[['onHandleLogin',['$event']]]]]}}" class="login-button data-v-fc2c1bf6" bindtap="__e">微信登录</button></view>
